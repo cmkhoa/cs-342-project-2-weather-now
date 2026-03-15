@@ -5,17 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="Basic Data Output to terminal, adding svgs for images from https://github.com/Makin-Things/weather-icons/tree/main">
-      <change beforePath="$PROJECT_DIR$/target/classes/JavaFX.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/MyWeatherAPI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/weather/Elevation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/weather/Geometry.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/weather/Period.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/weather/ProbabilityOfPrecipitation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/weather/Properties.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/weather/Root.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/weather/WeatherAPI.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/Scene1Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/controller/Scene2Controller.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/DewPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/HourlyPeriod.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/HourlyProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/HourlyRoot.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/MyWeatherAPI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/model/RelativeHumidity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/util/IconRouter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/util/SvgIcon.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/util/TempConverter.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/Scene1View.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/view/Scene2View.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/JavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/MyWeatherAPI.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +30,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="20" />
+    <option name="cachedIndexableFilesCount" value="285" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -36,21 +43,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "cmkhoa"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;cmkhoa&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/cmkhoa/cs-342-project-2-weather-now.git",
-    "accountId": "4be5a0c2-4393-4d5e-b662-72a16cbaed9c"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/cmkhoa/cs-342-project-2-weather-now.git&quot;,
+    &quot;accountId&quot;: &quot;4be5a0c2-4393-4d5e-b662-72a16cbaed9c&quot;
   }
-}]]></component>
+}</component>
   <component name="McpProjectServerCommands">
     <commands />
     <urls />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -71,12 +81,13 @@
     "RunOnceActivity.MCP Project settings loaded": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
     "git-widget-placeholder": "main",
     "junie.onboarding.icon.badge.shown": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/mkc/Documents/uic/cs/cs342/project/project2/Project2",
+    "last_opened_file_path": "/Users/mkc/Documents/uic/cs/cs342/project/project2/Project2/src/main/java/model",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -90,8 +101,21 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java/model" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/java" />
+      <recent name="$PROJECT_DIR$/src/main/java/util" />
+      <recent name="$PROJECT_DIR$/src/main/java/component" />
+      <recent name="$PROJECT_DIR$/src/main/java/view" />
+      <recent name="$PROJECT_DIR$/src/main/java/controller" />
+    </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="model" />
     </key>
   </component>
   <component name="RunManager" selected="Maven.Project2 clean ">
@@ -195,7 +219,9 @@
       <workItem from="1708523253008" duration="49000" />
       <workItem from="1741096486163" duration="7567000" />
       <workItem from="1771957133252" duration="2227000" />
-      <workItem from="1772768566223" duration="11336000" />
+      <workItem from="1772768566223" duration="12866000" />
+      <workItem from="1773026378017" duration="492000" />
+      <workItem from="1773294581200" duration="10694000" />
     </task>
     <task id="LOCAL-00001" summary="Basic Data Output to terminal, adding svgs for images from https://github.com/Makin-Things/weather-icons/tree/main">
       <option name="closed" value="true" />
@@ -205,7 +231,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773018545784</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Basic Data Output to terminal, adding svgs for images from https://github.com/Makin-Things/weather-icons/tree/main">
+      <option name="closed" value="true" />
+      <created>1773018707831</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1773018707831</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

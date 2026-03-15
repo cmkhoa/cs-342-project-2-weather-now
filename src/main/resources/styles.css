@@ -1,0 +1,165 @@
+/* =============================================================
+   styles.css  —  342 Weather App
+   Loaded by Scene1View and Scene2View via scene.getStylesheets()
+   Figma design: Inter font family, 1px solid black borders,
+   white backgrounds, rounded icon containers.
+   ============================================================= */
+
+/* ----- Root containers ---------------------------------------- */
+
+.scene1-root, .scene2-root {
+    -fx-background-color: white;
+    -fx-font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* ----- Menu bar ----------------------------------------------- */
+
+.menu-bar {
+    -fx-background-color: transparent;
+}
+
+.location-btn {
+    -fx-font-size: 20px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+    -fx-underline: true;
+}
+
+.home-btn {
+    -fx-font-size: 20px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-underline: true;
+}
+
+.back-btn {
+    -fx-font-size: 20px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-background-color: transparent;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+    -fx-underline: true;
+}
+
+.scene2-title {
+    -fx-font-size: 24px;
+    -fx-font-family: 'Inter', sans-serif;
+}
+
+/* ----- Quick info hero ---------------------------------------- */
+
+.quick-info {
+    -fx-background-color: transparent;
+}
+
+.hero-icon {
+    -fx-background-radius: 31px;
+    -fx-border-radius: 31px;
+    -fx-border-color: #747474;
+    -fx-border-width: 1px;
+}
+
+.hero-temp {
+    -fx-font-size: 40px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-text-fill: black;
+}
+
+.hero-desc {
+    -fx-font-size: 20px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-text-fill: black;
+}
+
+/* ----- Current conditions bar (precip / wind / humidity) ------ */
+
+.current-info-bar {
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
+}
+
+.stat-slot {
+    -fx-background-color: transparent;
+}
+
+/* ----- Hourly forecast panel ---------------------------------- */
+
+.hourly-info-box {
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
+}
+
+.hourly-scroll {
+    -fx-background-color: transparent;
+    -fx-background: transparent;
+    -fx-border-color: transparent;
+    -fx-padding: 0;
+}
+
+/* Remove default ScrollPane viewport background */
+.hourly-scroll .viewport {
+    -fx-background-color: transparent;
+}
+
+/* ----- Hourly card (HourlyCard component) --------------------- */
+
+.hourly-card {
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
+}
+
+/* ----- 3-day info panel --------------------------------------- */
+
+.three-day-box {
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
+}
+
+.more-btn {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-cursor: hand;
+    -fx-underline: true;
+}
+
+/* ----- Weekday row (WeekdayRow component) ---------------------- */
+
+.weekday-row {
+    -fx-background-color: transparent;
+}
+
+/* ----- Scene 2 period list ------------------------------------ */
+
+.periods-list {
+    -fx-background-color: white;
+}
+
+.scene2-scroll {
+    -fx-background-color: white;
+    -fx-background: white;
+    -fx-border-color: transparent;
+}
+
+.scene2-scroll .viewport {
+    -fx-background-color: white;
+}
+
+/* ----- Period card (PeriodCard component) ---------------------- */
+
+.period-card {
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
+}

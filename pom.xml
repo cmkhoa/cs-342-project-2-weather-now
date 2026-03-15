@@ -1,70 +1,109 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>CS342Spring2026</groupId>
-  <artifactId>Project2</artifactId>
-  <version>0.0.1-SNAPSHOT</version>
-  
-  <properties>
-   <maven.compiler.release>11</maven.compiler.release>
-   <maven.compiler.source>11</maven.compiler.source>
-   <maven.compiler.target>11</maven.compiler.target>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>CS342Spring2026</groupId>
+    <artifactId>Project2</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
 
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <exec.mainClass>JavaFX</exec.mainClass>
-  </properties>
-  
- <dependencies>
-   
-    
-    <dependency>
-        <groupId>org.junit.jupiter</groupId>
-        <artifactId>junit-jupiter</artifactId>
-        <version>5.9.1</version>
-        <scope>test</scope>
-    </dependency>  
- 
-    <dependency>
-      <groupId>org.openjfx</groupId>
-      <artifactId>javafx-controls</artifactId>
-      <version>19.0.2.1</version>
-      <scope>compile</scope>
-    </dependency>
-    
-    <dependency>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-fxml</artifactId>
-        <version>19.0.2.1</version>
-    </dependency>
+    <properties>
+        <maven.compiler.release>11</maven.compiler.release>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <exec.mainClass>JavaFX</exec.mainClass>
+    </properties>
 
-     <dependency>
-         <groupId>com.fasterxml.jackson.core</groupId>
-         <artifactId>jackson-databind</artifactId>
-         <version>2.11.3</version>
-     </dependency>
+    <dependencies>
 
-    
-    
-</dependencies>
+        <!-- ── Testing ──────────────────────────────────────────────── -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.9.1</version>
+            <scope>test</scope>
+        </dependency>
 
-<build>
-    <plugins>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <version>2.22.1</version>
-        </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-compiler-plugin</artifactId>
-            <configuration>
-                <source>11</source>
-                <target>11</target>
-            </configuration>
-        </plugin>
+        <!-- ── JavaFX ───────────────────────────────────────────────── -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>19.0.2.1</version>
+            <scope>compile</scope>
+        </dependency>
 
-    </plugins>
-</build>
- 
-   
-  
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-fxml</artifactId>
+            <version>19.0.2.1</version>
+        </dependency>
+
+        <!--
+          javafx-swing is required for SwingFXUtils.toFXImage(), which converts
+          the BufferedImage produced by Batik into a JavaFX WritableImage.
+        -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-swing</artifactId>
+            <version>19.0.2.1</version>
+        </dependency>
+
+        <!-- ── JSON ─────────────────────────────────────────────────── -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.11.3</version>
+        </dependency>
+
+        <!-- ── Batik SVG rasterizer ─────────────────────────────────── -->
+        <!--
+          batik-transcoder: core SVGAbstractTranscoder used in SvgIcon.java.
+          Pulls in batik-bridge, batik-dom, batik-parser, batik-svg-dom, etc.
+          as transitive dependencies — no need to list them individually.
+        -->
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-transcoder</artifactId>
+            <version>1.17</version>
+        </dependency>
+
+        <!--
+          batik-codec: provides the ImageWriter SPI needed by the transcoder
+          to produce a BufferedImage output. Without this the transcoder
+          throws a MissingTranscoderException at runtime.
+        -->
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>batik-codec</artifactId>
+            <version>1.17</version>
+        </dependency>
+
+        <!--
+          xmlgraphics-commons: shared utility layer for Batik I/O and image
+          pipeline (explicitly declared to pin the version and avoid conflicts).
+        -->
+        <dependency>
+            <groupId>org.apache.xmlgraphics</groupId>
+            <artifactId>xmlgraphics-commons</artifactId>
+            <version>2.9</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.22.1</version>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>11</source>
+                    <target>11</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

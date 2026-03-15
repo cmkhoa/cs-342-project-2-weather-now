@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import model.HourlyPeriod;
 import weather.Period;
 import weather.WeatherAPI;
 
@@ -29,7 +30,6 @@ public class JavaFX extends Application {
 		weather = new TextField();
 		temperature.setText("Today's weather is: "+String.valueOf(forecast.get(0).temperature));
 		weather.setText(forecast.get(0).shortForecast);
-		// Iterate through all 14 periods (7 days of Day/Night
 		for (Period p : forecast) {
 			System.out.println("--- Period " + p.number + ": " + p.name + " ---");
 			System.out.println("Time: " + p.startTime + " to " + p.endTime);
@@ -43,13 +43,25 @@ public class JavaFX extends Application {
 			System.out.println("Icon URL: " + p.icon);
 			System.out.println("-------------------------------------\n");
 		}
-		
-		
-		
-				
-		Scene scene = new Scene(new VBox(temperature,weather), 540,960);
+
+		ArrayList<HourlyPeriod> hourlyForecast = model.MyWeatherAPI.getHourlyForecast("LOT",77,70);
+		for (HourlyPeriod p : hourlyForecast) {
+			System.out.println("--- Hourly Period " + p.number + ": " + p.name + " ---");
+			System.out.println("Time: " + p.startTime + " to " + p.endTime);
+			System.out.println("Temp: " + p.temperature + " " + p.temperatureUnit);
+			System.out.println("Precip: " + (p.probabilityOfPrecipitation != null ? p.probabilityOfPrecipitation.value : "0") + "%");
+			System.out.println("Wind: " + p.windSpeed + " from " + p.windDirection);
+			System.out.println("DewPoint " + p.dewpoint.value);
+			System.out.println("Humidity " + p.relativeHumidity.value);
+			System.out.println("Short: " + p.shortForecast);
+			System.out.println("Detailed: " + p.detailedForecast);
+			System.out.println("Icon URL: " + p.icon);
+		}
+
+
+
+		Scene scene = new Scene(new VBox(temperature,weather), 700,700);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
-
 }
