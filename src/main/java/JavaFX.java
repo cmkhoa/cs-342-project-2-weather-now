@@ -15,14 +15,12 @@ import java.util.ArrayList;
 
 /**
  * Application entry point and scene lifecycle manager.
- *
  * Responsibilities:
  *   1. Launch the JavaFX application
  *   2. Perform initial data fetch on a background thread
  *   3. Build Scene 1 and Scene 2 on the FX thread
  *   4. Schedule a 30-minute refresh Timeline
  *   5. Own the Stage reference — all scene switches go through here
- *
  * Thread model:
  *   - Network calls run on a daemon Thread (NOT the FX thread)
  *   - All Stage/Scene mutations are wrapped in Platform.runLater()
@@ -81,7 +79,6 @@ public class JavaFX extends Application {
 	/**
 	 * Spawns a background thread to fetch both forecasts,
 	 * then rebuilds Scene 1 and Scene 2 on the FX thread.
-	 *
 	 * If either fetch fails, the app retains the previous scenes
 	 * (or the placeholder on first load) and prints an error.
 	 */
