@@ -1,4 +1,4 @@
-package util;
+package utils;
 
 /**
  * Global temperature unit state and conversion utility.

@@ -5,9 +5,9 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import util.IconRouter;
-import util.SvgIcon;
-import util.TempConverter;
+import utils.IconRouter;
+import utils.SvgIcon;
+import utils.TempConverter;
 import weather.Period;
 
 /**
@@ -62,7 +62,7 @@ public class PeriodCard extends VBox {
         Label windLabel  = makeSubLabel(formatWind(period));
         Label windirLabel = makeSubLabel(period.windDirection != null ? period.windDirection : "--");
         Label precipLabel = makeSubLabel(formatPrecip(period));
-        
+
         HBox.setHgrow(windLabel,   Priority.ALWAYS);
         HBox.setHgrow(windirLabel, Priority.ALWAYS);
         HBox.setHgrow(precipLabel, Priority.ALWAYS);

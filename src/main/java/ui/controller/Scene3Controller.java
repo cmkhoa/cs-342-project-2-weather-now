@@ -1,7 +1,7 @@
 package ui.controller;
 
 import models.location.LocationWeather;
-import service.GeocodingService;
+import services.GeocodingService;
 import models.hourlyForecast.MyWeatherAPI;
 import ui.view.Scene3View;
 

@@ -1,4 +1,4 @@
-package service;
+package services;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import models.location.LocationWeather;
@@ -15,20 +15,12 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Geocoding service with two distinct entry points, mirroring the
+ * Geocoding services with two distinct entry points, mirroring the
  * GeocodeByCity / GeocodeByPoint split in the reference Go implementation.
- *
- * Public API:
- *   GeocodingService.searchByCity("Chicago")      → List<LocationWeather>  (Scene 3 search bar)
- *   GeocodingService.searchByPoint(41.85, -87.65) → LocationWeather        (map tap / coordinate lookup)
- *
- * Provider: Nominatim (https://nominatim.openstreetmap.org)
- *   - Free, no API key, jsonv2 format (includes importance ranking)
- *   - No featuretype filter — NYC is tagged "borough" not "city" in OSM,
- *     so featuretype=city silently drops it. Trust Nominatim's importance rank instead.
- *   - US coverage validated by NWS /points/ rather than countrycodes= param,
- *     since NWS naturally rejects non-US coordinates.
- *
+ * Methods:
+ *   GeocodingService.searchByCity("Chicago") → List<LocationWeather>  (Scene 3 search bar)
+ *   GeocodingService.searchByPoint(41.85, -87.65) → LocationWeather (map tap / coordinate lookup)
+ * Provider: https://nominatim.openstreetmap.org
  * Threading: all methods are blocking — call from a background thread.
  */
 public class GeocodingService {
@@ -36,15 +28,12 @@ public class GeocodingService {
     private static final String NOMINATIM_SEARCH_URL =
             "https://nominatim.openstreetmap.org/search?format=jsonv2&limit=5&q=";
 
-    // /reverse endpoint takes lat/lon directly and returns a single best match
+    // reverse endpoint takes lat/lon directly and returns a single best match
     private static final String NOMINATIM_REVERSE_URL =
             "https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=%s&lon=%s";
 
     private static final String NWS_POINTS_URL =
             "https://api.weather.gov/points/";
-
-    private static final String USER_AGENT =
-            "CS342-WeatherApp/1.0 (university project)";
 
     private static final HttpClient   CLIENT = HttpClient.newHttpClient();
     private static final ObjectMapper OM     = new ObjectMapper();
@@ -194,7 +183,6 @@ public class GeocodingService {
             String encoded = URLEncoder.encode(query, StandardCharsets.UTF_8);
             HttpRequest req = HttpRequest.newBuilder()
                     .uri(URI.create(NOMINATIM_SEARCH_URL + encoded))
-                    .header("User-Agent", USER_AGENT)
                     .build();
 
             HttpResponse<String> resp = CLIENT.send(req, HttpResponse.BodyHandlers.ofString());
@@ -218,12 +206,11 @@ public class GeocodingService {
     private static NwsPointsResult resolveNwsGrid(double lat, double lon) {
         try {
             String coord = String.format("%.4f,%.4f", lat, lon);
-            HttpRequest req = HttpRequest.newBuilder()
+            HttpRequest request = HttpRequest.newBuilder()
                     .uri(URI.create(NWS_POINTS_URL + coord))
-                    .header("User-Agent", USER_AGENT)
                     .build();
 
-            HttpResponse<String> resp = CLIENT.send(req, HttpResponse.BodyHandlers.ofString());
+            HttpResponse<String> resp = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
 
             NwsPointsRoot root = OM.readValue(resp.body(), NwsPointsRoot.class);
             if (root == null || root.properties == null) return null;

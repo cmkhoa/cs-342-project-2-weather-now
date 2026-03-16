@@ -9,9 +9,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import models.hourlyForecast.HourlyPeriod;
-import util.IconRouter;
-import util.SvgIcon;
-import util.TempConverter;
+import utils.IconRouter;
+import utils.SvgIcon;
+import utils.TempConverter;
 import weather.Period;
 
 import java.text.SimpleDateFormat;

@@ -4,9 +4,9 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-import util.IconRouter;
-import util.SvgIcon;
-import util.TempConverter;
+import utils.IconRouter;
+import utils.SvgIcon;
+import utils.TempConverter;
 import weather.Period;
 
 import java.text.SimpleDateFormat;

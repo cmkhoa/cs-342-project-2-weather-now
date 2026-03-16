@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
-import util.TempConverter;
+import utils.TempConverter;
 
 /**
  * A single result row in the Scene 3 city search / pinned list.

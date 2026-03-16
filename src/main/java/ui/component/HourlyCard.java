@@ -4,9 +4,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import models.hourlyForecast.HourlyPeriod;
-import util.IconRouter;
-import util.SvgIcon;
-import util.TempConverter;
+import utils.IconRouter;
+import utils.SvgIcon;
+import utils.TempConverter;
 
 import java.text.SimpleDateFormat;
 

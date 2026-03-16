@@ -8,7 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
-import util.TempConverter;
+import utils.TempConverter;
 
 import java.util.List;
 import java.util.function.Consumer;
@@ -228,7 +228,7 @@ public class Scene3View {
     // ---------------------------------------------------------------
 
     private String unitSwitchText() {
-        return TempConverter.getUnit() == util.TempConverter.Unit.FAHRENHEIT
+        return TempConverter.getUnit() == utils.TempConverter.Unit.FAHRENHEIT
                 ? "Switch to °C"
                 : "Switch to °F";
     }

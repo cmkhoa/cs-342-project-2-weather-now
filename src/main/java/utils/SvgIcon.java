@@ -1,4 +1,4 @@
-package util;
+package utils;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.layout.Region;
