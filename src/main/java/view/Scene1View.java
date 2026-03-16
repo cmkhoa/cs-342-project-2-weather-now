@@ -2,9 +2,7 @@ package view;
 
 import component.HourlyCard;
 import component.WeekdayRow;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -34,12 +32,6 @@ import java.util.Date;
  */
 public class Scene1View {
 
-    // Figma-specified dimensions
-    private static final double SCENE_W  = 540;
-    private static final double SCENE_H  = 1080;
-    private static final double PADDING  = 50;
-    private static final double CONTENT_W = 440;
-
     // Callbacks wired by Scene1Controller
     private Runnable onMoreForecastClick;
     private Runnable onLocationClick;
@@ -52,9 +44,7 @@ public class Scene1View {
      * @param hourlyPeriods The hourly periods from model.MyWeatherAPI (must not be null)
      */
     public Scene build(ArrayList<Period> periods12hr, ArrayList<HourlyPeriod> hourlyPeriods) {
-        VBox root = new VBox(0);
-        root.setPrefSize(SCENE_W, SCENE_H);
-        root.setPadding(new Insets(PADDING));
+        VBox root = new VBox();
         root.getStyleClass().add("scene1-root");
 
         root.getChildren().addAll(
@@ -65,7 +55,7 @@ public class Scene1View {
                 buildThreeDayInfo(periods12hr)
         );
 
-        Scene scene = new Scene(root, SCENE_W, SCENE_H);
+        Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         return scene;
     }
@@ -88,9 +78,6 @@ public class Scene1View {
      */
     private HBox buildMenuBar() {
         HBox bar = new HBox();
-        bar.setPrefWidth(CONTENT_W);
-        bar.setAlignment(Pos.CENTER_LEFT);
-        bar.setPadding(new Insets(20));
         bar.getStyleClass().add("menu-bar");
 
         Button locationBtn = new Button("Chicago"); // hardcoded for Phase 1
@@ -115,19 +102,16 @@ public class Scene1View {
      * Hero icon comes from 12-hr period[0].
      */
     private VBox buildQuickInfo(ArrayList<Period> periods12hr, ArrayList<HourlyPeriod> hourlyPeriods) {
-        VBox box = new VBox(12);
-        box.setPrefWidth(CONTENT_W);
-        box.setAlignment(Pos.CENTER);
-        box.setPadding(new Insets(65, 25, 0, 25));
+        VBox box = new VBox();
         box.getStyleClass().add("quick-info");
 
         Period current = hourlyPeriods.isEmpty() ? null : hourlyPeriods.get(0);
 
-        // Hero icon — 180×180, rendered as a scaled JavaFX Group via SvgIcon
-        Group heroIcon = new Group();
+        // Hero icon — rendered as a scalable JavaFX Region via SvgIcon
+        Region heroIcon = new Region();
         if (current != null) {
             String path = IconRouter.getLocalPath(current.icon, current.isDaytime);
-            heroIcon = SvgIcon.load(path, 180);
+            heroIcon = SvgIcon.load(path);
         }
         heroIcon.getStyleClass().add("hero-icon");
 
@@ -156,9 +140,6 @@ public class Scene1View {
      */
     private HBox buildCurrentInfo(ArrayList<HourlyPeriod> hourlyPeriods) {
         HBox bar = new HBox();
-        bar.setPrefWidth(CONTENT_W);
-        bar.setAlignment(Pos.CENTER);
-        bar.setPadding(new Insets(11, 26, 11, 26));
         bar.getStyleClass().add("current-info-bar");
 
         HourlyPeriod h0 = (hourlyPeriods != null && !hourlyPeriods.isEmpty()) ? hourlyPeriods.get(0) : null;
@@ -185,16 +166,12 @@ public class Scene1View {
      * Horizontally scrollable row of HourlyCard components.
      */
     private VBox buildHourlyInfo(ArrayList<HourlyPeriod> hourlyPeriods) {
-        VBox box = new VBox(15);
-        box.setPrefWidth(CONTENT_W);
-        box.setPrefHeight(201);
-        box.setPadding(new Insets(26));
+        VBox box = new VBox();
         box.getStyleClass().add("hourly-info-box");
 
         // Header row
         HBox header = new HBox();
-        header.setAlignment(Pos.CENTER_LEFT);
-        header.setMaxWidth(Double.MAX_VALUE);
+        header.getStyleClass().add("hourly-header");
 
         Label todayLabel = new Label("Today");
         todayLabel.getStyleClass().add("today-label");
@@ -208,9 +185,8 @@ public class Scene1View {
         header.getChildren().addAll(todayLabel, spacer, dateLabel);
 
         // Hourly scroll strip
-        HBox strip = new HBox(31); // 31px gap matches Figma
-        strip.setAlignment(Pos.CENTER_LEFT);
-        strip.setPadding(new Insets(0));
+        HBox strip = new HBox();
+        strip.getStyleClass().add("hourly-strip");
 
         if (hourlyPeriods != null) {
             // Show up to 24 hours ahead
@@ -236,15 +212,12 @@ public class Scene1View {
      * Three WeekdayRow components.
      */
     private VBox buildThreeDayInfo(ArrayList<Period> periods12hr) {
-        VBox box = new VBox(15);
-        box.setPrefWidth(CONTENT_W);
-        box.setPadding(new Insets(20));
+        VBox box = new VBox();
         box.getStyleClass().add("three-day-box");
 
         // Header row
         HBox header = new HBox();
-        header.setAlignment(Pos.CENTER_LEFT);
-        header.setMaxWidth(Double.MAX_VALUE);
+        header.getStyleClass().add("three-day-header");
 
         Label nextLabel = new Label("Next Forecast");
         nextLabel.getStyleClass().add("next-label");
@@ -260,8 +233,8 @@ public class Scene1View {
 
         // 3 weekday rows — NWS periods alternate Day(even)/Night(odd)
         // Skip period[0] (today's current period); use pairs [0/1], [2/3], [4/5]
-        VBox rows = new VBox(0);
-        rows.setPadding(new Insets(0, 0, 12, 0));
+        VBox rows = new VBox();
+        rows.getStyleClass().add("three-day-rows");
 
         for (int i = 0; i < 3; i++) {
             int dayIdx   = i * 2;
@@ -283,8 +256,7 @@ public class Scene1View {
 
     /** Builds an icon+text stat slot for the current conditions bar. */
     private HBox buildStatSlot(String iconText, String valueText) {
-        HBox slot = new HBox(10);
-        slot.setAlignment(Pos.CENTER_LEFT);
+        HBox slot = new HBox();
         slot.getStyleClass().add("stat-slot");
 
         // Placeholder label — replace with actual ImageView from resources

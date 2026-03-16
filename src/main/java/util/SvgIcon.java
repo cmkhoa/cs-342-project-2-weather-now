@@ -1,11 +1,13 @@
 package util;
 
 import javafx.embed.swing.SwingFXUtils;
-import javafx.scene.Group;
-import javafx.scene.image.ImageView;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.image.WritableImage;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 import org.apache.batik.transcoder.TranscoderInput;
 import org.apache.batik.transcoder.TranscoderOutput;
@@ -34,21 +36,19 @@ import java.util.concurrent.ConcurrentHashMap;
  *   first frame. For the weather app context this is entirely acceptable.
  *
  * Caching:
- *   Rasterized images are cached by (resourcePath + pixelSize) so repeated
- *   construction of HourlyCard / WeekdayRow / PeriodCard during a 30-minute
- *   refresh does not re-transcode the same icon.
+ *   rasterization at 200px and cached by resourcePath.
  *
- * Public API (unchanged from the previous SvgIcon contract):
+ * Public API:
  * <pre>
- *   Group icon = SvgIcon.load("/weather-icons-main/animated/clear-day.svg", 30);
+ *   Region icon = SvgIcon.load("/weather-icons-main/animated/clear-day.svg");
  * </pre>
- * The returned Group contains a single ImageView. On any failure a grey
- * placeholder rectangle of the same size is returned instead.
+ * The returned Region resizes the background image to fit its CSS boundaries.
  */
 public class SvgIcon {
 
-    /** Cache key format: "resourcePath|pixelSize" */
+    /** Cache key format: "resourcePath" */
     private static final Map<String, WritableImage> CACHE = new ConcurrentHashMap<>();
+    private static final int RASTER_SIZE = 200;
 
     // -----------------------------------------------------------------------
     // Public API
@@ -65,36 +65,34 @@ public class SvgIcon {
      *
      * @param resourcePath  classpath-relative path starting with '/',
      *                      e.g. "/weather-icons-main/animated/clear-day.svg"
-     * @param displaySize   desired rendered size in pixels (width = height)
-     * @return              a {@link Group} containing an {@link ImageView},
-     *                      or a grey placeholder {@link Group} on any failure
+     * @return              a {@link Region} containing the image as a background
      */
-    public static Group load(String resourcePath, double displaySize) {
-        String cacheKey = resourcePath + "|" + (int) displaySize;
+    public static Region load(String resourcePath) {
+        String cacheKey = resourcePath;
 
         WritableImage cached = CACHE.get(cacheKey);
         if (cached != null) {
-            return wrapInGroup(cached, displaySize);
+            return wrapInRegion(cached);
         }
 
         try (InputStream is = SvgIcon.class.getResourceAsStream(resourcePath)) {
             if (is == null) {
                 System.err.println("[SvgIcon] Resource not found: " + resourcePath);
-                return placeholder(displaySize);
+                return placeholder();
             }
 
-            WritableImage fxImage = rasterize(is, (int) Math.round(displaySize));
+            WritableImage fxImage = rasterize(is, RASTER_SIZE);
             if (fxImage == null) {
                 System.err.println("[SvgIcon] Rasterization returned null for: " + resourcePath);
-                return placeholder(displaySize);
+                return placeholder();
             }
 
             CACHE.put(cacheKey, fxImage);
-            return wrapInGroup(fxImage, displaySize);
+            return wrapInRegion(fxImage);
 
         } catch (Exception e) {
             System.err.println("[SvgIcon] Failed to load " + resourcePath + ": " + e.getMessage());
-            return placeholder(displaySize);
+            return placeholder();
         }
     }
 
@@ -169,25 +167,26 @@ public class SvgIcon {
     // Helpers
     // -----------------------------------------------------------------------
 
-    /** Wraps a {@link WritableImage} in a fixed-size {@link ImageView} inside a {@link Group}. */
-    private static Group wrapInGroup(WritableImage image, double displaySize) {
-        ImageView iv = new ImageView(image);
-        iv.setFitWidth(displaySize);
-        iv.setFitHeight(displaySize);
-        iv.setPreserveRatio(true);
-        iv.setSmooth(true);
-        return new Group(iv);
+    /** Wraps a {@link WritableImage} in a fixed-size {@link Region} that scales it. */
+    private static Region wrapInRegion(WritableImage image) {
+        Region region = new Region();
+        BackgroundImage bg = new BackgroundImage(
+                image,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.CENTER,
+                new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false)
+        );
+        region.setBackground(new Background(bg));
+        return region;
     }
 
     /**
      * Returns a small rounded-corner grey rectangle as a fallback.
-     * Same size contract as a real icon so layout is never disrupted.
      */
-    private static Group placeholder(double size) {
-        Rectangle r = new Rectangle(size, size);
-        r.setFill(Color.LIGHTGRAY);
-        r.setArcWidth(4);
-        r.setArcHeight(4);
-        return new Group(r);
+    private static Region placeholder() {
+        Region r = new Region();
+        r.setStyle("-fx-background-color: lightgray; -fx-background-radius: 4;");
+        return r;
     }
 }

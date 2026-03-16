@@ -1,8 +1,7 @@
 package view;
 
 import component.PeriodCard;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,11 +23,6 @@ import java.util.ArrayList;
  */
 public class Scene2View {
 
-    private static final double SCENE_W   = 540;
-    private static final double SCENE_H   = 1080;
-    private static final double PADDING   = 50;
-    private static final double CONTENT_H = 910;
-
     // Callback wired by Scene2Controller
     private Runnable onBackClick;
 
@@ -42,9 +36,7 @@ public class Scene2View {
      * @param periods12hr All 14 12-hour periods from WeatherAPI (must not be null)
      */
     public Scene build(ArrayList<Period> periods12hr) {
-        VBox root = new VBox(0);
-        root.setPrefSize(SCENE_W, SCENE_H);
-        root.setPadding(new Insets(PADDING));
+        VBox root = new VBox();
         root.getStyleClass().add("scene2-root");
 
         root.getChildren().addAll(
@@ -52,7 +44,7 @@ public class Scene2View {
                 buildContent(periods12hr)
         );
 
-        Scene scene = new Scene(root, SCENE_W, SCENE_H);
+        Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         return scene;
     }
@@ -72,10 +64,7 @@ public class Scene2View {
      * [ Back button ]  [ "Forecast" label ]
      */
     private HBox buildMenuBar() {
-        HBox bar = new HBox(60); // 60px gap between back btn and title
-        bar.setPrefWidth(440);
-        bar.setAlignment(Pos.CENTER_LEFT);
-        bar.setPadding(new Insets(20));
+        HBox bar = new HBox();
         bar.getStyleClass().add("menu-bar");
 
         Button backBtn = new Button("← Back");
@@ -94,14 +83,11 @@ public class Scene2View {
      * VBox of PeriodCard components, one per period.
      */
     private ScrollPane buildContent(ArrayList<Period> periods12hr) {
-        VBox periodsBox = new VBox(10);
-        periodsBox.setPadding(new Insets(0, 20, 0, 20));
-        periodsBox.setMaxWidth(Double.MAX_VALUE);
+        VBox periodsBox = new VBox();
         periodsBox.getStyleClass().add("periods-list");
 
         for (Period p : periods12hr) {
             PeriodCard card = new PeriodCard(p);
-            card.setMaxWidth(Double.MAX_VALUE);
             periodsBox.getChildren().add(card);
         }
 
@@ -109,7 +95,6 @@ public class Scene2View {
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         scrollPane.setFitToWidth(true);
-        scrollPane.setPrefHeight(CONTENT_H);
         scrollPane.getStyleClass().add("scene2-scroll");
 
         return scrollPane;

@@ -1,8 +1,8 @@
 package component;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
+
+
+import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import hourlyForecast.HourlyPeriod;
@@ -25,33 +25,23 @@ import java.text.SimpleDateFormat;
  */
 public class HourlyCard extends VBox {
 
-    private static final double CARD_WIDTH  = 75;
-    private static final double CARD_HEIGHT = 110;
-    private static final double ICON_SIZE   = 30;
+
 
     public HourlyCard(HourlyPeriod period) {
-        super(6); // spacing between children
+        super();
 
-        setPrefWidth(CARD_WIDTH);
-        setPrefHeight(CARD_HEIGHT);
-        setMinWidth(CARD_WIDTH);
-        setMaxWidth(CARD_WIDTH);
-        setAlignment(Pos.CENTER);
-        setPadding(new Insets(8));
         getStyleClass().add("hourly-card");
 
         // -- Hour label --
         Label hourLabel = new Label(formatHour(period));
-        hourLabel.getStyleClass().add("hourly-text");
-        hourLabel.setAlignment(Pos.CENTER);
+        hourLabel.getStyleClass().addAll("hourly-text", "hourly-hour-label");
 
         // -- Weather icon --
-        Group icon = buildIcon(period);
+        Region icon = buildIcon(period);
 
         // -- Temperature label --
         Label tempLabel = new Label(TempConverter.format(period.temperature));
-        tempLabel.getStyleClass().add("hourly-text");
-        tempLabel.setAlignment(Pos.CENTER);
+        tempLabel.getStyleClass().addAll("hourly-text", "hourly-temp-label");
 
         getChildren().addAll(hourLabel, icon, tempLabel);
     }
@@ -71,9 +61,11 @@ public class HourlyCard extends VBox {
         }
     }
 
-    /** Loads the BOM static SVG icon via SvgIcon parser; returns a scaled Group. */
-    private Group buildIcon(HourlyPeriod period) {
+    /** Loads the BOM static SVG icon via SvgIcon parser; returns a scaled Region. */
+    private Region buildIcon(HourlyPeriod period) {
         String resourcePath = IconRouter.getLocalPath(period.icon, period.isDaytime);
-        return SvgIcon.load(resourcePath, ICON_SIZE);
+        Region region = SvgIcon.load(resourcePath);
+        region.getStyleClass().add("hourly-icon");
+        return region;
     }
 }

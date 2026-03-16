@@ -29,8 +29,6 @@ import java.util.ArrayList;
 public class JavaFX extends Application {
 
 	private static final String APP_TITLE    = "CS 342 Project 2: Weather App";
-	private static final double SCENE_W      = 540;
-	private static final double SCENE_H      = 1080;
 	private static final double REFRESH_MINS = 30;
 
 	private Stage primaryStage;
@@ -58,7 +56,11 @@ public class JavaFX extends Application {
 		scene1Controller.setScene2Controller(scene2Controller);
 
 		// Show a blank placeholder while data loads
-		stage.setScene(new Scene(new javafx.scene.layout.StackPane(), SCENE_W, SCENE_H));
+		javafx.scene.layout.StackPane placeholderRoot = new javafx.scene.layout.StackPane();
+		placeholderRoot.getStyleClass().add("scene1-root");
+		Scene placeholderScene = new Scene(placeholderRoot);
+		placeholderScene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
+		stage.setScene(placeholderScene);
 		stage.show();
 
 		// Initial fetch + build on a background thread

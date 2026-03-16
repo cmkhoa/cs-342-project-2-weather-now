@@ -1,8 +1,7 @@
 package component;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
+
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -29,15 +28,11 @@ import weather.Period;
  */
 public class PeriodCard extends VBox {
 
-    private static final double CARD_PREF_HEIGHT = 114;
-    private static final double ICON_SIZE         = 30;
+
 
     public PeriodCard(Period period) {
-        super(10); // gap between rows
+        super();
 
-        setPrefHeight(CARD_PREF_HEIGHT);
-        setMaxWidth(Double.MAX_VALUE);
-        setPadding(new Insets(25));
         getStyleClass().add("period-card");
 
         getChildren().addAll(
@@ -55,20 +50,18 @@ public class PeriodCard extends VBox {
      */
     private HBox buildInfo1Row(Period period) {
         HBox row = new HBox();
-        row.setAlignment(Pos.CENTER_LEFT);
-        row.setMaxWidth(Double.MAX_VALUE);
+        row.getStyleClass().add("period-info1-row");
 
         // Period name
         Label nameLabel = new Label(period.name != null ? period.name : "--");
         nameLabel.getStyleClass().add("period-name-label");
-        nameLabel.setPrefWidth(88);
 
         // Spacer
         Region spacerLeft = new Region();
         HBox.setHgrow(spacerLeft, Priority.ALWAYS);
 
         // Icon
-        Group icon = buildIcon(period);
+        Region icon = buildIcon(period);
 
         // Spacer
         Region spacerRight = new Region();
@@ -77,8 +70,6 @@ public class PeriodCard extends VBox {
         // Temperature
         Label tempLabel = new Label(TempConverter.format(period.temperature));
         tempLabel.getStyleClass().add("period-temp-label");
-        tempLabel.setPrefWidth(75);
-        tempLabel.setAlignment(Pos.CENTER_RIGHT);
 
         row.getChildren().addAll(nameLabel, spacerLeft, icon, spacerRight, tempLabel);
         return row;
@@ -89,9 +80,8 @@ public class PeriodCard extends VBox {
      * Three equal-width columns matching Figma node 62:167.
      */
     private HBox buildInfo2Row(Period period) {
-        HBox row = new HBox(15);
-        row.setAlignment(Pos.CENTER_LEFT);
-        row.setMaxWidth(Double.MAX_VALUE);
+        HBox row = new HBox();
+        row.getStyleClass().add("period-info2-row");
 
         Label windLabel  = makeSubLabel(formatWind(period));
         Label windirLabel = makeSubLabel(period.windDirection != null ? period.windDirection : "--");
@@ -101,10 +91,6 @@ public class PeriodCard extends VBox {
         HBox.setHgrow(windLabel,   Priority.ALWAYS);
         HBox.setHgrow(windirLabel, Priority.ALWAYS);
         HBox.setHgrow(precipLabel, Priority.ALWAYS);
-
-        windLabel.setMaxWidth(Double.MAX_VALUE);
-        windirLabel.setMaxWidth(Double.MAX_VALUE);
-        precipLabel.setMaxWidth(Double.MAX_VALUE);
 
         row.getChildren().addAll(windLabel, windirLabel, precipLabel);
         return row;
@@ -131,9 +117,11 @@ public class PeriodCard extends VBox {
         return period.probabilityOfPrecipitation.value + "% precip";
     }
 
-    private Group buildIcon(Period period) {
-        if (period == null) return new Group();
+    private Region buildIcon(Period period) {
+        if (period == null) return new Region();
         String resourcePath = IconRouter.getLocalPath(period.icon, period.isDaytime);
-        return SvgIcon.load(resourcePath, ICON_SIZE);
+        Region region = SvgIcon.load(resourcePath);
+        region.getStyleClass().add("period-icon");
+        return region;
     }
 }

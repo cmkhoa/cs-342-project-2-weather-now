@@ -4,20 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="Working scene 1 and 2">
+    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="Working scene 1 and 2 with refactoring of css properties.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/JavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JavaFX.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/component/HourlyCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/component/HourlyCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/component/PeriodCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/component/PeriodCard.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/component/WeekdayRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/component/WeekdayRow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/controller/Scene1Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/Scene1Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/DewPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hourlyForecast/DewPoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/HourlyPeriod.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hourlyForecast/HourlyPeriod.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/HourlyProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hourlyForecast/HourlyProperties.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/HourlyRoot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hourlyForecast/HourlyRoot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/MyWeatherAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hourlyForecast/MyWeatherAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/model/RelativeHumidity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/hourlyForecast/RelativeHumidity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/util/SvgIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/util/SvgIcon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/Scene1View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Scene1View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/view/Scene2View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/view/Scene2View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
@@ -116,7 +110,7 @@
       <recent name="model" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.Project2 clean ">
+  <component name="RunManager" selected="Maven.Project2 Run">
     <configuration default="true" type="JetRunConfigurationType">
       <module name="project2" />
       <method v="2">
@@ -220,7 +214,7 @@
       <workItem from="1772768566223" duration="12866000" />
       <workItem from="1773026378017" duration="492000" />
       <workItem from="1773294581200" duration="11428000" />
-      <workItem from="1773613179359" duration="4420000" />
+      <workItem from="1773613179359" duration="7971000" />
     </task>
     <task id="LOCAL-00001" summary="Basic Data Output to terminal, adding svgs for images from https://github.com/Makin-Things/weather-icons/tree/main">
       <option name="closed" value="true" />
@@ -262,7 +256,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773617611546</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Working scene 1 and 2 with refactoring of css properties.">
+      <option name="closed" value="true" />
+      <created>1773620504935</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1773620504935</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -272,6 +274,7 @@
     <MESSAGE value="Basic Data Output to terminal, adding svgs for images from https://github.com/Makin-Things/weather-icons/tree/main" />
     <MESSAGE value="Built the model for hourly data parsing + template for views and controllers" />
     <MESSAGE value="Working scene 1 and 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Working scene 1 and 2" />
+    <MESSAGE value="Working scene 1 and 2 with refactoring of css properties." />
+    <option name="LAST_COMMIT_MESSAGE" value="Working scene 1 and 2 with refactoring of css properties." />
   </component>
 </project>

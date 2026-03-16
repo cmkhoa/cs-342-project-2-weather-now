@@ -1,8 +1,7 @@
 package component;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Group;
+
+
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -27,28 +26,22 @@ import java.text.SimpleDateFormat;
  */
 public class WeekdayRow extends HBox {
 
-    private static final double ICON_SIZE  = 30;
-    private static final double ROW_HEIGHT = 50;
 
     public WeekdayRow(Period dayPeriod, Period nightPeriod) {
         super();
 
-        setPrefHeight(ROW_HEIGHT);
-        setAlignment(Pos.CENTER_LEFT);
-        setPadding(new Insets(10));
         getStyleClass().add("weekday-row");
 
         // -- Weekday label (left) --
         Label weekdayLabel = new Label(formatWeekday(dayPeriod));
-        weekdayLabel.getStyleClass().add("weekday-label");
-        weekdayLabel.setPrefWidth(78);
+        weekdayLabel.getStyleClass().addAll("weekday-label", "weekday-label-left");
 
         // -- Spacer --
         Region spacerLeft = new Region();
         HBox.setHgrow(spacerLeft, Priority.ALWAYS);
 
         // -- Weather icon (center) --
-        Group icon = buildIcon(dayPeriod);
+        Region icon = buildIcon(dayPeriod);
 
         // -- Spacer --
         Region spacerRight = new Region();
@@ -56,9 +49,7 @@ public class WeekdayRow extends HBox {
 
         // -- Hi / Lo label (right) --
         Label hiLoLabel = new Label(formatHiLo(dayPeriod, nightPeriod));
-        hiLoLabel.getStyleClass().add("weekday-label");
-        hiLoLabel.setAlignment(Pos.CENTER_RIGHT);
-        hiLoLabel.setPrefWidth(47);
+        hiLoLabel.getStyleClass().addAll("weekday-label", "weekday-label-right");
 
         getChildren().addAll(weekdayLabel, spacerLeft, icon, spacerRight, hiLoLabel);
     }
@@ -84,10 +75,12 @@ public class WeekdayRow extends HBox {
         return hi + TempConverter.symbol() + " / " + lo + TempConverter.symbol();
     }
 
-    /** Loads the day-period BOM static SVG icon; returns a scaled Group. */
-    private Group buildIcon(Period period) {
-        if (period == null) return new Group();
+    /** Loads the day-period BOM static SVG icon; returns a scaled Region. */
+    private Region buildIcon(Period period) {
+        if (period == null) return new Region();
         String resourcePath = IconRouter.getLocalPath(period.icon, period.isDaytime);
-        return SvgIcon.load(resourcePath, ICON_SIZE);
+        Region region = SvgIcon.load(resourcePath);
+        region.getStyleClass().add("weekday-icon");
+        return region;
     }
 }
