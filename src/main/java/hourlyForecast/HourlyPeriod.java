@@ -1,4 +1,4 @@
-package model;
+package hourlyForecast;
 
 import weather.Period;
 

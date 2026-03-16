@@ -1,6 +1,6 @@
 import controller.Scene1Controller;
 import controller.Scene2Controller;
-import model.HourlyPeriod;
+import hourlyForecast.HourlyPeriod;
 import weather.Period;
 
 import javafx.animation.KeyFrame;

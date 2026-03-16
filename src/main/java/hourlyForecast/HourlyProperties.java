@@ -1,7 +1,6 @@
-package model;
+package hourlyForecast;
 
 import weather.Elevation;
-import weather.Period;
 
 import java.util.ArrayList;
 import java.util.Date;

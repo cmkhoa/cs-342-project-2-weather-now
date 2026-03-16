@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
-import model.HourlyPeriod;
+import hourlyForecast.HourlyPeriod;
 import util.IconRouter;
 import util.SvgIcon;
 import util.TempConverter;
@@ -22,10 +22,8 @@ import java.util.Date;
 
 /**
  * Builds the full Scene 1 layout from live data.
- *
  * Figma: node 1:276  "Scene 1 - Main Screen"
  * Canvas size: 540 × 1080
- *
  * Structure:
  *   VBox (root, 540w)
  *   ├── MenuBar        HBox: [locationBtn]  [homeBtn]
@@ -113,7 +111,6 @@ public class Scene1View {
     /**
      * Quick info hero — Figma node 5:350
      * Centered: icon (180×180) → temp (40px) → shortDesc (20px)
-     *
      * Hero temp and shortDesc come from the 12-hr period[0].
      * Hero icon comes from 12-hr period[0].
      */
@@ -124,7 +121,7 @@ public class Scene1View {
         box.setPadding(new Insets(65, 25, 0, 25));
         box.getStyleClass().add("quick-info");
 
-        Period current = periods12hr.isEmpty() ? null : periods12hr.get(0);
+        Period current = hourlyPeriods.isEmpty() ? null : hourlyPeriods.get(0);
 
         // Hero icon — 180×180, rendered as a scaled JavaFX Group via SvgIcon
         Group heroIcon = new Group();
@@ -139,7 +136,6 @@ public class Scene1View {
                 ? TempConverter.format(current.temperature)
                 : "--";
         Label tempLabel = new Label(tempText);
-        tempLabel.setStyle("-fx-font-size: 40px; -fx-font-family: 'Inter', sans-serif;");
         tempLabel.getStyleClass().add("hero-temp");
 
         // Short description — 20px
@@ -147,7 +143,6 @@ public class Scene1View {
                 ? current.shortForecast
                 : "--";
         Label descLabel = new Label(descText);
-        descLabel.setStyle("-fx-font-size: 20px; -fx-font-family: 'Inter', sans-serif;");
         descLabel.getStyleClass().add("hero-desc");
 
         box.getChildren().addAll(heroIcon, tempLabel, descLabel);
@@ -162,16 +157,15 @@ public class Scene1View {
     private HBox buildCurrentInfo(ArrayList<HourlyPeriod> hourlyPeriods) {
         HBox bar = new HBox();
         bar.setPrefWidth(CONTENT_W);
-        bar.setAlignment(Pos.CENTER_LEFT);
+        bar.setAlignment(Pos.CENTER);
         bar.setPadding(new Insets(11, 26, 11, 26));
         bar.getStyleClass().add("current-info-bar");
 
-        HourlyPeriod h0 = (hourlyPeriods != null && !hourlyPeriods.isEmpty())
-                ? hourlyPeriods.get(0) : null;
+        HourlyPeriod h0 = (hourlyPeriods != null && !hourlyPeriods.isEmpty()) ? hourlyPeriods.get(0) : null;
 
-        String precipText = h0 != null ? h0.probabilityOfPrecipitation + "%" : "--";
+        String precipText = h0 != null ? h0.probabilityOfPrecipitation.value + "%" : "--";
         String windText   = h0 != null && h0.windSpeed != null ? h0.windSpeed : "--";
-        String humidText  = h0 != null ? h0.relativeHumidity + "%" : "--";
+        String humidText  = h0 != null ? h0.relativeHumidity.value + "%" : "--";
 
         HBox precipSlot   = buildStatSlot("💧", precipText);  // TODO: replace emoji with SVG icon
         HBox windSlot     = buildStatSlot("💨", windText);
@@ -203,13 +197,13 @@ public class Scene1View {
         header.setMaxWidth(Double.MAX_VALUE);
 
         Label todayLabel = new Label("Today");
-        todayLabel.setStyle("-fx-font-size: 20px; -fx-font-family: 'Inter', sans-serif;");
+        todayLabel.getStyleClass().add("today-label");
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
         Label dateLabel = new Label(formatTodayDate());
-        dateLabel.setStyle("-fx-font-size: 14px; -fx-font-family: 'Inter', sans-serif;");
+        dateLabel.getStyleClass().add("date-label");
 
         header.getChildren().addAll(todayLabel, spacer, dateLabel);
 
@@ -253,13 +247,12 @@ public class Scene1View {
         header.setMaxWidth(Double.MAX_VALUE);
 
         Label nextLabel = new Label("Next Forecast");
-        nextLabel.setStyle("-fx-font-size: 20px; -fx-font-family: 'Inter', sans-serif;");
+        nextLabel.getStyleClass().add("next-label");
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
         Button moreBtn = new Button("More >");
-        moreBtn.setStyle("-fx-font-size: 14px; -fx-font-family: 'Inter', sans-serif;");
         moreBtn.getStyleClass().add("more-btn");
         moreBtn.setOnAction(e -> { if (onMoreForecastClick != null) onMoreForecastClick.run(); });
 
@@ -296,10 +289,10 @@ public class Scene1View {
 
         // Placeholder label — replace with actual ImageView from resources
         Label iconLabel = new Label(iconText);
-        iconLabel.setStyle("-fx-font-size: 18px;");
+        iconLabel.getStyleClass().add("stat-icon-label");
 
         Label valueLabel = new Label(valueText);
-        valueLabel.setStyle("-fx-font-size: 14px; -fx-font-family: 'Inter', sans-serif;");
+        valueLabel.getStyleClass().add("stat-value-label");
 
         slot.getChildren().addAll(iconLabel, valueLabel);
         return slot;

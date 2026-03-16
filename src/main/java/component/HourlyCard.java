@@ -5,7 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import model.HourlyPeriod;
+import hourlyForecast.HourlyPeriod;
 import util.IconRouter;
 import util.SvgIcon;
 import util.TempConverter;
@@ -14,7 +14,6 @@ import java.text.SimpleDateFormat;
 
 /**
  * A single card in the horizontal hourly forecast scroll strip (Scene 1).
- *
  * Figma spec (node 60:23):
  *   Width:  74px   Height: 110px
  *   Border: 1px solid black
@@ -26,10 +25,9 @@ import java.text.SimpleDateFormat;
  */
 public class HourlyCard extends VBox {
 
-    private static final double CARD_WIDTH  = 74;
+    private static final double CARD_WIDTH  = 75;
     private static final double CARD_HEIGHT = 110;
     private static final double ICON_SIZE   = 30;
-    private static final double FONT_SIZE   = 14;
 
     public HourlyCard(HourlyPeriod period) {
         super(6); // spacing between children
@@ -44,7 +42,7 @@ public class HourlyCard extends VBox {
 
         // -- Hour label --
         Label hourLabel = new Label(formatHour(period));
-        hourLabel.setStyle("-fx-font-size: " + FONT_SIZE + "px; -fx-font-family: 'Inter', sans-serif;");
+        hourLabel.getStyleClass().add("hourly-text");
         hourLabel.setAlignment(Pos.CENTER);
 
         // -- Weather icon --
@@ -52,7 +50,7 @@ public class HourlyCard extends VBox {
 
         // -- Temperature label --
         Label tempLabel = new Label(TempConverter.format(period.temperature));
-        tempLabel.setStyle("-fx-font-size: " + FONT_SIZE + "px; -fx-font-family: 'Inter', sans-serif;");
+        tempLabel.getStyleClass().add("hourly-text");
         tempLabel.setAlignment(Pos.CENTER);
 
         getChildren().addAll(hourLabel, icon, tempLabel);

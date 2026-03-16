@@ -1,10 +1,10 @@
 package controller;
 
-import model.HourlyPeriod;
+import hourlyForecast.HourlyPeriod;
 import view.Scene1View;
 import weather.Period;
 import weather.WeatherAPI;
-import model.MyWeatherAPI;
+import hourlyForecast.MyWeatherAPI;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,9 +14,7 @@ import java.util.ArrayList;
 /**
  * Fetches all data needed for Scene 1, populates Scene1View,
  * and wires navigation callbacks.
- *
  * Hardcoded location for Phase 1: Chicago (LOT / 77,70)
- *
  * Called by:
  *   JavaFX.java  — on startup and every 30 minutes via Timeline
  */

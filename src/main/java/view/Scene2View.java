@@ -14,15 +14,12 @@ import java.util.ArrayList;
 
 /**
  * Builds the full Scene 2 layout from 12-hour period data.
- *
  * Figma: node 1:277  "Scene 2 - Three Day Forecast"
  * Canvas size: 540 × 1080
- *
  * Structure:
  *   VBox (root)
  *   ├── MenuBar    HBox: [ Back button ]  [ "Forecast" title ]
  *   └── content    ScrollPane > VBox of PeriodCards (all 14 periods)
- *
  * Navigation: "Back" button callback wired by Scene2Controller.
  */
 public class Scene2View {
@@ -86,7 +83,6 @@ public class Scene2View {
         backBtn.setOnAction(e -> { if (onBackClick != null) onBackClick.run(); });
 
         Label titleLabel = new Label("Forecast");
-        titleLabel.setStyle("-fx-font-size: 24px; -fx-font-family: 'Inter', sans-serif;");
         titleLabel.getStyleClass().add("scene2-title");
 
         bar.getChildren().addAll(backBtn, titleLabel);

@@ -163,3 +163,40 @@
     -fx-border-width: 1px;
     -fx-background-color: white;
 }
+
+/* ----- Labels (extracted from code) --------------------------- */
+
+.hourly-text {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-text-fill: black;
+}
+
+.period-name-label, .period-temp-label {
+    -fx-font-size: 20px;
+    -fx-font-family: 'Inter', sans-serif;
+}
+
+.period-sub-label {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Inter', sans-serif;
+}
+
+.weekday-label {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Inter', sans-serif;
+}
+
+.today-label, .next-label {
+    -fx-font-size: 20px;
+    -fx-font-family: 'Inter', sans-serif;
+}
+
+.date-label, .stat-value-label {
+    -fx-font-size: 14px;
+    -fx-font-family: 'Inter', sans-serif;
+}
+
+.stat-icon-label {
+    -fx-font-size: 18px;
+}

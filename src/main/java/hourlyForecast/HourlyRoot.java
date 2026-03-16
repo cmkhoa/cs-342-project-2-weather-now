@@ -1,4 +1,4 @@
-package model;
+package hourlyForecast;
 
 import weather.Geometry;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

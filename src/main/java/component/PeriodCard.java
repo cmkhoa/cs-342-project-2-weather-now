@@ -15,18 +15,15 @@ import weather.Period;
 
 /**
  * A single period card in the Scene 2 scrollable forecast list.
- *
  * Figma spec (node 62:162):
  *   Width: full (400px in content area)   Height: 114px
  *   Border: 1px solid black
  *   Padding: 25px
  *   Gap between rows: 10px
- *
  *   Row 1 (info1) — HBox, justify-between:
  *     <Period>  (20px, left)
  *     icon      (30×30, center)
  *     <temp>    (20px, right)
- *
  *   Row 2 (info2) — HBox, 3 equal columns:
  *     <wind>    |  <windir>  |  <precip>
  */
@@ -34,8 +31,6 @@ public class PeriodCard extends VBox {
 
     private static final double CARD_PREF_HEIGHT = 114;
     private static final double ICON_SIZE         = 30;
-    private static final double FONT_SIZE_MAIN    = 20;
-    private static final double FONT_SIZE_SUB     = 14;
 
     public PeriodCard(Period period) {
         super(10); // gap between rows
@@ -65,10 +60,7 @@ public class PeriodCard extends VBox {
 
         // Period name
         Label nameLabel = new Label(period.name != null ? period.name : "--");
-        nameLabel.setStyle(
-                "-fx-font-size: " + FONT_SIZE_MAIN + "px;" +
-                "-fx-font-family: 'Inter', sans-serif;"
-        );
+        nameLabel.getStyleClass().add("period-name-label");
         nameLabel.setPrefWidth(88);
 
         // Spacer
@@ -84,10 +76,7 @@ public class PeriodCard extends VBox {
 
         // Temperature
         Label tempLabel = new Label(TempConverter.format(period.temperature));
-        tempLabel.setStyle(
-                "-fx-font-size: " + FONT_SIZE_MAIN + "px;" +
-                "-fx-font-family: 'Inter', sans-serif;"
-        );
+        tempLabel.getStyleClass().add("period-temp-label");
         tempLabel.setPrefWidth(75);
         tempLabel.setAlignment(Pos.CENTER_RIGHT);
 
@@ -127,10 +116,7 @@ public class PeriodCard extends VBox {
 
     private Label makeSubLabel(String text) {
         Label l = new Label(text);
-        l.setStyle(
-                "-fx-font-size: " + FONT_SIZE_SUB + "px;" +
-                "-fx-font-family: 'Inter', sans-serif;"
-        );
+        l.getStyleClass().add("period-sub-label");
         return l;
     }
 
@@ -142,7 +128,7 @@ public class PeriodCard extends VBox {
         if (period.probabilityOfPrecipitation == null) {
             return "0% precip";
         }
-        return (int) Math.round(period.probabilityOfPrecipitation.value) + "% precip";
+        return period.probabilityOfPrecipitation.value + "% precip";
     }
 
     private Group buildIcon(Period period) {

@@ -16,22 +16,18 @@ import java.text.SimpleDateFormat;
 
 /**
  * A single row in the Scene 1 "Next Forecast" 3-day section.
- *
  * Figma spec (node 62:66):
  *   Width: full (360px inside card)   Height: ~50px
  *   Layout: [ <weekday> ]  [ icon 30×30 ]  [ <hi/lo> ]
  *   Font: 14px Inter
- *
  * NWS 12-hr period pairing convention:
  *   dayPeriod   (isDaytime=true)  → temperature is the HIGH
  *   nightPeriod (isDaytime=false) → temperature is the LOW
- *
  * The icon and weekday name come from the day period.
  */
 public class WeekdayRow extends HBox {
 
     private static final double ICON_SIZE  = 30;
-    private static final double FONT_SIZE  = 14;
     private static final double ROW_HEIGHT = 50;
 
     public WeekdayRow(Period dayPeriod, Period nightPeriod) {
@@ -44,7 +40,7 @@ public class WeekdayRow extends HBox {
 
         // -- Weekday label (left) --
         Label weekdayLabel = new Label(formatWeekday(dayPeriod));
-        weekdayLabel.setStyle("-fx-font-size: " + FONT_SIZE + "px; -fx-font-family: 'Inter', sans-serif;");
+        weekdayLabel.getStyleClass().add("weekday-label");
         weekdayLabel.setPrefWidth(78);
 
         // -- Spacer --
@@ -60,7 +56,7 @@ public class WeekdayRow extends HBox {
 
         // -- Hi / Lo label (right) --
         Label hiLoLabel = new Label(formatHiLo(dayPeriod, nightPeriod));
-        hiLoLabel.setStyle("-fx-font-size: " + FONT_SIZE + "px; -fx-font-family: 'Inter', sans-serif;");
+        hiLoLabel.getStyleClass().add("weekday-label");
         hiLoLabel.setAlignment(Pos.CENTER_RIGHT);
         hiLoLabel.setPrefWidth(47);
 

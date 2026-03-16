@@ -1,6 +1,6 @@
-package model;
+package hourlyForecast;
 
-public class RelativeHumidity {
+public class DewPoint {
     public String unitCode;
     public int value;
 }
