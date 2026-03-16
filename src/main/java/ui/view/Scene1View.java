@@ -1,14 +1,14 @@
-package view;
+package ui.view;
 
-import component.HourlyCard;
-import component.WeekdayRow;
+import ui.component.HourlyCard;
+import ui.component.WeekdayRow;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
-import hourlyForecast.HourlyPeriod;
+import models.hourlyForecast.HourlyPeriod;
 import util.IconRouter;
 import util.SvgIcon;
 import util.TempConverter;
@@ -22,6 +22,7 @@ import java.util.Date;
  * Builds the full Scene 1 layout from live data.
  * Figma: node 1:276  "Scene 1 - Main Screen"
  * Canvas size: 540 × 1080
+ *
  * Structure:
  *   VBox (root, 540w)
  *   ├── MenuBar        HBox: [locationBtn]  [homeBtn]
@@ -29,6 +30,10 @@ import java.util.Date;
  *   ├── currentInfo    HBox: precip | wind | humidity  ← from hourly[0]
  *   ├── hourlyInfo     VBox: "Today"/date + HBox scroll strip  ← from hourly list
  *   └── 3DayInfo       VBox: "Next Forecast"/"More>" + 3 WeekdayRows  ← from 12-hr periods
+ *
+ * Phase 3 change: build() now accepts a locationName string so the
+ * location button in the menu bar reflects the current city rather
+ * than the hardcoded "Chicago" from Phase 1.
  */
 public class Scene1View {
 
@@ -37,18 +42,25 @@ public class Scene1View {
     private Runnable onLocationClick;
     private Runnable onHomeClick;
 
+    // ---------------------------------------------------------------
+    // Public builder
+    // ---------------------------------------------------------------
+
     /**
      * Constructs and returns a fully populated Scene 1.
      *
-     * @param periods12hr  The 14 12-hour periods from WeatherAPI (must not be null)
-     * @param hourlyPeriods The hourly periods from model.MyWeatherAPI (must not be null)
+     * @param periods12hr   The 14 12-hour periods from WeatherAPI (must not be null)
+     * @param hourlyPeriods The hourly periods from MyWeatherAPI (may be empty)
+     * @param locationName  Display name for the location button, e.g. "Chicago, IL"
      */
-    public Scene build(ArrayList<Period> periods12hr, ArrayList<HourlyPeriod> hourlyPeriods) {
+    public Scene build(ArrayList<Period> periods12hr,
+                       ArrayList<HourlyPeriod> hourlyPeriods,
+                       String locationName) {
         VBox root = new VBox();
         root.getStyleClass().add("scene1-root");
 
         root.getChildren().addAll(
-                buildMenuBar(),
+                buildMenuBar(locationName),
                 buildQuickInfo(periods12hr, hourlyPeriods),
                 buildCurrentInfo(hourlyPeriods),
                 buildHourlyInfo(hourlyPeriods),
@@ -58,6 +70,15 @@ public class Scene1View {
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         return scene;
+    }
+
+    /**
+     * Backwards-compatible overload for the Phase 1 hardcoded path.
+     * Passes "Chicago, IL" as the location name.
+     */
+    public Scene build(ArrayList<Period> periods12hr,
+                       ArrayList<HourlyPeriod> hourlyPeriods) {
+        return build(periods12hr, hourlyPeriods, "Chicago, IL");
     }
 
     // ---------------------------------------------------------------
@@ -75,12 +96,14 @@ public class Scene1View {
     /**
      * Menu bar — Figma node 2:338
      * [ <Location> button (left) ]  [ <home> button (right) ]
+     *
+     * Phase 3: locationName is now dynamic instead of hardcoded "Chicago".
      */
-    private HBox buildMenuBar() {
+    private HBox buildMenuBar(String locationName) {
         HBox bar = new HBox();
         bar.getStyleClass().add("menu-bar");
 
-        Button locationBtn = new Button("Chicago"); // hardcoded for Phase 1
+        Button locationBtn = new Button(locationName != null ? locationName : "—");
         locationBtn.getStyleClass().add("location-btn");
         locationBtn.setOnAction(e -> { if (onLocationClick != null) onLocationClick.run(); });
 
@@ -98,72 +121,63 @@ public class Scene1View {
     /**
      * Quick info hero — Figma node 5:350
      * Centered: icon (180×180) → temp (40px) → shortDesc (20px)
-     * Hero temp and shortDesc come from the 12-hr period[0].
-     * Hero icon comes from 12-hr period[0].
      */
-    private VBox buildQuickInfo(ArrayList<Period> periods12hr, ArrayList<HourlyPeriod> hourlyPeriods) {
+    private VBox buildQuickInfo(ArrayList<Period> periods12hr,
+                                ArrayList<HourlyPeriod> hourlyPeriods) {
         VBox box = new VBox();
         box.getStyleClass().add("quick-info");
 
-        Period current = hourlyPeriods.isEmpty() ? null : hourlyPeriods.get(0);
+        Period current = (hourlyPeriods != null && !hourlyPeriods.isEmpty())
+                ? hourlyPeriods.get(0)
+                : (periods12hr != null && !periods12hr.isEmpty() ? periods12hr.get(0) : null);
 
-        // Hero icon — rendered as a scalable JavaFX Region via SvgIcon
-        Region heroIcon = new Region();
         if (current != null) {
-            String path = IconRouter.getLocalPath(current.icon, current.isDaytime);
-            heroIcon = SvgIcon.load(path);
+            // Hero icon
+            Region icon = SvgIcon.load(IconRouter.getLocalPath(current.icon, current.isDaytime));
+            icon.getStyleClass().add("hero-icon");
+
+            // Temperature
+            Label tempLabel = new Label(TempConverter.format(current.temperature));
+            tempLabel.getStyleClass().add("hero-temp");
+
+            // Short description
+            Label descLabel = new Label(current.shortForecast != null ? current.shortForecast : "");
+            descLabel.getStyleClass().add("hero-desc");
+
+            box.getChildren().addAll(icon, tempLabel, descLabel);
         }
-        heroIcon.getStyleClass().add("hero-icon");
 
-        // Temperature label — 40px
-        String tempText = current != null
-                ? TempConverter.format(current.temperature)
-                : "--";
-        Label tempLabel = new Label(tempText);
-        tempLabel.getStyleClass().add("hero-temp");
-
-        // Short description — 20px
-        String descText = current != null && current.shortForecast != null
-                ? current.shortForecast
-                : "--";
-        Label descLabel = new Label(descText);
-        descLabel.getStyleClass().add("hero-desc");
-
-        box.getChildren().addAll(heroIcon, tempLabel, descLabel);
         return box;
     }
 
     /**
-     * Current conditions strip — Figma node 15:359
-     * Three icon+label slots: precipitation | wind speed | humidity
-     * All values sourced from hourlyPeriods.get(0).
+     * Current conditions bar — Figma node 15:359
+     * Precip | Wind speed+direction | Humidity
      */
     private HBox buildCurrentInfo(ArrayList<HourlyPeriod> hourlyPeriods) {
         HBox bar = new HBox();
         bar.getStyleClass().add("current-info-bar");
 
-        HourlyPeriod h0 = (hourlyPeriods != null && !hourlyPeriods.isEmpty()) ? hourlyPeriods.get(0) : null;
+        HourlyPeriod h = (hourlyPeriods != null && !hourlyPeriods.isEmpty())
+                ? hourlyPeriods.get(0) : null;
 
-        String precipText = h0 != null ? h0.probabilityOfPrecipitation.value + "%" : "--";
-        String windText   = h0 != null && h0.windSpeed != null ? h0.windSpeed : "--";
-        String humidText  = h0 != null ? h0.relativeHumidity.value + "%" : "--";
+        String precip   = h != null && h.probabilityOfPrecipitation != null
+                ? h.probabilityOfPrecipitation.value + "%" : "0%";
+        String wind     = h != null && h.windSpeed != null ? h.windSpeed : "--";
+        String humidity = h != null && h.relativeHumidity != null
+                ? h.relativeHumidity.value + "%" : "--%";
 
-        HBox precipSlot   = buildStatSlot("💧", precipText);  // TODO: replace emoji with SVG icon
-        HBox windSlot     = buildStatSlot("💨", windText);
-        HBox humidSlot    = buildStatSlot("🌫", humidText);
+        bar.getChildren().addAll(
+                buildStatSlot("💧", precip),
+                buildStatSlot("💨", wind),
+                buildStatSlot("🌢", humidity)
+        );
 
-        HBox.setHgrow(precipSlot, Priority.ALWAYS);
-        HBox.setHgrow(windSlot,   Priority.ALWAYS);
-        HBox.setHgrow(humidSlot,  Priority.ALWAYS);
-
-        bar.getChildren().addAll(precipSlot, windSlot, humidSlot);
         return bar;
     }
 
     /**
-     * Hourly forecast panel — Figma node 8:354
-     * Header: "Today" (left) + date (right)
-     * Horizontally scrollable row of HourlyCard components.
+     * Hourly forecast strip — Figma node 8:354
      */
     private VBox buildHourlyInfo(ArrayList<HourlyPeriod> hourlyPeriods) {
         VBox box = new VBox();
@@ -189,7 +203,6 @@ public class Scene1View {
         strip.getStyleClass().add("hourly-strip");
 
         if (hourlyPeriods != null) {
-            // Show up to 24 hours ahead
             int limit = Math.min(hourlyPeriods.size(), 24);
             for (int i = 0; i < limit; i++) {
                 strip.getChildren().add(new HourlyCard(hourlyPeriods.get(i)));
@@ -207,15 +220,12 @@ public class Scene1View {
     }
 
     /**
-     * 3-day next forecast section — Figma node 16:360
-     * Header: "Next Forecast" (left) + "More >" button (right)
-     * Three WeekdayRow components.
+     * 3-day next forecast — Figma node 16:360
      */
     private VBox buildThreeDayInfo(ArrayList<Period> periods12hr) {
         VBox box = new VBox();
         box.getStyleClass().add("three-day-box");
 
-        // Header row
         HBox header = new HBox();
         header.getStyleClass().add("three-day-header");
 
@@ -231,18 +241,18 @@ public class Scene1View {
 
         header.getChildren().addAll(nextLabel, spacer, moreBtn);
 
-        // 3 weekday rows — NWS periods alternate Day(even)/Night(odd)
-        // Skip period[0] (today's current period); use pairs [0/1], [2/3], [4/5]
         VBox rows = new VBox();
         rows.getStyleClass().add("three-day-rows");
 
-        for (int i = 0; i < 3; i++) {
-            int dayIdx   = i * 2;
-            int nightIdx = i * 2 + 1;
-            Period day   = (dayIdx   < periods12hr.size()) ? periods12hr.get(dayIdx)   : null;
-            Period night = (nightIdx < periods12hr.size()) ? periods12hr.get(nightIdx) : null;
-            if (day != null) {
-                rows.getChildren().add(new WeekdayRow(day, night));
+        if (periods12hr != null) {
+            for (int i = 0; i < 3; i++) {
+                int dayIdx   = i * 2;
+                int nightIdx = i * 2 + 1;
+                Period day   = (dayIdx   < periods12hr.size()) ? periods12hr.get(dayIdx)   : null;
+                Period night = (nightIdx < periods12hr.size()) ? periods12hr.get(nightIdx) : null;
+                if (day != null) {
+                    rows.getChildren().add(new WeekdayRow(day, night));
+                }
             }
         }
 
@@ -254,12 +264,10 @@ public class Scene1View {
     // Shared helpers
     // ---------------------------------------------------------------
 
-    /** Builds an icon+text stat slot for the current conditions bar. */
     private HBox buildStatSlot(String iconText, String valueText) {
         HBox slot = new HBox();
         slot.getStyleClass().add("stat-slot");
 
-        // Placeholder label — replace with actual ImageView from resources
         Label iconLabel = new Label(iconText);
         iconLabel.getStyleClass().add("stat-icon-label");
 
@@ -270,7 +278,6 @@ public class Scene1View {
         return slot;
     }
 
-    /** Formats today's date as "Mar 15", etc. */
     private String formatTodayDate() {
         try {
             return new SimpleDateFormat("MMM d").format(new Date());

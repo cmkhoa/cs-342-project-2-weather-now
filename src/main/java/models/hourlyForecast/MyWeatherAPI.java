@@ -1,4 +1,4 @@
-package hourlyForecast;
+package models.hourlyForecast;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -10,6 +10,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
+// Extends WeatherAPI to add methods for fetching and parsing hourly forecasts.
 public class MyWeatherAPI extends WeatherAPI {
     public static ArrayList<HourlyPeriod> getHourlyForecast(String region, int gridx, int gridy) {
         HttpRequest request = HttpRequest.newBuilder()

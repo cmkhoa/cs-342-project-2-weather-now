@@ -1,6 +1,4 @@
-package component;
-
-
+package ui.component;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
@@ -14,80 +12,57 @@ import weather.Period;
 
 /**
  * A single period card in the Scene 2 scrollable forecast list.
- * Figma spec (node 62:162):
- *   Width: full (400px in content area)   Height: 114px
- *   Border: 1px solid black
- *   Padding: 25px
- *   Gap between rows: 10px
- *   Row 1 (info1) — HBox, justify-between:
- *     <Period>  (20px, left)
- *     icon      (30×30, center)
- *     <temp>    (20px, right)
- *   Row 2 (info2) — HBox, 3 equal columns:
- *     <wind>    |  <windir>  |  <precip>
+ * basically has 2 rows, the first with the period name, an icon, the temperature
+ * the second row has the wind speed, the wind dir and the chance of precipitation
  */
 public class PeriodCard extends VBox {
-
-
-
     public PeriodCard(Period period) {
         super();
-
+        // Import properties from the CSS file
         getStyleClass().add("period-card");
 
+        // call builder functions for the inner 2 rows
         getChildren().addAll(
                 buildInfo1Row(period),
                 buildInfo2Row(period)
         );
     }
 
-    // ---------------------------------------------------------------
-    // Row builders
-    // ---------------------------------------------------------------
-
-    /**
-     * Row 1: [ <Period name>  |  icon  |  <temp> ]
-     */
     private HBox buildInfo1Row(Period period) {
         HBox row = new HBox();
+        // Import properties from the CSS file
         row.getStyleClass().add("period-info1-row");
 
-        // Period name
+        // create the label for the Period name and the temperature
         Label nameLabel = new Label(period.name != null ? period.name : "--");
         nameLabel.getStyleClass().add("period-name-label");
-
-        // Spacer
-        Region spacerLeft = new Region();
-        HBox.setHgrow(spacerLeft, Priority.ALWAYS);
-
-        // Icon
-        Region icon = buildIcon(period);
-
-        // Spacer
-        Region spacerRight = new Region();
-        HBox.setHgrow(spacerRight, Priority.ALWAYS);
-
-        // Temperature
         Label tempLabel = new Label(TempConverter.format(period.temperature));
         tempLabel.getStyleClass().add("period-temp-label");
 
+        // build the icon
+        Region icon = buildIcon(period);
+
+        // generate the spacers
+        Region spacerRight = new Region();
+        HBox.setHgrow(spacerRight, Priority.ALWAYS);
+        Region spacerLeft = new Region();
+        HBox.setHgrow(spacerLeft, Priority.ALWAYS);
+
+        // return the row
         row.getChildren().addAll(nameLabel, spacerLeft, icon, spacerRight, tempLabel);
         return row;
     }
 
-    /**
-     * Row 2: [ <wind speed>  |  <wind direction>  |  <precip %> ]
-     * Three equal-width columns matching Figma node 62:167.
-     */
     private HBox buildInfo2Row(Period period) {
         HBox row = new HBox();
+        // Import properties from the CSS file
         row.getStyleClass().add("period-info2-row");
 
+        // create the labels for each entry
         Label windLabel  = makeSubLabel(formatWind(period));
         Label windirLabel = makeSubLabel(period.windDirection != null ? period.windDirection : "--");
         Label precipLabel = makeSubLabel(formatPrecip(period));
-
-        // Equal width: each takes 1/3 of available space
+        
         HBox.setHgrow(windLabel,   Priority.ALWAYS);
         HBox.setHgrow(windirLabel, Priority.ALWAYS);
         HBox.setHgrow(precipLabel, Priority.ALWAYS);

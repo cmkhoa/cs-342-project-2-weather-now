@@ -1,6 +1,6 @@
-package controller;
+package ui.controller;
 
-import view.Scene2View;
+import ui.view.Scene2View;
 import weather.Period;
 
 import javafx.scene.Scene;

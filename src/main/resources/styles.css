@@ -311,3 +311,121 @@
 .stat-icon-label {
     -fx-font-size: 18px;
 }
+
+.scene3-root {
+    -fx-background-color: white;
+    -fx-font-family: 'Inter', 'Segoe UI', sans-serif;
+    -fx-pref-width: 540;
+    -fx-pref-height: 1080;
+    -fx-padding: 50;
+    -fx-spacing: 0;
+}
+
+/* "Weather" title in Scene 3 menu bar */
+.scene3-title {
+    -fx-font-size: 20px;
+    -fx-font-family: 'Inter', sans-serif;
+}
+
+/* Unit switch label — clickable, right-aligned */
+.unit-switch-label {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-cursor: hand;
+    -fx-underline: true;
+}
+
+/* Content VBox inside Scene 3 */
+.scene3-content {
+    -fx-spacing: 10;
+    -fx-padding: 0 20 0 20;
+    -fx-pref-width: 440;
+}
+
+/* ----- Search bar (Figma node 68:92) -------------------------- */
+
+.search-bar {
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
+    -fx-pref-height: 49;
+    -fx-pref-width: 400;
+    -fx-padding: 10 25 10 25;
+    -fx-spacing: 10;
+    -fx-alignment: center-left;
+}
+
+.search-icon {
+    -fx-font-size: 18px;
+    -fx-pref-width: 30;
+    -fx-pref-height: 29;
+}
+
+.search-field {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-pref-height: 29;
+}
+
+/* ----- Results list (Figma node 68:99) ------------------------ */
+
+.results-scroll {
+    -fx-background-color: white;
+    -fx-background: white;
+    -fx-border-color: transparent;
+    -fx-pref-height: 851;
+    -fx-pref-width: 400;
+}
+
+.results-scroll .viewport {
+    -fx-background-color: white;
+}
+
+.results-list {
+    -fx-background-color: white;
+    -fx-spacing: 18;
+    -fx-padding: 20 10 20 10;
+}
+
+/* ----- Location result row (Figma node 68:100 / 62:329) ------- */
+
+.location-result-row {
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-background-color: white;
+    -fx-pref-height: 57;
+    -fx-pref-width: 380;
+    -fx-padding: 0 10 0 10;
+    -fx-alignment: center-left;
+    -fx-spacing: 0;
+}
+
+.result-row-clickable {
+    -fx-cursor: hand;
+}
+
+.result-row-clickable:hover {
+    -fx-background-color: #f5f5f5;
+}
+
+.result-location-label {
+    -fx-font-size: 20px;
+    -fx-font-family: 'Inter', sans-serif;
+}
+
+.result-temp-label {
+    -fx-font-size: 20px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-pref-width: 75;
+    -fx-alignment: center-right;
+}
+
+/* No-results / loading label */
+.no-results-label {
+    -fx-font-size: 16px;
+    -fx-font-family: 'Inter', sans-serif;
+    -fx-text-fill: #888888;
+    -fx-padding: 20;
+}

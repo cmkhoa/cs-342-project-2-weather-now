@@ -1,6 +1,6 @@
-package view;
+package ui.view;
 
-import component.PeriodCard;
+import ui.component.PeriodCard;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
