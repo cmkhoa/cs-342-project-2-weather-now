@@ -6,17 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="Scene 3 chua xong, dang refactor thanh phan scene 1 2 cho oke han">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/service/GeocodingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/GeocodingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/HourlyCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/HourlyCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/LocationResultRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/LocationResultRow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/PeriodCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/PeriodCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/WeekdayRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/WeekdayRow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/controller/Scene3Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/controller/Scene3Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene1View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene1View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene3View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene3View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/IconRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/IconRouter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/SvgIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/SvgIcon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/util/TempConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/TempConverter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/JavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JavaFX.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,7 +14,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="301" />
+    <option name="cachedIndexableFilesCount" value="309" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -216,7 +206,7 @@
       <workItem from="1772768566223" duration="12866000" />
       <workItem from="1773026378017" duration="492000" />
       <workItem from="1773294581200" duration="11428000" />
-      <workItem from="1773613179359" duration="19078000" />
+      <workItem from="1773613179359" duration="21291000" />
     </task>
     <task id="LOCAL-00001" summary="Basic Data Output to terminal, adding svgs for images from https://github.com/Makin-Things/weather-icons/tree/main">
       <option name="closed" value="true" />
@@ -282,7 +272,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773636958290</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Scene 3 chua xong, dang refactor thanh phan scene 1 2 cho oke han">
+      <option name="closed" value="true" />
+      <created>1773638547269</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1773638547269</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
