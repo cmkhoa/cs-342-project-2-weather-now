@@ -11,7 +11,6 @@ import javafx.scene.layout.*;
 import models.hourlyForecast.HourlyPeriod;
 import utils.GifIcon;
 import utils.IconRouter;
-import utils.SvgIcon;
 import utils.TempConverter;
 import weather.Period;
 
