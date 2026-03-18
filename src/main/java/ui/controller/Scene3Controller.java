@@ -53,6 +53,9 @@ public class Scene3Controller {
     // Debounce timeline — reset on every keystroke
     private Timeline debounce;
 
+    //  Cache the last search results for instant unit toggling ---
+    private List<LocationWeather> lastResults;
+
     // ---------------------------------------------------------------
     // Constructor
     // ---------------------------------------------------------------
@@ -108,6 +111,10 @@ public class Scene3Controller {
             if (scene1Controller != null) {
                 scene1Controller.onUnitChanged();
             }
+
+            if (this.lastResults != null) {
+                view.setResults(this.lastResults, this::onRowTapped);
+            }
         });
 
         scene3 = view.build(defaultLocation);
@@ -155,6 +162,8 @@ public class Scene3Controller {
             System.out.println("[Scene3Controller] Searching: " + query);
             List<LocationWeather> results = GeocodingService.searchByCity(query);
             System.out.println("[Scene3Controller] Results: " + results.size());
+
+            this.lastResults = results; // cache last result
 
             Platform.runLater(() ->
                     view.setResults(results, this::onRowTapped)

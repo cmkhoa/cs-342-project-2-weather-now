@@ -5,7 +5,10 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
+import utils.IconRouter;
+import utils.SvgIcon;
 import utils.TempConverter;
+import weather.Period;
 
 /**
  * A single result row in the Scene 3 city search / pinned list.
@@ -24,15 +27,24 @@ public class LocationResultRow extends HBox {
                 location.displayName : "--");
         nameLabel.getStyleClass().add("result-location-label");
 
-//        TODO: Change this into the icon using LocationWeather's currentIcon
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        // --- NEW: Load the animated GIF icon for the current period ---
+        Region iconRegion = new Region(); // Default empty region
+        if (location.periods12hr != null && !location.periods12hr.isEmpty()) {
+            Period current = location.periods12hr.get(0);
+            iconRegion = SvgIcon.load(IconRouter.getLocalPath(current.icon, current.isDaytime));
+        }
+        iconRegion.getStyleClass().add("result-icon");
+        // --------------------------------------------------------------
 
         Label tempLabel = new Label((location.periods12hr != null && !location.periods12hr.isEmpty()) ?
                 TempConverter.format(location.currentTemp) : "--");
         tempLabel.getStyleClass().add("result-temp-label");
 
-        getChildren().addAll(nameLabel, spacer, tempLabel);
+        // Add the iconRegion right between the spacer and the tempLabel
+        getChildren().addAll(nameLabel, spacer, iconRegion, tempLabel);
 
         // Handle the click action
         if (onClick != null) {
