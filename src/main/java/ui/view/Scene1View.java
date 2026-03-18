@@ -17,6 +17,7 @@ import weather.Period;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javafx.scene.input.ScrollEvent;
 
 /**
  * Builds the full Scene 1 layout from live data.
@@ -210,10 +211,23 @@ public class Scene1View {
         }
 
         ScrollPane scrollPane = new ScrollPane(strip);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setFitToHeight(true);
+
+        scrollPane.setFitToHeight(false);   // keeps strip height locked to viewport
+        scrollPane.setFitToWidth(false);   // allows strip to grow wider than viewport → enables H-scroll
+
+        scrollPane.setPrefHeight(140);     // enough room for the cards (110px tall + padding)
         scrollPane.getStyleClass().add("hourly-scroll");
+
+        // Redirect vertical scroll events to horizontal scrolling
+        scrollPane.addEventFilter(ScrollEvent.SCROLL, event -> {
+            double delta = event.getDeltaY() != 0 ? event.getDeltaY() : event.getDeltaX();
+            double hval = scrollPane.getHvalue();
+            double hmax = scrollPane.getHmax();
+            scrollPane.setHvalue(hval - (delta / 500.0) * hmax);
+            event.consume();
+        });
 
         box.getChildren().addAll(header, scrollPane);
         return box;
