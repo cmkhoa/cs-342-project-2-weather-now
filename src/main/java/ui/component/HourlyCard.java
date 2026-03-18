@@ -5,7 +5,7 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import models.hourlyForecast.HourlyPeriod;
 import utils.IconRouter;
-import utils.SvgIcon;
+import utils.GifIcon;
 import utils.TempConverter;
 
 import java.text.SimpleDateFormat;
@@ -49,7 +49,7 @@ public class HourlyCard extends VBox {
     // Load each hour's icon and style it to match the cards size
     private Region buildIcon(HourlyPeriod period) {
         String resourcePath = IconRouter.getLocalPath(period.icon, period.isDaytime);
-        Region region = SvgIcon.load(resourcePath);
+        Region region = GifIcon.load(resourcePath); // <-- CHANGED THIS LINE
         region.getStyleClass().add("hourly-icon");
         return region;
     }

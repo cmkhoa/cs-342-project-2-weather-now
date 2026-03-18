@@ -22,7 +22,7 @@ package utils;
 public class IconRouter {
     // Base URL and fallback icon
     private static final String BASE     = "/weather-icons-main/bom/app/";
-    private static final String FALLBACK = BASE + "04_cloudy.svg";
+    private static final String FALLBACK = BASE + "04_cloudy.gif";
     /**
      * Function takes in icon url and the daytime status from the period
      * @param nwsIconUrl  full URL returned by the NWS API (Period.icon), may be null
@@ -63,47 +63,47 @@ public class IconRouter {
     private static String resolveToken(String token, boolean day) {
         // Thunderstorm
         if (token.contains("tsra") || token.contains("thunder")) {
-            return day ? BASE + "16_storms.svg" : BASE + "16_storms_night.svg";
+            return day ? BASE + "16_storms.gif" : BASE + "16_storms_night.gif";
         }
         // Clear / sunny
         if (token.equals("skc")) {
-            return day ? BASE + "01_sunny.svg" : BASE + "02_clear_night.svg";
+            return day ? BASE + "01_sunny.gif" : BASE + "02_clear_night.gif";
         }
         // Few clouds
         if (token.contains("few")) {
-            return day ? BASE + "05_mostly_sunny.svg" : BASE + "05_mostly_sunny_night.svg";
+            return day ? BASE + "05_mostly_sunny.gif" : BASE + "05_mostly_sunny_night.gif";
         }
         // Scattered clouds
         if (token.contains("sct")) {
-            return day ? BASE + "03_partly_cloudy.svg" : BASE + "03_partly_cloudy_night.svg";
+            return day ? BASE + "03_partly_cloudy.gif" : BASE + "03_partly_cloudy_night.gif";
         }
         // Broken / overcast
         if (token.contains("bkn") || token.contains("ovc")) {
-            return day ? BASE + "04_cloudy.svg" : BASE + "04_cloudy_night.svg";
+            return day ? BASE + "04_cloudy.gif" : BASE + "04_cloudy_night.gif";
         }
         // Snow
         if (token.contains("snow") || token.equals("sn") || token.contains("blizzard")) {
-            return day ? BASE + "15_snow.svg" : BASE + "15_snow_night.svg";
+            return day ? BASE + "15_snow.gif" : BASE + "15_snow_night.gif";
         }
         // Rain / showers
         if (token.contains("rain") || token.contains("shra") || token.contains("shower")) {
-            return day ? BASE + "12_rain.svg" : BASE + "12_rain_night.svg";
+            return day ? BASE + "12_rain.gif" : BASE + "12_rain_night.gif";
         }
         // Fog / haze
         if (token.contains("fog") || token.equals("fg") || token.contains("haze")) {
-            return day ? BASE + "10_fog.svg" : BASE + "10_fog_night.svg";
+            return day ? BASE + "10_fog.gif" : BASE + "10_fog_night.gif";
         }
         // Wind
         if (token.contains("wind") || token.contains("breezy")) {
-            return day ? BASE + "09_wind.svg" : BASE + "09_wind_night.svg";
+            return day ? BASE + "09_wind.gif" : BASE + "09_wind_night.gif";
         }
         // Hot
         if (token.contains("hot")) {
-            return BASE + "01_sunny.svg";
+            return BASE + "01_sunny.gif";
         }
         // Cold / frost
         if (token.contains("cold") || token.contains("frost")) {
-            return day ? BASE + "14_frost.svg" : BASE + "14_frost_night.svg";
+            return day ? BASE + "14_frost.gif" : BASE + "14_frost_night.gif";
         }
 
         return FALLBACK;

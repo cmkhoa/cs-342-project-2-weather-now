@@ -4,9 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="Scene 3 chua xong, dang refactor thanh phan scene 1 2 cho oke han">
+    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="Upate Scene1View: spacing, rounded corner, and horizontal scrolling">
+      <change afterPath="$PROJECT_DIR$/src/main/java/utils/GifIcon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/HourlyCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/HourlyCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/WeekdayRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/WeekdayRow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene1View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene1View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/IconRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/IconRouter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/clear-day.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/clear-night.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/cloudy-2-day.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/cloudy-2-night.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/cloudy.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/fog-night.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/fog.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rainy-3-night.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rainy-3.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/snowy-2-night.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/snowy-2.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/wind.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,6 +41,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -36,7 +57,7 @@
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/cmkhoa/cs-342-project-2-weather-now.git&quot;,
-    &quot;accountId&quot;: &quot;4be5a0c2-4393-4d5e-b662-72a16cbaed9c&quot;
+    &quot;accountId&quot;: &quot;6c90d98c-8d1b-4624-a175-38629f0e6514&quot;
   }
 }</component>
   <component name="McpProjectServerCommands">
@@ -68,10 +89,10 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
     &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;animated-emojis&quot;,
     &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mkc/Documents/uic/cs/cs342/project/project2/Project2/src/main/java/model&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ngtua/OneDrive/Documents/Study/CS 342/cs-342-project-2-weather-now&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -186,8 +207,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.240" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.240" />
+        <option value="bundled-jdk-30f59d01ecdd-2fc7cc6b9a17-intellij.indexing.shared.core-IU-253.30387.90" />
       </set>
     </attachedChunks>
   </component>
@@ -280,11 +300,42 @@
       <option name="project" value="LOCAL" />
       <updated>1773638547269</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Upate Scene1View: spacing, rounded corner, and horizontal scrolling">
+      <option name="closed" value="true" />
+      <created>1773805086985</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1773805086985</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="animated-emojis" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Basic Data Output to terminal, adding svgs for images from https://github.com/Makin-Things/weather-icons/tree/main" />
@@ -292,6 +343,7 @@
     <MESSAGE value="Working scene 1 and 2" />
     <MESSAGE value="Working scene 1 and 2 with refactoring of css properties." />
     <MESSAGE value="Scene 3 chua xong, dang refactor thanh phan scene 1 2 cho oke han" />
-    <option name="LAST_COMMIT_MESSAGE" value="Scene 3 chua xong, dang refactor thanh phan scene 1 2 cho oke han" />
+    <MESSAGE value="Upate Scene1View: spacing, rounded corner, and horizontal scrolling" />
+    <option name="LAST_COMMIT_MESSAGE" value="Upate Scene1View: spacing, rounded corner, and horizontal scrolling" />
   </component>
 </project>

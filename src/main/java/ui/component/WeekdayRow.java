@@ -5,7 +5,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import utils.IconRouter;
-import utils.SvgIcon;
+import utils.GifIcon;
 import utils.TempConverter;
 import weather.Period;
 
@@ -77,7 +77,7 @@ public class WeekdayRow extends HBox {
     private Region buildIcon(Period period) {
         if (period == null) return new Region();
         String resourcePath = IconRouter.getLocalPath(period.icon, period.isDaytime);
-        Region region = SvgIcon.load(resourcePath);
+        Region region = GifIcon.load(resourcePath);
         region.getStyleClass().add("weekday-icon");
         return region;
     }

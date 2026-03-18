@@ -9,6 +9,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 import models.hourlyForecast.HourlyPeriod;
+import utils.GifIcon;
 import utils.IconRouter;
 import utils.SvgIcon;
 import utils.TempConverter;
@@ -134,7 +135,7 @@ public class Scene1View {
 
         if (current != null) {
             // Hero icon
-            Region icon = SvgIcon.load(IconRouter.getLocalPath(current.icon, current.isDaytime));
+            Region icon = GifIcon.load(IconRouter.getLocalPath(current.icon, current.isDaytime));
             icon.getStyleClass().add("hero-icon");
 
             // Temperature
