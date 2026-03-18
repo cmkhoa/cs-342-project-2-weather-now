@@ -186,8 +186,8 @@
     -fx-border-color: black;
     -fx-border-width: 1px;
     -fx-background-color: white;
-    -fx-border-radius: 9;
-    -fx-background-radius: 9;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-spacing: 5;
     -fx-pref-width: 55;
     -fx-pref-height: 80;
@@ -277,6 +277,8 @@
     -fx-border-color: black;
     -fx-border-width: 1px;
     -fx-background-color: white;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-spacing: 10;
     -fx-pref-height: 90;
     -fx-max-width: 5000;
@@ -284,12 +286,12 @@
 }
 
 .period-info1-row, .period-info2-row {
-    -fx-alignment: center-left;
+    -fx-alignment: center;
     -fx-max-width: 5000;
 }
 
 .period-info2-row {
-    -fx-spacing: 10;
+    -fx-spacing: 40;
 }
 
 /* ----- Labels (extracted from code) --------------------------- */
@@ -306,7 +308,7 @@
 }
 
 .period-name-label {
-    -fx-pref-width: 80;
+    -fx-pref-width: 250;
 }
 
 .period-temp-label {
@@ -315,7 +317,7 @@
 }
 
 .period-sub-label {
-    -fx-font-size: 11px;
+    -fx-font-size: 13px;
     -fx-font-family: 'Inter', sans-serif;
 }
 

@@ -4,277 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="Scene 3 chua xong, dang refactor thanh phan scene 1 2 cho oke han">
+    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="adjusted the first page UI">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ui-icons/backButton.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ui-icons/homeButton.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ui-icons/location.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ui-icons/moreButton.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ui-icons/precipitationIcon.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/ui-icons/searchIcon.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JavaFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene2View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene2View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/IconRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/IconRouter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/SvgIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/SvgIcon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/TempConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/TempConverter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/clear-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/clear-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/cloudy-1-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/cloudy-1-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/cloudy-2-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/cloudy-2-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/cloudy-3-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/cloudy-3-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/cloudy.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/dust.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/fog-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/fog-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/fog.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/frost-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/frost-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/frost.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/hail.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/haze-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/haze-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/haze.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/hurricane.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/isolated-thunderstorms-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/isolated-thunderstorms-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/isolated-thunderstorms.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rain-and-sleet-mix.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rain-and-snow-mix.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rainy-1-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rainy-1-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rainy-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rainy-2-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rainy-2-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rainy-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rainy-3-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rainy-3-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/rainy-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/scattered-thunderstorms-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/scattered-thunderstorms-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/scattered-thunderstorms.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/severe-thunderstorm.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/snow-and-sleet-mix.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/snowy-1-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/snowy-1-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/snowy-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/snowy-2-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/snowy-2-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/snowy-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/snowy-3-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/snowy-3-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/snowy-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/thunderstorms.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/tornado.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/tropical-storm.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/animated/wind.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/00_missing_data.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/00_missing_data.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/00_missing_data_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/00_missing_data_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/01_sunny.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/01_sunny.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/02_clear.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/02_clear.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/02_clear_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/02_clear_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/03_partly_cloudy.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/03_partly_cloudy.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/03_partly_cloudy_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/03_partly_cloudy_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/03_partly_cloudy_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/03_partly_cloudy_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/04_cloudy.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/04_cloudy.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/04_cloudy_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/04_cloudy_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/04_cloudy_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/04_cloudy_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/05_mostly_sunny.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/05_mostly_sunny.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/05_mostly_sunny_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/05_mostly_sunny_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/05_mostly_sunny_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/05_mostly_sunny_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/06_haze.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/06_haze.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/06_haze_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/06_haze_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/08_light_rain.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/08_light_rain.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/08_light_rain_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/08_light_rain_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/09_wind.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/09_wind.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/09_wind_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/09_wind_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/09_wind_night_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/09_wind_night_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/09_wind_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/09_wind_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/10_fog.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/10_fog.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/10_fog_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/10_fog_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/10_fog_night_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/10_fog_night_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/11_showers.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/11_showers.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/11_showers_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/11_showers_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/12_rain.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/12_rain.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/12_rain_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/12_rain_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/12_rain_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/12_rain_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/13_dust.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/13_dust.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/13_dust_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/13_dust_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/13_dust_night_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/13_dust_night_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/14_frost.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/14_frost.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/14_frost_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/14_frost_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/14_frost_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/14_frost_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/15_snow.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/15_snow.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/15_snow_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/15_snow_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/15_snow_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/15_snow_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/16_storms.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/16_storms.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/16_storms_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/16_storms_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/16_storms_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/16_storms_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/17_light_showers.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/17_light_showers.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/17_light_showers_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/17_light_showers_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/17_light_showers_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/17_light_showers_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/18_heavy_showers.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/18_heavy_showers.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/18_heavy_showers_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/18_heavy_showers_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/18_heavy_showers_rn.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/18_heavy_showers_rn.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/19_tropical_cyclone.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/19_tropical_cyclone.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/19_tropical_cyclone_night.svg" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/19_tropical_cyclone_night.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/app/BOM_ICONS.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/weather-icons-main/bom/weatherIcons/BOM_ICONS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/clear-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/clear-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/cloudy-day-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/cloudy-day-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/cloudy-day-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/cloudy-night-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/cloudy-night-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/cloudy-night-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/cloudy-original.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/cloudy.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/fair-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/fair-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/fog.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/haze.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/hurricane.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/isolated-thunderstorms.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/partly-cloudy-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/partly-cloudy-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/rain-and-sleet-mix.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/rain-and-snow-mix.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/rain.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/rainy-1-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/rainy-1-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/rainy-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/rainy-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/rainy-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/rainy-4.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/rainy-5.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/rainy-6.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/rainy-7.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/scattered-thunderstorms.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/severe-thunderstorm.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/sleet.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/snow-and-sleet-mix.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/snow.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/snowy-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/snowy-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/snowy-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/snowy-4.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/snowy-5.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/snowy-6.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/sunny-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/sunny-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/thunder.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/tornado.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/tropical-storm.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/weather-sprite.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/weather.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/weather_sagittarius.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/weather_sunset.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/animated/wind.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/clear-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/clear-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/cloudy-day-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/cloudy-day-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/cloudy-day-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/cloudy-night-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/cloudy-night-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/cloudy-night-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/cloudy-original.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/cloudy.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/fair-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/fair-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/fog.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/haze.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/hurricane.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/isolated-thunderstorms.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/partly-cloudy-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/partly-cloudy-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/rain-and-sleet-mix.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/rain-and-snow-mix.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/rain.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/rainy-1-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/rainy-1-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/rainy-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/rainy-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/rainy-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/rainy-4.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/rainy-5.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/rainy-6.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/rainy-7.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/scattered-thunderstorms.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/severe-thunderstorm.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/sleet.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/snow-and-sleet-mix.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/snow.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/snowy-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/snowy-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/snowy-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/snowy-4.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/snowy-5.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/snowy-6.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/sunny-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/sunny-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/thunder.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/tornado.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/tropical-storm.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/weather-sprite.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/weather.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/weather_sagittarius.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/weather_sunset.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/original/static/wind.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/clear-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/clear-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/cloudy-1-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/cloudy-1-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/cloudy-2-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/cloudy-2-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/cloudy-3-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/cloudy-3-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/cloudy.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/dust.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/fog-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/fog-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/fog.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/frost-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/frost-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/frost.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/hail.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/haze-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/haze-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/haze.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/hurricane.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/isolated-thunderstorms-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/isolated-thunderstorms-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/isolated-thunderstorms.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/rain-and-sleet-mix.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/rain-and-snow-mix.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/rainy-1-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/rainy-1-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/rainy-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/rainy-2-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/rainy-2-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/rainy-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/rainy-3-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/rainy-3-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/rainy-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/scattered-thunderstorms-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/scattered-thunderstorms-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/scattered-thunderstorms.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/severe-thunderstorm.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/snow-and-sleet-mix.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/snowy-1-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/snowy-1-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/snowy-1.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/snowy-2-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/snowy-2-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/snowy-2.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/snowy-3-day.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/snowy-3-night.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/snowy-3.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/thunderstorms.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/tornado.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/tropical-storm.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/weather-icons-main/static/wind.svg" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -357,11 +95,11 @@
       <recent name="$PROJECT_DIR$/src/main/java/model" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/main/resources" />
       <recent name="$PROJECT_DIR$/src/main/java/ui/view" />
       <recent name="$PROJECT_DIR$/src/main/java/ui/controller" />
       <recent name="$PROJECT_DIR$/src/main/java/ui/component" />
       <recent name="$PROJECT_DIR$/src/main/java/services" />
-      <recent name="$PROJECT_DIR$/src/main/java/location" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="" />
@@ -548,7 +286,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773638547269</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="adjusted the first page UI">
+      <option name="closed" value="true" />
+      <created>1773859395859</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1773859395859</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -560,6 +306,7 @@
     <MESSAGE value="Working scene 1 and 2" />
     <MESSAGE value="Working scene 1 and 2 with refactoring of css properties." />
     <MESSAGE value="Scene 3 chua xong, dang refactor thanh phan scene 1 2 cho oke han" />
-    <option name="LAST_COMMIT_MESSAGE" value="Scene 3 chua xong, dang refactor thanh phan scene 1 2 cho oke han" />
+    <MESSAGE value="adjusted the first page UI" />
+    <option name="LAST_COMMIT_MESSAGE" value="adjusted the first page UI" />
   </component>
 </project>
