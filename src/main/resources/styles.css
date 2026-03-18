@@ -10,9 +10,9 @@
 .scene1-root, .scene2-root {
     -fx-background-color: white;
     -fx-font-family: 'Inter', 'Segoe UI', sans-serif;
-    -fx-pref-width: 540;
-    -fx-pref-height: 1080;
-    -fx-padding: 20 50 20 50;
+    -fx-pref-width: 405;
+    -fx-pref-height: 810;
+    -fx-padding: 30 30 30 30;
     -fx-spacing: 15;
 }
 
@@ -20,18 +20,19 @@
 
 .menu-bar {
     -fx-background-color: transparent;
-    -fx-pref-width: 440;
+    -fx-pref-width: 330;
+    -fx-pref-height: 40;
     -fx-alignment: center-left;
-    -fx-padding: 20;
+    -fx-padding: 15;
     -fx-spacing: 0;
 }
 
 .scene2-root .menu-bar {
-    -fx-spacing: 60;
+    -fx-spacing: 45;
 }
 
 .location-btn {
-    -fx-font-size: 20px;
+    -fx-font-size: 15px;
     -fx-font-family: 'Inter', sans-serif;
     -fx-background-color: transparent;
     -fx-border-color: black;
@@ -41,7 +42,7 @@
 }
 
 .home-btn {
-    -fx-font-size: 20px;
+    -fx-font-size: 15px;
     -fx-font-family: 'Inter', sans-serif;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
@@ -50,7 +51,7 @@
 }
 
 .back-btn {
-    -fx-font-size: 20px;
+    -fx-font-size: 15px;
     -fx-font-family: 'Inter', sans-serif;
     -fx-background-color: transparent;
     -fx-border-color: black;
@@ -60,7 +61,7 @@
 }
 
 .scene2-title {
-    -fx-font-size: 24px;
+    -fx-font-size: 18px;
     -fx-font-family: 'Inter', sans-serif;
 }
 
@@ -68,38 +69,39 @@
 
 .quick-info {
     -fx-background-color: transparent;
-    -fx-spacing: 12;
-    -fx-pref-width: 440;
+    -fx-spacing: 9;
+    -fx-pref-width: 330;
+    -fx-pref-height: 310;
     -fx-alignment: center;
-    -fx-padding: 10 25 0 25;
+    -fx-padding: 8 19 0 19;
 }
 
 .hero-icon {
-    /*-fx-background-radius: 31px;*/
-    /*-fx-border-radius: 31px;*/
+    /*-fx-background-radius: 23px;*/
+    /*-fx-border-radius: 23px;*/
     /*-fx-border-color: #747474;*/
     /*-fx-border-width: 1px;*/
-    -fx-pref-width: 180;
-    -fx-pref-height: 180;
-    -fx-min-width: 180;
-    -fx-min-height: 180;
+    -fx-pref-width: 135;
+    -fx-pref-height: 135;
+    -fx-min-width: 135;
+    -fx-min-height: 135;
 }
 
 .hourly-icon, .period-icon, .weekday-icon {
-    -fx-pref-width: 30;
-    -fx-pref-height: 30;
-    -fx-min-width: 30;
-    -fx-min-height: 30;
+    -fx-pref-width: 23;
+    -fx-pref-height: 23;
+    -fx-min-width: 23;
+    -fx-min-height: 23;
 }
 
 .hero-temp {
-    -fx-font-size: 40px;
+    -fx-font-size: 30px;
     -fx-font-family: 'Inter', sans-serif;
     -fx-text-fill: black;
 }
 
 .hero-desc {
-    -fx-font-size: 20px;
+    -fx-font-size: 15px;
     -fx-font-family: 'Inter', sans-serif;
     -fx-text-fill: black;
 }
@@ -109,13 +111,13 @@
 .current-info-bar {
     -fx-border-color: black;
     -fx-border-width: 1px;
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
+    -fx-border-radius: 9;
+    -fx-background-radius: 9;
     -fx-background-color: white;
-    -fx-pref-width: 440;
+    -fx-pref-width: 330;
     -fx-alignment: center;
-    -fx-padding: 11 26 11 26;
-    -fx-spacing: 40;
+    -fx-padding: 8 20 8 20;
+    -fx-spacing: 30;
 }
 
 .stat-slot {
@@ -129,13 +131,13 @@
 .hourly-info-box {
     -fx-border-color: black;
     -fx-border-width: 1px;
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-background-color: white;
-    -fx-spacing: 15;
-    -fx-pref-width: 440;
-    /*-fx-pref-height: 201;*/
-    -fx-padding: 26;
+    -fx-spacing: 10;
+    -fx-pref-width: 330;
+    -fx-pref-height: 210;
+    -fx-padding: 20;
 }
 
 .hourly-header {
@@ -146,7 +148,7 @@
 .hourly-strip {
     -fx-spacing: 10;
     -fx-alignment: center-left;
-    -fx-padding:4 4 4 4;
+    -fx-padding: 5 5 5 5;
 }
 
 .hourly-scroll {
@@ -184,15 +186,15 @@
     -fx-border-color: black;
     -fx-border-width: 1px;
     -fx-background-color: white;
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
-    -fx-spacing: 6;
-    -fx-pref-width: 75;
-    -fx-pref-height: 110;
-    -fx-min-width: 75;
-    -fx-max-width: 75;
+    -fx-border-radius: 9;
+    -fx-background-radius: 9;
+    -fx-spacing: 5;
+    -fx-pref-width: 55;
+    -fx-pref-height: 80;
+    -fx-min-width: 55;
+    -fx-max-width: 55;
     -fx-alignment: center;
-    -fx-padding: 8;
+    -fx-padding: 6;
 }
 
 .hourly-hour-label, .hourly-temp-label {
@@ -204,11 +206,11 @@
 .three-day-box {
     -fx-border-color: black;
     -fx-border-width: 1px;
-    -fx-border-radius: 12;
-    -fx-background-radius: 12;
+    -fx-border-radius: 10;
+    -fx-background-radius: 10;
     -fx-background-color: white;
-    -fx-spacing: 15;
-    -fx-pref-width: 440;
+    -fx-spacing: 10;
+    -fx-pref-width: 330;
     -fx-padding: 20;
 }
 
@@ -218,12 +220,12 @@
 }
 
 .three-day-rows {
-    -fx-spacing: 0;
-    -fx-padding: 0 0 12 0;
+    -fx-spacing: 10;
+    -fx-padding: 0;
 }
 
 .more-btn {
-    -fx-font-size: 14px;
+    -fx-font-size: 15px;
     -fx-font-family: 'Inter', sans-serif;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
@@ -235,18 +237,18 @@
 
 .weekday-row {
     -fx-background-color: transparent;
-    -fx-pref-height: 50;
+    -fx-pref-height: 20;
     -fx-alignment: center-left;
-    -fx-padding: 10;
+    -fx-padding: 0;
     -fx-spacing: 0;
 }
 
 .weekday-label-left {
-    -fx-pref-width: 78;
+    -fx-pref-width: 80;
 }
 
 .weekday-label-right {
-    -fx-pref-width: 47;
+    -fx-pref-width: 80;
     -fx-alignment: center-right;
 }
 
@@ -254,8 +256,8 @@
 
 .periods-list {
     -fx-background-color: white;
-    -fx-spacing: 10;
-    -fx-padding: 0 20 0 20;
+    -fx-spacing: 15;
+    -fx-padding: 0;
     -fx-max-width: 5000;
 }
 
@@ -263,7 +265,6 @@
     -fx-background-color: white;
     -fx-background: white;
     -fx-border-color: transparent;
-    -fx-pref-height: 910;
 }
 
 .scene2-scroll .viewport {
@@ -277,9 +278,9 @@
     -fx-border-width: 1px;
     -fx-background-color: white;
     -fx-spacing: 10;
-    -fx-pref-height: 114;
+    -fx-pref-height: 90;
     -fx-max-width: 5000;
-    -fx-padding: 25;
+    -fx-padding: 20;
 }
 
 .period-info1-row, .period-info2-row {
@@ -288,73 +289,73 @@
 }
 
 .period-info2-row {
-    -fx-spacing: 15;
+    -fx-spacing: 10;
 }
 
 /* ----- Labels (extracted from code) --------------------------- */
 
 .hourly-text {
-    -fx-font-size: 14px;
+    -fx-font-size: 11px;
     -fx-font-family: 'Inter', sans-serif;
     -fx-text-fill: black;
 }
 
 .period-name-label, .period-temp-label {
-    -fx-font-size: 20px;
+    -fx-font-size: 15px;
     -fx-font-family: 'Inter', sans-serif;
 }
 
 .period-name-label {
-    -fx-pref-width: 88;
+    -fx-pref-width: 80;
 }
 
 .period-temp-label {
-    -fx-pref-width: 75;
+    -fx-pref-width: 80;
     -fx-alignment: center-right;
 }
 
 .period-sub-label {
-    -fx-font-size: 14px;
+    -fx-font-size: 11px;
     -fx-font-family: 'Inter', sans-serif;
 }
 
 .weekday-label {
-    -fx-font-size: 14px;
+    -fx-font-size: 13px;
     -fx-font-family: 'Inter', sans-serif;
 }
 
 .today-label, .next-label {
-    -fx-font-size: 20px;
+    -fx-font-size: 15px;
     -fx-font-family: 'Inter', sans-serif;
 }
 
 .date-label, .stat-value-label {
-    -fx-font-size: 14px;
+    -fx-font-size: 15px;
     -fx-font-family: 'Inter', sans-serif;
 }
 
 .stat-icon-label {
-    -fx-font-size: 18px;
+    -fx-font-size: 14px;
 }
 
 .scene3-root {
     -fx-background-color: white;
     -fx-font-family: 'Inter', 'Segoe UI', sans-serif;
-    -fx-pref-width: 540;
-    -fx-pref-height: 1080;
-    -fx-padding: 50;
+    -fx-pref-width: 405;
+    -fx-pref-height: 810;
+    -fx-padding: 38;
     -fx-spacing: 0;
 }
 
 /* "Weather" title in Scene 3 menu bar */
 .scene3-title {
-    -fx-font-size: 20px;
+    -fx-font-size: 15px;
     -fx-font-family: 'Inter', sans-serif;
 }
 
 /* Unit switch label — clickable, right-aligned */
 .unit-switch-label {
-    -fx-font-size: 16px;
+    -fx-font-size: 12px;
     -fx-font-family: 'Inter', sans-serif;
     -fx-cursor: hand;
     -fx-underline: true;
@@ -362,9 +363,9 @@
 
 /* Content VBox inside Scene 3 */
 .scene3-content {
-    -fx-spacing: 10;
-    -fx-padding: 0 20 0 20;
-    -fx-pref-width: 440;
+    -fx-spacing: 8;
+    -fx-padding: 0 15 0 15;
+    -fx-pref-width: 330;
 }
 
 /* ----- Search bar (Figma node 68:92) -------------------------- */
@@ -373,25 +374,25 @@
     -fx-border-color: black;
     -fx-border-width: 1px;
     -fx-background-color: white;
-    -fx-pref-height: 49;
-    -fx-pref-width: 400;
-    -fx-padding: 10 25 10 25;
-    -fx-spacing: 10;
+    -fx-pref-height: 37;
+    -fx-pref-width: 300;
+    -fx-padding: 8 19 8 19;
+    -fx-spacing: 8;
     -fx-alignment: center-left;
 }
 
 .search-icon {
-    -fx-font-size: 18px;
-    -fx-pref-width: 30;
-    -fx-pref-height: 29;
+    -fx-font-size: 14px;
+    -fx-pref-width: 23;
+    -fx-pref-height: 22;
 }
 
 .search-field {
-    -fx-font-size: 16px;
+    -fx-font-size: 12px;
     -fx-font-family: 'Inter', sans-serif;
     -fx-background-color: transparent;
     -fx-border-color: transparent;
-    -fx-pref-height: 29;
+    -fx-pref-height: 22;
 }
 
 /* ----- Results list (Figma node 68:99) ------------------------ */
@@ -400,8 +401,8 @@
     -fx-background-color: white;
     -fx-background: white;
     -fx-border-color: transparent;
-    -fx-pref-height: 851;
-    -fx-pref-width: 400;
+    -fx-pref-height: 638;
+    -fx-pref-width: 300;
 }
 
 .results-scroll .viewport {
@@ -410,8 +411,8 @@
 
 .results-list {
     -fx-background-color: white;
-    -fx-spacing: 18;
-    -fx-padding: 20 10 20 10;
+    -fx-spacing: 14;
+    -fx-padding: 15 8 15 8;
 }
 
 /* ----- Location result row (Figma node 68:100 / 62:329) ------- */
@@ -420,9 +421,9 @@
     -fx-border-color: black;
     -fx-border-width: 1px;
     -fx-background-color: white;
-    -fx-pref-height: 57;
-    -fx-pref-width: 380;
-    -fx-padding: 0 10 0 10;
+    -fx-pref-height: 43;
+    -fx-pref-width: 285;
+    -fx-padding: 0 8 0 8;
     -fx-alignment: center-left;
     -fx-spacing: 0;
 }
@@ -436,21 +437,21 @@
 }
 
 .result-location-label {
-    -fx-font-size: 20px;
+    -fx-font-size: 15px;
     -fx-font-family: 'Inter', sans-serif;
 }
 
 .result-temp-label {
-    -fx-font-size: 20px;
+    -fx-font-size: 15px;
     -fx-font-family: 'Inter', sans-serif;
-    -fx-pref-width: 75;
+    -fx-pref-width: 56;
     -fx-alignment: center-right;
 }
 
 /* No-results / loading label */
 .no-results-label {
-    -fx-font-size: 16px;
+    -fx-font-size: 12px;
     -fx-font-family: 'Inter', sans-serif;
     -fx-text-fill: #888888;
-    -fx-padding: 20;
+    -fx-padding: 15;
 }

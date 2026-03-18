@@ -33,7 +33,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * Note on animation:
  *   Batik rasterizes one static frame of each SVG (the initial state).
  *   CSS keyframe / SMIL animation is not played — icons appear as their
- *   first frame. For the weather app context this is entirely acceptable.
+ *   first frame. For the weather weatherIcons context this is entirely acceptable.
  *
  * Caching:
  *   rasterization at 200px and cached by resourcePath.

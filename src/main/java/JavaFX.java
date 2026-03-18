@@ -30,7 +30,7 @@ import java.util.ArrayList;
  * Thread model (single-threaded):
  *   - All network calls and Stage/Scene mutations run on the FX thread.
  *   - No background threads or Platform.runLater() are used.
- *   - The app will be unresponsive during a fetch, but this keeps the
+ *   - The weatherIcons will be unresponsive during a fetch, but this keeps the
  *     implementation simple while concurrency has not yet been covered.
  */
 public class JavaFX extends Application {
@@ -91,7 +91,7 @@ public class JavaFX extends Application {
 	 * Fetches both forecasts for the home (Chicago) location directly on the
 	 * FX thread, then immediately rebuilds the scenes.
 	 *
-	 * If either fetch fails, the app retains the previous scene
+	 * If either fetch fails, the weatherIcons retains the previous scene
 	 * (or shows nothing on first load) and prints an error.
 	 */
 	private void fetchAndRefresh() {

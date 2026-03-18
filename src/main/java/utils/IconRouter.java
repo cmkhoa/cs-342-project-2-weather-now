@@ -2,7 +2,7 @@ package utils;
 
 /**
  * This class deconstructs the icon url from each period (both 12hr and hourly) to get a pre assigned icon
- * in /weather-icons-main/bom/app/
+ * in /weather-icons-main/bom/weatherIcons/
  * Reference: https://clojurecivitas.org/scittle/weather/weather_nws_integration.html
  *  NWS token(s)    --> BOM file (day / night)
  *  skc             --> 01_sunny / 02_clear_night
@@ -21,7 +21,7 @@ package utils;
 
 public class IconRouter {
     // Base URL and fallback icon
-    private static final String BASE     = "/weather-icons-main/bom/app/";
+    private static final String BASE     = "/weather-icons-main/bom/weatherIcons/";
     private static final String FALLBACK = BASE + "04_cloudy.svg";
     /**
      * Function takes in icon url and the daytime status from the period

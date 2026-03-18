@@ -4,7 +4,7 @@ package utils;
  * Global temperature unit state and conversion utility.
  *
  * All NWS data arrives in °F. This class holds the current display
- * unit and converts on demand. The toggle is app-wide — one call
+ * unit and converts on demand. The toggle is weatherIcons-wide — one call
  * affects all labels that use convert().
  *
  * Usage:
@@ -23,7 +23,7 @@ public class TempConverter {
     // Unit control
     // ---------------------------------------------------------------
 
-    /** Toggles between °F and °C app-wide. */
+    /** Toggles between °F and °C weatherIcons-wide. */
     public static void toggle() {
         current = (current == Unit.FAHRENHEIT) ? Unit.CELSIUS : Unit.FAHRENHEIT;
     }

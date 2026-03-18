@@ -85,9 +85,12 @@ public class Scene2View {
     private ScrollPane buildContent(ArrayList<Period> periods12hr) {
         VBox periodsBox = new VBox();
         periodsBox.getStyleClass().add("periods-list");
-
-        for (Period p : periods12hr) {
-            PeriodCard card = new PeriodCard(p);
+        int startIdx = 2;
+        if (!periods12hr.get(0).isDaytime){
+            startIdx -= 1;
+        }
+        for (int i = startIdx; i < startIdx + 6; i++) {
+            PeriodCard card = new PeriodCard(periods12hr.get(i));
             periodsBox.getChildren().add(card);
         }
 
