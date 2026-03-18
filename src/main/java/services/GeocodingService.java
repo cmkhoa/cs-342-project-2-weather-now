@@ -118,6 +118,22 @@ public class GeocodingService {
                 LocationWeather lw = buildFromCoords(lat, lon);
                 if (lw == null) continue;
 
+                // --- FIX: Override NWS's station name with Nominatim's exact name ---
+                // Nominatim returns a full string like: "City of New York, New York, United States"
+                if (candidate.display_name != null) {
+                    String[] parts = candidate.display_name.split(",");
+                    String city = parts[0].trim();
+
+                    // Extract state from Nominatim (usually the 2nd to last item)
+                    if (parts.length >= 3) {
+                        String state = parts[parts.length - 2].trim();
+                        lw.displayName = city + ", " + state;
+                    } else {
+                        lw.displayName = city;
+                    }
+                }
+                // --------------------------------------------------------------------
+
                 results.add(lw);
                 if (results.size() >= 5) break;
 
