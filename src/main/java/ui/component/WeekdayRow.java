@@ -14,14 +14,9 @@ import java.text.SimpleDateFormat;
 
 /**
  * A single row in the Scene 1 "Next Forecast" 3-day section.
- *
- * Layout:  [ Weekday (left, 95px) ]  [spacer]  [ 28×28 icon (center) ]  [spacer]  [ hi/lo (right, 95px) ]
- *
- * Row height is 46px (set by CSS). All children are vertically centered via Pos.CENTER_LEFT.
- * Text is white at 14px for readability over the glass background.
+ * Layout: Weekday + icon + hi/lo
  */
 public class WeekdayRow extends HBox {
-
     public WeekdayRow(Period dayPeriod, Period nightPeriod) {
         super();
         setAlignment(Pos.CENTER_LEFT);
@@ -32,12 +27,11 @@ public class WeekdayRow extends HBox {
         weekdayLabel.getStyleClass().addAll("weekday-label", "weekday-label-left");
         weekdayLabel.setAlignment(Pos.CENTER_LEFT);
 
-        // Equal-flex spacers push icon to center
         Region spacerLeft = new Region();
         HBox.setHgrow(spacerLeft, Priority.ALWAYS);
 
         // Weather icon centered
-        Region icon = buildIcon(dayPeriod);
+        Region icon = getIcon(dayPeriod);
 
         Region spacerRight = new Region();
         HBox.setHgrow(spacerRight, Priority.ALWAYS);
@@ -50,29 +44,20 @@ public class WeekdayRow extends HBox {
         getChildren().addAll(weekdayLabel, spacerLeft, icon, spacerRight, hiLoLabel);
     }
 
-    // ---------------------------------------------------------------
-    // Helpers
-    // ---------------------------------------------------------------
-
     private String formatWeekday(Period period) {
         if (period == null || period.startTime == null) return "--";
         try {
             return new SimpleDateFormat("EEEE").format(period.startTime);
-        } catch (Exception e) {
-            return period.name != null ? period.name : "--";
-        }
+        } catch (Exception e) { return period.name != null ? period.name : "--"; }
     }
 
     private String formatHiLo(Period dayPeriod, Period nightPeriod) {
-        String hi = (dayPeriod   != null)
-                ? String.valueOf(TempConverter.convert(dayPeriod.temperature))   : "--";
-        String lo = (nightPeriod != null)
-                ? String.valueOf(TempConverter.convert(nightPeriod.temperature)) : "--";
+        String hi = (dayPeriod   != null) ? String.valueOf(TempConverter.convert(dayPeriod.temperature))   : "--";
+        String lo = (nightPeriod != null) ? String.valueOf(TempConverter.convert(nightPeriod.temperature)) : "--";
         return hi + TempConverter.symbol() + " / " + lo + TempConverter.symbol();
     }
 
-    private Region buildIcon(Period period) {
-        if (period == null) return new Region();
+    private Region getIcon(Period period) {
         Region region = SvgIcon.load(IconRouter.getLocalPath(period.icon, period.isDaytime));
         region.getStyleClass().add("weekday-icon");
         return region;

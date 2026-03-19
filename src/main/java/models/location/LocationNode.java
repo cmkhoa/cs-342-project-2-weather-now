@@ -12,7 +12,7 @@ import java.util.ArrayList;
  *   Stage 2 (when the user clicks on the search result): uses the MyWeatherAPI
  * With the default Chicago location set with a function
  */
-public class LocationWeather {
+public class LocationNode {
     public String displayName;
     public double lat, lon;
 
@@ -29,10 +29,10 @@ public class LocationWeather {
     public ArrayList<HourlyPeriod> hourlyPeriods;
 
     // Constructors
-    public LocationWeather() {}
-    public LocationWeather(String displayName, double lat, double lon, String nwsOffice, int gridX, int gridY) {
+    public LocationNode() {}
+    public LocationNode(String displayName, double lat, double lon, String nwsOffice, int gridX, int gridY){
         this.displayName = displayName;
-        this.lat = lat;     this.lon = lon;
+        this.lat = lat; this.lon = lon;
         this.nwsOffice = nwsOffice;
         this.gridX = gridX; this.gridY = gridY;
     }
@@ -41,7 +41,6 @@ public class LocationWeather {
     public boolean isFullyLoaded() {
         return hourlyPeriods != null && !hourlyPeriods.isEmpty();
     }
-
     // Function populates the quick access fields for the search result row
     public void refreshConvenience() {
         if (periods12hr != null && !periods12hr.isEmpty()) {
@@ -49,9 +48,8 @@ public class LocationWeather {
             currentIcon = periods12hr.get(0).icon;
         }
     }
-
     // Default home location: set the location for the Chicago line at boot
-    public static LocationWeather chicagoDefault() {
-        return new LocationWeather("Chicago, IL", 41.85, -87.65, "LOT", 77, 70);
+    public static LocationNode chicagoDefault() {
+        return new LocationNode("Chicago, IL", 41.85, -87.65, "LOT", 77, 70);
     }
 }

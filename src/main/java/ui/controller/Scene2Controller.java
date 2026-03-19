@@ -1,6 +1,8 @@
 package ui.controller;
 
+import ui.view.Scene2Factory;
 import ui.view.Scene2View;
+import ui.view.SceneFactory;
 import weather.Period;
 
 import javafx.scene.Scene;
@@ -9,46 +11,38 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 /**
- * Receives the already-fetched 12-hour period data (from Scene1Controller)
- * and builds + returns Scene 2.
+ * Builds Scene 2 from already-fetched 12-hour period data.
  *
- * Updated: now accepts a weatherClass string from Scene1View so Scene 2
- * renders the same background gradient as Scene 1's current weather state.
+ * Abstract Factory — holds a SceneFactory reference, calls sceneFactory.create()
+ * rather than view.build() directly. The controller is decoupled from the
+ * concrete view class.
  */
 public class Scene2Controller {
 
-    private final Stage primaryStage;
-    private final Scene2View view;
-    private Scene scene1Reference;
+    private final Stage        primaryStage;
+    private final Scene2View   view;
+    private final SceneFactory sceneFactory;  // Abstract Factory
 
-    // The last weather class applied (stored so it can be reused on rebuild)
+    private Scene  scene1Reference;
     private String lastWeatherClass = "";
 
     public Scene2Controller(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        this.view = new Scene2View();
+        this.view         = new Scene2View();
+        this.sceneFactory = new Scene2Factory(view);  // Abstract Factory wired here
     }
 
-    public void setScene1Reference(Scene scene1) {
-        this.scene1Reference = scene1;
-    }
-
-    /** Set by Scene1Controller after each build so Scene 2 matches. */
+    public void setScene1Reference(Scene scene1)   { this.scene1Reference  = scene1; }
     public void setWeatherClass(String weatherClass) {
         this.lastWeatherClass = weatherClass != null ? weatherClass : "";
     }
 
-    // ---------------------------------------------------------------
-    // Public API
-    // ---------------------------------------------------------------
-
     public Scene buildScene(ArrayList<Period> periods12hr) {
         view.setOnBackClick(() -> {
-            if (scene1Reference != null) {
-                primaryStage.setScene(scene1Reference);
-            }
+            if (scene1Reference != null) primaryStage.setScene(scene1Reference);
         });
 
-        return view.build(periods12hr, lastWeatherClass);
+        // Abstract Factory — interface call, not view.build() directly
+        return sceneFactory.create(periods12hr, null, null, lastWeatherClass, null);
     }
 }

@@ -1,11 +1,13 @@
 package ui.controller;
 
-import models.location.LocationWeather;
+import models.location.LocationNode;
 import models.hourlyForecast.HourlyPeriod;
-import models.hourlyForecast.MyWeatherAPI;
+import services.ForecastService;
+import services.HourlyForecastService;
+import ui.view.Scene1Factory;
 import ui.view.Scene1View;
+import ui.view.SceneFactory;
 import weather.Period;
-import weather.WeatherAPI;
 
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -13,178 +15,133 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 /**
- * Fetches all data for Scene 1, populates Scene1View, wires navigation callbacks.
+ * Wires Scene 1 data, navigation callbacks, and scene construction.
  *
- * Key fix: homeScene1 tracks the LAST CHICAGO scene separately from lastScene1
- * (which is always the most-recently-built scene, possibly for a non-home city).
- * The Home button always goes back to homeScene1, not lastScene1.
+ * For hw4:
+ *      template method: by using forecastService and hourlyforecastservice
+ *      abstract factory: the build function calls sceneFactory.create()
  */
 public class Scene1Controller {
+    private static final LocationNode HOME = LocationNode.chicagoDefault();
 
-    private static final LocationWeather HOME = LocationWeather.chicagoDefault();
+    // Template Method services
+    private static final ForecastService forecastService = new ForecastService();
+    private static final HourlyForecastService hourlyForecastService = new HourlyForecastService();
 
-    private final Stage       primaryStage;
-    private final Scene1View  view;
-    private Scene2Controller  scene2Controller;
-    private Scene3Controller  scene3Controller;
+    private final Stage primaryStage;
+    private final Scene1View view;
+    private final SceneFactory sceneFactory;  // Abstract Factory
 
-    /** Always the most recently built Scene 1 (any city). */
+    private Scene2Controller scene2Controller;
+    private Scene3Controller scene3Controller;
+
+    // store the most recent version of scene 1, being the previous for back, or home for chicago
     private Scene lastScene1;
-
-    /**
-     * The last Scene 1 built for the Chicago home location.
-     * Only updated when buildScene() or buildSceneForLocation(Chicago) runs.
-     * The Home button navigates here.
-     */
     private Scene homeScene1;
-
-    private LocationWeather currentLocation;
+    private LocationNode currentLocation;
 
     public Scene1Controller(Stage primaryStage) {
-        this.primaryStage    = primaryStage;
-        this.view            = new Scene1View();
+        this.primaryStage = primaryStage;
+        this.view = new Scene1View();
+        this.sceneFactory = new Scene1Factory(view);
         this.currentLocation = HOME;
     }
 
     public void setScene2Controller(Scene2Controller s2c) { this.scene2Controller = s2c; }
     public void setScene3Controller(Scene3Controller s3c) { this.scene3Controller = s3c; }
 
-    // ---------------------------------------------------------------
-    // Phase 1 — called by JavaFX.java 30-minute refresh cycle (Chicago)
-    // ---------------------------------------------------------------
-
-    public Scene buildScene(ArrayList<Period> periods12hr,
-                            ArrayList<HourlyPeriod> hourlyPeriods) {
-        LocationWeather lw = LocationWeather.chicagoDefault();
+    public Scene buildScene(ArrayList<Period> periods12hr, ArrayList<HourlyPeriod> hourlyPeriods) {
+        LocationNode lw = LocationNode.chicagoDefault();
         lw.periods12hr   = periods12hr;
         lw.hourlyPeriods = hourlyPeriods;
         lw.refreshConvenience();
 
         Scene scene = buildSceneForLocation(lw);
-        // This came from the auto-refresh for Chicago — store as the canonical home scene
-        this.homeScene1 = scene;
+        this.homeScene1 = scene;  // auto-refresh always produces a Chicago scene
         return scene;
     }
 
-    // ---------------------------------------------------------------
-    // Phase 3 — called by Scene3Controller after a city is picked
-    // ---------------------------------------------------------------
-
-    public Scene buildSceneForLocation(LocationWeather location) {
+    // Called by Scene3Controller after a city is picked
+    public Scene buildSceneForLocation(LocationNode location) {
         this.currentLocation = location;
-
         wireCallbacks(location);
 
-        Scene scene = view.build(
-                location.periods12hr,
+        // Abstract Factory — controller calls the interface, not the view directly
+        Scene scene = sceneFactory.create(location.periods12hr,
                 location.hourlyPeriods != null ? location.hourlyPeriods : new ArrayList<>(),
-                location.displayName
+                location.displayName,
+                view.getDetectedWeatherClass(),
+                null
         );
 
-        // Propagate weather theme to Scene 2
         if (scene2Controller != null) {
             scene2Controller.setWeatherClass(view.getDetectedWeatherClass());
+            scene2Controller.setScene1Reference(scene);
         }
 
         this.lastScene1 = scene;
 
-        // If this is the home/Chicago location, update the homeScene1 reference too
         if (isHomeLocation(location)) {
             this.homeScene1 = scene;
-        }
-
-        if (scene2Controller != null) {
-            scene2Controller.setScene1Reference(scene);
         }
 
         return scene;
     }
 
-    // ---------------------------------------------------------------
-    // Unit toggle callback (from Scene 3)
-    // ---------------------------------------------------------------
-
+    // Called by Scene3Controller on unit toggle
     public void onUnitChanged() {
-        if (currentLocation != null && currentLocation.periods12hr != null) {
-            Scene rebuilt = buildSceneForLocation(currentLocation);
-            // Only push to the stage if Scene 1 is currently showing
-            Scene showing = primaryStage.getScene();
-            if (showing != null
-                    && showing.getRoot().getStyleClass().contains("scene1-root")) {
-                primaryStage.setScene(rebuilt);
-            }
+        if (currentLocation == null || currentLocation.periods12hr == null) return;
+        Scene rebuilt = buildSceneForLocation(currentLocation);
+        Scene showing = primaryStage.getScene();
+        if (showing != null && showing.getRoot().getStyleClass().contains("scene1-root")) {
+            primaryStage.setScene(rebuilt);
         }
     }
 
-    // ---------------------------------------------------------------
-    // Static data fetchers used by JavaFX.java
-    // ---------------------------------------------------------------
-
+    // Static data fetchers — Template Method pattern
+    // Both delegate to AbstractForecastService subclasses.
     public static ArrayList<Period> fetch12Hr() {
-        return WeatherAPI.getForecast(HOME.nwsOffice, HOME.gridX, HOME.gridY);
+        return forecastService.fetch(HOME.nwsOffice, HOME.gridX, HOME.gridY);
     }
-
     public static ArrayList<HourlyPeriod> fetchHourly() {
-        return MyWeatherAPI.getHourlyForecast(HOME.nwsOffice, HOME.gridX, HOME.gridY);
+        return hourlyForecastService.fetch(HOME.nwsOffice, HOME.gridX, HOME.gridY);
     }
 
-    // ---------------------------------------------------------------
-    // Accessors used by Scene3Controller
-    // ---------------------------------------------------------------
+    // Accessors
+    public LocationNode getCurrentLocation() { return currentLocation; }
+    public Scene getLastScene1()     { return lastScene1; }
+    public Scene getHomeScene1()     { return homeScene1; }
 
-    public LocationWeather getCurrentLocation() { return currentLocation; }
-    public Scene            getLastScene1()     { return lastScene1; }
-    public Scene            getHomeScene1()     { return homeScene1; }
-
-    // ---------------------------------------------------------------
-    // Helpers
-    // ---------------------------------------------------------------
-
-    private boolean isHomeLocation(LocationWeather loc) {
-        return loc != null
-                && loc.nwsOffice.equals(HOME.nwsOffice)
-                && loc.gridX == HOME.gridX
-                && loc.gridY == HOME.gridY;
+    private boolean isHomeLocation(LocationNode loc) {
+        return loc != null && loc.nwsOffice.equals(HOME.nwsOffice) && loc.gridX == HOME.gridX && loc.gridY == HOME.gridY;
     }
 
-    private void wireCallbacks(LocationWeather location) {
+    private void wireCallbacks(LocationNode location) {
 
-        // "More >" → Scene 2
         view.setOnMoreForecastClick(() -> {
             if (scene2Controller != null && location.periods12hr != null) {
-                Scene s2 = scene2Controller.buildScene(location.periods12hr);
-                primaryStage.setScene(s2);
+                primaryStage.setScene(scene2Controller.buildScene(location.periods12hr));
             }
         });
 
-        // Location button → Scene 3
         view.setOnLocationClick(() -> {
             if (scene3Controller != null) {
-                // Always pass the HOME location data for the pinned card in Scene 3
-                LocationWeather pinnedData = isHomeLocation(currentLocation)
-                        ? currentLocation
-                        : HOME; // fallback if home hasn't been fetched yet
-                scene3Controller.show(currentLocation, lastScene1);
+                scene3Controller.show(location, lastScene1);
             }
         });
 
-        // Home button → show the last Chicago scene
         view.setOnHomeClick(() -> {
-            if (isHomeLocation(currentLocation)) return; // already home, no-op
+            if (isHomeLocation(currentLocation)) return;
 
             if (homeScene1 != null) {
-                // We have a previously-built home scene — just show it
                 primaryStage.setScene(homeScene1);
-                // Update currentLocation to reflect we're back home
                 this.currentLocation = HOME;
+                if (scene2Controller != null) scene2Controller.setScene1Reference(homeScene1);
             } else {
-                // No home scene built yet (shouldn't happen in normal flow, but safe fallback)
-                System.out.println("[Scene1Controller] No homeScene1 available — fetching...");
                 ArrayList<Period> p12 = fetch12Hr();
                 ArrayList<HourlyPeriod> ph = fetchHourly();
                 if (p12 != null && ph != null) {
-                    Scene s = buildScene(p12, ph);
-                    primaryStage.setScene(s);
+                    primaryStage.setScene(buildScene(p12, ph));
                 }
             }
         });

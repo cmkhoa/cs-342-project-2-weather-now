@@ -11,6 +11,7 @@ import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
 // Extends WeatherAPI to add methods for fetching and parsing hourly forecasts.
+// no longer used because of hw 4
 public class MyWeatherAPI extends WeatherAPI {
     public static ArrayList<HourlyPeriod> getHourlyForecast(String region, int gridx, int gridy) {
         HttpRequest request = HttpRequest.newBuilder()
@@ -19,9 +20,7 @@ public class MyWeatherAPI extends WeatherAPI {
         HttpResponse<String> response = null;
         try {
             response = HttpClient.newHttpClient().send(request, HttpResponse.BodyHandlers.ofString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) { e.printStackTrace(); }
         HourlyRoot r = getHourlyObject(response.body());
         if(r == null){
             System.err.println("Failed to parse JSon");
@@ -36,10 +35,7 @@ public class MyWeatherAPI extends WeatherAPI {
         try {
             toRet = om.readValue(json, HourlyRoot.class);
             ArrayList<HourlyPeriod> p = toRet.properties.periods;
-
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
-        }
+        } catch (JsonProcessingException e) { e.printStackTrace(); }
         return toRet;
 
     }

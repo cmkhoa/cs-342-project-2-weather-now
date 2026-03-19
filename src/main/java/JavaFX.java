@@ -14,42 +14,25 @@ import javafx.util.Duration;
 import java.util.ArrayList;
 
 /**
- * Application entry point and scene lifecycle manager.
- *
+ * Application entry point
  * Responsibilities:
  *   1. Launch the JavaFX application
- *   2. Perform the initial data fetch on the FX thread
- *   3. Build Scene 1 and Scene 2 on the FX thread
- *   4. Schedule a 30-minute refresh Timeline
- *   5. Own the Stage reference — all scene switches go through here
- *
- * Phase 3 additions:
- *   - Instantiates Scene3Controller
- *   - Wires Scene3Controller <-> Scene1Controller bidirectionally
- *
- * Thread model (single-threaded):
- *   - All network calls and Stage/Scene mutations run on the FX thread.
- *   - No background threads or Platform.runLater() are used.
- *   - The weatherIcons will be unresponsive during a fetch, but this keeps the
- *     implementation simple while concurrency has not yet been covered.
+ *   2. Wire the three scene controllers to each other
+ *   3. Perform the initial data fetch
+ *   4. Show the stage once data is ready
+ *   5. Schedule a 30-minute auto-refresh Timeline
  */
 public class JavaFX extends Application {
-
 	private static final String APP_TITLE    = "CS 342 Project 2: Weather App";
-	private static final double REFRESH_MINS = 30;
+	private static final double REFRESH_MINS = 30;   // auto-refresh interval
 
 	private Stage primaryStage;
-	private Scene currentScene1;
-	private boolean isFirstLoad = true;
+    private boolean isFirstLoad = true;  // used to push Scene 1 to stage on startup
 
-	// Controllers are created once; their views are rebuilt on each refresh
+	// Controllers are created once at startup; their views are rebuilt on each refresh
 	private Scene1Controller scene1Controller;
 	private Scene2Controller scene2Controller;
-	private Scene3Controller scene3Controller;  // Phase 3
-
-	// ---------------------------------------------------------------
-	// Application lifecycle
-	// ---------------------------------------------------------------
+	private Scene3Controller scene3Controller;
 
 	public static void main(String[] args) { launch(args); }
 
@@ -59,23 +42,24 @@ public class JavaFX extends Application {
 		stage.setTitle(APP_TITLE);
 		stage.setResizable(false);
 
-		// ── Wire controllers ─────────────────────────────────────────
+		// Each controller owns one view and is reused across refreshes.
 		scene1Controller = new Scene1Controller(stage);
 		scene2Controller = new Scene2Controller(stage);
-		scene3Controller = new Scene3Controller(stage);   // Phase 3
+		scene3Controller = new Scene3Controller(stage);
 
-		// Bidirectional wiring: each controller knows about its neighbours
+		// Scene1 needs Scene2 for the "More >" button and Scene3 for the location button.
+		// Scene3 needs Scene1 so it can navigate back after a city is selected.
 		scene1Controller.setScene2Controller(scene2Controller);
-		scene1Controller.setScene3Controller(scene3Controller);  // Phase 3
-		scene3Controller.setScene1Controller(scene1Controller);  // Phase 3
+		scene1Controller.setScene3Controller(scene3Controller);
+		scene3Controller.setScene1Controller(scene1Controller);
 
-		// ── Initial fetch (blocks FX thread until complete) ──────────
+		// fetch new data and rebuild the scenes
 		fetchAndRefresh();
 
-		// ── Show stage after data is loaded ──────────────────────────
+		// Show the stage only after data is ready so the user never sees a blank window
 		stage.show();
 
-		// ── 30-minute auto-refresh ───────────────────────────────────
+		// Fires fetchAndRefresh() repeatedly every 30 minutes; INDEFINITE means it never stops.
 		Timeline refreshTimeline = new Timeline(
 				new KeyFrame(Duration.minutes(REFRESH_MINS), event -> fetchAndRefresh())
 		);
@@ -83,17 +67,8 @@ public class JavaFX extends Application {
 		refreshTimeline.play();
 	}
 
-	// ---------------------------------------------------------------
-	// Fetch + rebuild cycle
-	// ---------------------------------------------------------------
 
-	/**
-	 * Fetches both forecasts for the home (Chicago) location directly on the
-	 * FX thread, then immediately rebuilds the scenes.
-	 *
-	 * If either fetch fails, the weatherIcons retains the previous scene
-	 * (or shows nothing on first load) and prints an error.
-	 */
+	// Fetches the 12-hr and hourly forecasts for the home (Chicago) location,
 	private void fetchAndRefresh() {
 		System.out.println("[JavaFX] Fetching forecast data...");
 
@@ -113,33 +88,28 @@ public class JavaFX extends Application {
 		rebuildScenes(periods12hr, hourlyPeriods);
 	}
 
-	/**
-	 * Rebuilds both scenes from fresh data and updates the stage if currently
-	 * showing Scene 1. Runs on the FX thread.
-	 */
+	// Rebuild scene 1 when it is being shown and update scene 2's back reference
 	private void rebuildScenes(ArrayList<Period> periods12hr,
 							   ArrayList<HourlyPeriod> hourlyPeriods) {
-		// Build Scene 1 (also updates scene2Controller's back-reference internally)
-		currentScene1 = scene1Controller.buildScene(periods12hr, hourlyPeriods);
+        Scene currentScene1 = scene1Controller.buildScene(periods12hr, hourlyPeriods);
 		scene2Controller.setScene1Reference(currentScene1);
 
 		Scene currentlyShowing = primaryStage.getScene();
 
 		if (isFirstLoad || isScene1(currentlyShowing)) {
+			// Push the new Scene 1 to the stage on first load or during a background refresh while Scene 1 is visible
 			System.out.println("[JavaFX] Updating Stage to Scene 1...");
 			primaryStage.setScene(currentScene1);
 			isFirstLoad = false;
 		} else {
+			// User is on Scene 2 or 3 — update data silently without interrupting navigation
 			System.out.println("[JavaFX] Data refreshed; keeping current view.");
 		}
 
 		System.out.println("[JavaFX] Scenes rebuilt successfully");
 	}
 
-	/**
-	 * Returns true if the currently showing scene is Scene 1 (or no scene yet).
-	 * Checks the root node's style class — each view tags its root distinctly.
-	 */
+	//Returns true if the currently displayed scene is Scene 1 (or nothing yet).
 	private boolean isScene1(Scene scene) {
 		if (scene == null || scene.getRoot() == null) return true;
 		return scene.getRoot().getStyleClass().contains("scene1-root");

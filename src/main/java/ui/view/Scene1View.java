@@ -116,7 +116,8 @@ public class Scene1View {
         bar.getStyleClass().add("menu-bar");
 
         Button locationBtn = buildLocationButton(locationName);
-        locationBtn.setOnAction(e -> { if (onLocationClick != null) onLocationClick.run(); });
+        Runnable onLocation = onLocationClick;
+        locationBtn.setOnAction(e -> { if (onLocation != null) onLocation.run(); });
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
@@ -125,7 +126,8 @@ public class Scene1View {
 
         if (!isHome) {
             Button homeBtn = buildHomeButton();
-            homeBtn.setOnAction(e -> { if (onHomeClick != null) onHomeClick.run(); });
+            Runnable onHome = onHomeClick;
+            homeBtn.setOnAction(e -> { if (onHome != null) onHome.run(); });
             bar.getChildren().add(homeBtn);
         }
 
@@ -133,7 +135,7 @@ public class Scene1View {
     }
 
     private Button buildLocationButton(String locationName) {
-        Region pinIcon = SvgIcon.loadTinted("/ui-icons/location.svg", 16);
+        Region pinIcon = SvgIcon.loadTinted("/ui-icons/location.svg", 20);
         pinIcon.getStyleClass().add("location-icon");
 
         Label nameLabel = new Label(locationName != null ? locationName : "—");
@@ -312,8 +314,8 @@ public class Scene1View {
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
         Button moreBtn = buildMoreButton();
-        moreBtn.setOnAction(e -> { if (onMoreForecastClick != null) onMoreForecastClick.run(); });
-
+        Runnable onMore = onMoreForecastClick;
+        moreBtn.setOnAction(e -> { if (onMore != null) onMore.run(); });
         header.getChildren().addAll(nextLabel, spacer, moreBtn);
 
         VBox rows = new VBox();
@@ -340,7 +342,7 @@ public class Scene1View {
     }
 
     private Button buildMoreButton() {
-        Region moreIcon = SvgIcon.loadTinted("/ui-icons/moreButton.svg", 18);
+        Region moreIcon = SvgIcon.loadTinted("/ui-icons/moreButton.svg", 20);
         moreIcon.getStyleClass().add("more-icon");
         Button btn = new Button();
         btn.setGraphic(moreIcon);

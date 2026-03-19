@@ -1,9 +1,11 @@
 package ui.controller;
 
-import models.location.LocationWeather;
+import models.location.LocationNode;
 import services.GeocodingService;
-import models.hourlyForecast.MyWeatherAPI;
+import services.HourlyForecastService;
+import ui.view.Scene3Factory;
 import ui.view.Scene3View;
+import ui.view.SceneFactory;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -17,36 +19,31 @@ import java.util.List;
 /**
  * Manages Scene 3 — City Search / Pinned List.
  *
- * Navigation contract:
- *  - Pinned Chicago card click  → navigateToHome() → scene1Controller.getHomeScene1()
- *  - Search result row click    → navigateToScene1(selected city)
- *  - Unit switch toggle         → refreshes pinned card temp + last results display
- *                                 + notifies Scene1Controller to rebuild if Scene 1 showing
+ * Design patterns in use:
  *
- * Scene 3 is rebuilt on every show() call so the pinned card reflects
- * the current unit and the latest Chicago data.
+ *   Template Method — hourly data for tapped search results is now fetched
+ *   via HourlyForecastService (an AbstractForecastService subclass) rather
+ *   than calling MyWeatherAPI directly.
+ *
+ *   Abstract Factory — scene3 is built via sceneFactory.create() rather
+ *   than view.build() directly.
  */
 public class Scene3Controller {
 
     private static final int DEBOUNCE_MS = 400;
 
+    // Template Method service — replaces MyWeatherAPI.getHourlyForecast()
+    private static final HourlyForecastService hourlyForecastService = new HourlyForecastService();
+
     private final Stage      primaryStage;
     private final Scene3View view;
 
     private Scene1Controller scene1Controller;
+    private SceneFactory     sceneFactory;    // Abstract Factory
 
-    // The active Scene 3 scene object
-    private Scene scene3;
-
-    // Debounce timer for the search field
-    private Timeline debounce;
-
-    // Cached last search results for unit-toggle refresh
-    private List<LocationWeather> lastResults;
-
-    // ---------------------------------------------------------------
-    // Constructor
-    // ---------------------------------------------------------------
+    private Scene                 scene3;
+    private Timeline              debounce;
+    private List<LocationNode> lastResults;
 
     public Scene3Controller(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -58,21 +55,11 @@ public class Scene3Controller {
     }
 
     // ---------------------------------------------------------------
-    // Public API — called by Scene1Controller's location button
+    // Public API
     // ---------------------------------------------------------------
 
-    /**
-     * Builds and shows Scene 3.
-     *
-     * @param currentLocation  The location currently shown in Scene 1 (used as pinned card data).
-     *                         If non-Chicago, the pinned card still shows Chicago data if available.
-     * @param returnScene      Unused directly — home navigation goes through scene1Controller.getHomeScene1().
-     */
-    public void show(LocationWeather currentLocation, Scene returnScene) {
-        // Determine what to show on the pinned Chicago card.
-        // Prefer the home location's data from Scene1Controller when available.
-        LocationWeather pinnedData = getPinnedLocationData(currentLocation);
-
+    public void show(LocationNode currentLocation, Scene returnScene) {
+        LocationNode pinnedData = getPinnedLocationData(currentLocation);
         buildScene(pinnedData);
         primaryStage.setScene(scene3);
     }
@@ -81,72 +68,46 @@ public class Scene3Controller {
     // Scene construction
     // ---------------------------------------------------------------
 
-    private void buildScene(LocationWeather pinnedData) {
-        // Clear any stale search results from a previous visit
-        lastResults = null;
+    private void buildScene(LocationNode pinnedData) {
+        lastResults  = null;
+        sceneFactory = new Scene3Factory(view);  // Abstract Factory wired here
 
-        // Wire all callbacks before building the view
         view.setOnSearchTextChanged(this::handleSearchInput);
 
         view.setOnUnitSwitch(() -> {
-            // Refresh pinned card label (in-place, no rebuild needed)
             view.refreshPinnedTemp();
-
-            // Refresh search results list with new units
-            if (lastResults != null) {
-                view.setResults(lastResults, this::onRowTapped);
-            }
-
-            // If Scene 1 is currently behind Scene 3, rebuild it with new units too
-            if (scene1Controller != null) {
-                scene1Controller.onUnitChanged();
-            }
+            if (lastResults != null) view.setResults(lastResults, this::onRowTapped);
+            if (scene1Controller != null) scene1Controller.onUnitChanged();
         });
 
-        // Pinned card click → go to the Chicago home screen
         view.setOnPinnedClick(this::navigateToHome);
 
-        scene3 = view.build(pinnedData);
+        // Abstract Factory — interface call, not view.build() directly
+        scene3 = sceneFactory.create(null, null, null, null, pinnedData);
     }
 
     // ---------------------------------------------------------------
     // Navigation
     // ---------------------------------------------------------------
 
-    /**
-     * Navigates to the Chicago home Scene 1.
-     * Uses scene1Controller.getHomeScene1() which is the canonical last-built
-     * Chicago scene (updated every 30-minute refresh cycle).
-     */
     private void navigateToHome() {
         if (scene1Controller == null) return;
-
         Scene home = scene1Controller.getHomeScene1();
         if (home != null) {
             primaryStage.setScene(home);
         } else {
-            // Fallback: rebuild Scene 1 for Chicago from scratch
-            LocationWeather chicago = LocationWeather.chicagoDefault();
-            Scene s1 = scene1Controller.buildSceneForLocation(chicago);
+            Scene s1 = scene1Controller.buildSceneForLocation(LocationNode.chicagoDefault());
             primaryStage.setScene(s1);
         }
     }
 
-    /**
-     * Navigates to Scene 1 for a selected search result city.
-     * Must be called on the FX thread.
-     */
-    private void navigateToScene1(LocationWeather location) {
-        if (scene1Controller == null) {
-            System.err.println("[Scene3Controller] scene1Controller not wired!");
-            return;
-        }
-        Scene s1 = scene1Controller.buildSceneForLocation(location);
-        primaryStage.setScene(s1);
+    private void navigateToScene1(LocationNode location) {
+        if (scene1Controller == null) return;
+        primaryStage.setScene(scene1Controller.buildSceneForLocation(location));
     }
 
     // ---------------------------------------------------------------
-    // Search debounce + background fetch
+    // Search
     // ---------------------------------------------------------------
 
     private void handleSearchInput(String query) {
@@ -154,50 +115,34 @@ public class Scene3Controller {
         if (query == null || query.isEmpty()) return;
 
         debounce = new Timeline(new KeyFrame(
-                Duration.millis(DEBOUNCE_MS),
-                e -> performSearch(query)
-        ));
+                Duration.millis(DEBOUNCE_MS), e -> performSearch(query)));
         debounce.setCycleCount(1);
         debounce.play();
     }
 
     private void performSearch(String query) {
         view.setLoading(true);
-
         Thread t = new Thread(() -> {
-            System.out.println("[Scene3Controller] Searching: " + query);
-            List<LocationWeather> results = GeocodingService.searchByCity(query);
-            System.out.println("[Scene3Controller] Results: " + results.size());
+            List<LocationNode> results = GeocodingService.searchByCity(query);
             this.lastResults = results;
-
-            Platform.runLater(() ->
-                    view.setResults(results, this::onRowTapped)
-            );
+            Platform.runLater(() -> view.setResults(results, this::onRowTapped));
         });
         t.setDaemon(true);
         t.start();
     }
 
     // ---------------------------------------------------------------
-    // Row tap — Stage-2 hourly load + navigate
+    // Row tap — Template Method fetches hourly data
     // ---------------------------------------------------------------
 
-    private void onRowTapped(LocationWeather selected) {
-        System.out.println("[Scene3Controller] Row tapped: " + selected.displayName);
-
-        if (selected.isFullyLoaded()) {
-            navigateToScene1(selected);
-            return;
-        }
+    private void onRowTapped(LocationNode selected) {
+        if (selected.isFullyLoaded()) { navigateToScene1(selected); return; }
 
         Thread t = new Thread(() -> {
-            System.out.println("[Scene3Controller] Fetching hourly for: " + selected.displayName);
-            selected.hourlyPeriods = MyWeatherAPI
-                    .getHourlyForecast(selected.nwsOffice, selected.gridX, selected.gridY);
-
-            if (selected.hourlyPeriods == null) {
-                System.err.println("[Scene3Controller] Hourly fetch failed: " + selected.displayName);
-            }
+            // Template Method — HourlyForecastService.fetch() runs the skeleton:
+            // buildUrl() → httpGet() → parseResponse()
+            selected.hourlyPeriods = hourlyForecastService
+                    .fetch(selected.nwsOffice, selected.gridX, selected.gridY);
             Platform.runLater(() -> navigateToScene1(selected));
         });
         t.setDaemon(true);
@@ -208,31 +153,17 @@ public class Scene3Controller {
     // Helpers
     // ---------------------------------------------------------------
 
-    /**
-     * Returns the best available LocationWeather for the pinned Chicago card.
-     * Prefers data from scene1Controller's home location if it's Chicago,
-     * otherwise falls back to the passed-in currentLocation or a stub.
-     */
-    private LocationWeather getPinnedLocationData(LocationWeather currentLocation) {
+    private LocationNode getPinnedLocationData(LocationNode currentLocation) {
         if (scene1Controller != null) {
-            LocationWeather sc1Loc = scene1Controller.getCurrentLocation();
-            if (sc1Loc != null && isChicago(sc1Loc)) {
-                return sc1Loc;
-            }
+            LocationNode loc = scene1Controller.getCurrentLocation();
+            if (loc != null && isChicago(loc)) return loc;
         }
-        // If the caller is showing Chicago, use that data
-        if (currentLocation != null && isChicago(currentLocation)) {
-            return currentLocation;
-        }
-        // Last resort: stub with no weather data (pinned card shows "--")
-        LocationWeather stub = LocationWeather.chicagoDefault();
-        return stub;
+        if (currentLocation != null && isChicago(currentLocation)) return currentLocation;
+        return LocationNode.chicagoDefault();
     }
 
-    private boolean isChicago(LocationWeather loc) {
-        return loc != null
-                && "LOT".equals(loc.nwsOffice)
-                && loc.gridX == 77
-                && loc.gridY == 70;
+    private boolean isChicago(LocationNode loc) {
+        return loc != null && "LOT".equals(loc.nwsOffice)
+                && loc.gridX == 77 && loc.gridY == 70;
     }
 }

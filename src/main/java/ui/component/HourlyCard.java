@@ -13,10 +13,9 @@ import java.text.SimpleDateFormat;
 
 /**
  * A single card in the hourly forecast scroll strip (Scene 1).
- * Layout: hour / icon / temp — all centered.
+ * Layout: hour + icon + temp
  */
 public class HourlyCard extends VBox {
-
     public HourlyCard(HourlyPeriod period) {
         super(4);
         getStyleClass().add("hourly-card");
@@ -27,7 +26,7 @@ public class HourlyCard extends VBox {
         hourLabel.setAlignment(Pos.CENTER);
         hourLabel.setMaxWidth(Double.MAX_VALUE);
 
-        Region icon = buildIcon(period);
+        Region icon = getIcon(period);
 
         Label tempLabel = new Label(TempConverter.format(period.temperature));
         tempLabel.getStyleClass().add("hourly-temp-label");
@@ -43,9 +42,8 @@ public class HourlyCard extends VBox {
         catch (Exception e) { return "--"; }
     }
 
-    private Region buildIcon(HourlyPeriod period) {
-        String path = IconRouter.getLocalPath(period.icon, period.isDaytime);
-        Region region = SvgIcon.load(path);
+    private Region getIcon(HourlyPeriod period) {
+        Region region = SvgIcon.load(IconRouter.getLocalPath(period.icon, period.isDaytime));
         region.getStyleClass().add("hourly-icon");
         return region;
     }

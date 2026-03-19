@@ -1,6 +1,6 @@
 package ui.view;
 
-import models.location.LocationWeather;
+import models.location.LocationNode;
 import ui.component.LocationResultRow;
 
 import javafx.geometry.Pos;
@@ -52,13 +52,13 @@ public class Scene3View {
     private VBox  resultsBox;
     private VBox  resultsPopupPanel;
     private Label pinnedTempLabel;
-    private LocationWeather pinnedLocation;
+    private LocationNode pinnedLocation;
 
     // ---------------------------------------------------------------
     // Public builder
     // ---------------------------------------------------------------
 
-    public Scene build(LocationWeather currentLocation) {
+    public Scene build(LocationNode currentLocation) {
         this.pinnedLocation = currentLocation;
 
         AnchorPane root = new AnchorPane();
@@ -114,8 +114,8 @@ public class Scene3View {
     // ---------------------------------------------------------------
 
     /** Replaces result rows with the given list. Shows the popup. */
-    public void setResults(List<LocationWeather> locations,
-                           Consumer<LocationWeather> onRowClick) {
+    public void setResults(List<LocationNode> locations,
+                           Consumer<LocationNode> onRowClick) {
         if (resultsBox == null) return;
         resultsBox.getChildren().clear();
 
@@ -124,7 +124,7 @@ public class Scene3View {
             lbl.getStyleClass().add("no-results-label");
             resultsBox.getChildren().add(lbl);
         } else {
-            for (LocationWeather lw : locations) {
+            for (LocationNode lw : locations) {
                 LocationResultRow row = new LocationResultRow(lw, () -> {
                     if (onRowClick != null) onRowClick.accept(lw);
                 });
@@ -190,7 +190,7 @@ public class Scene3View {
     }
 
     /** Body — pinned card + search bar */
-    private VBox buildBody(LocationWeather loc) {
+    private VBox buildBody(LocationNode loc) {
         VBox body = new VBox(12);
         body.getStyleClass().add("scene3-content");
         body.getChildren().addAll(buildSearchBar(), buildPinnedCard(loc));
@@ -203,7 +203,7 @@ public class Scene3View {
      * Clicking anywhere on the card fires onPinnedClick → Scene3Controller
      * navigates back to the Chicago home Scene 1.
      */
-    private VBox buildPinnedCard(LocationWeather loc) {
+    private VBox buildPinnedCard(LocationNode loc) {
         VBox card = new VBox(4);
         card.getStyleClass().add("pinned-card");
         card.setCursor(javafx.scene.Cursor.HAND);

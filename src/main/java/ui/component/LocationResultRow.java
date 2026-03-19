@@ -1,6 +1,6 @@
 package ui.component;
 
-import models.location.LocationWeather;
+import models.location.LocationNode;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -14,18 +14,14 @@ import weather.Period;
 
 /**
  * A single row in Scene 3's search results popup.
- *
- * Layout:  [ City Name ]  [spacer]  [ 26×26 weather icon ]  [ temp ]  [ 📌 ]
- * All elements vertically centered in the 54px row height.
+ * Layout: city + icon + temp
  */
 public class LocationResultRow extends HBox {
-
-    public LocationResultRow(LocationWeather location, Runnable onClick) {
+    public LocationResultRow(LocationNode location, Runnable onClick) {
         super(8);
         getStyleClass().add("location-result-row");
         setAlignment(Pos.CENTER_LEFT);
 
-        // City name
         Label nameLabel = new Label(location.displayName != null ? location.displayName : "--");
         nameLabel.getStyleClass().add("result-location-label");
         nameLabel.setMaxWidth(Double.MAX_VALUE);
@@ -40,29 +36,27 @@ public class LocationResultRow extends HBox {
         iconRegion.getStyleClass().add("result-icon");
 
         // Temperature
-        Label tempLabel = new Label(
-                (location.periods12hr != null && !location.periods12hr.isEmpty())
+        Label tempLabel = new Label((location.periods12hr != null && !location.periods12hr.isEmpty())
                         ? TempConverter.format(location.currentTemp) : "--");
         tempLabel.getStyleClass().add("result-temp-label");
         tempLabel.setAlignment(Pos.CENTER_RIGHT);
 
-        // Pin button (placeholder for future persistence)
-        Button pinBtn = new Button("📌");
-        pinBtn.getStyleClass().add("pin-btn");
-        pinBtn.setOnAction(e -> {
-            e.consume();
-            System.out.println("[Pin] " + location.displayName);
-        });
+//        // Pin button (placeholder for future persistence)
+//        Button pinBtn = new Button("📌");
+//        pinBtn.getStyleClass().add("pin-btn");
+//        pinBtn.setOnAction(e -> {
+//            e.consume();
+//            System.out.println("[Pin] " + location.displayName);
+//        });
 
-        getChildren().addAll(nameLabel, iconRegion, tempLabel, pinBtn);
+        getChildren().addAll(nameLabel, iconRegion, tempLabel); // , pinBtn
 
         // Row click triggers navigation
         if (onClick != null) {
             getStyleClass().add("result-row-clickable");
             setOnMouseClicked(e -> {
-                // Don't navigate when clicking the pin button
-                if (e.getPickResult().getIntersectedNode() != pinBtn
-                        && !e.getPickResult().getIntersectedNode().getStyleClass().contains("pin-btn")) {
+                if (!e.getPickResult().getIntersectedNode().getStyleClass().contains("pin-btn")) {
+                    //e.getPickResult().getIntersectedNode() != pinBtn &&
                     onClick.run();
                 }
             });
