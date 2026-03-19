@@ -22,16 +22,16 @@ import java.util.function.Consumer;
  *
  * Layout (AnchorPane root):
  *   ┌─── mainContent (VBox, full-width) ───────────────────┐
- *   │  header strip (64px)                                  │
+ *   │  header strip (64px)                                 │
  *   │  scene3-content VBox (16px padding each side)        │
- *   │    pinned card  (~120px)                              │
- *   │    search bar   ( 46px)                               │
- *   │    [gap 12px]                                         │
- *   └───────────────────────────────────────────────────────┘
+ *   │    pinned card  (~120px)                             │
+ *   │    search bar   ( 46px)                              │
+ *   │    [gap 12px]                                        │
+ *   └──────────────────────────────────────────────────────┘
  *   ┌─── resultsPopupPanel (overlay, AnchorPane anchors) ──┐
  *   │  positioned at top=280, left=18, right=18            │
- *   │  (below: header + top-pad + pinned + spacing + bar)   │
- *   └───────────────────────────────────────────────────────┘
+ *   │  (below: header + top-pad + pinned + spacing + bar)  │
+ *   └──────────────────────────────────────────────────────┘
  *
  * Key fixes:
  *  - AnchorPane root (not StackPane) prevents the popup from overflowing
@@ -90,9 +90,9 @@ public class Scene3View {
         resultsPopupPanel.setManaged(false);
         resultsPopupPanel.setMaxHeight(380);
 
-        AnchorPane.setTopAnchor(resultsPopupPanel,  280.0);
-        AnchorPane.setLeftAnchor(resultsPopupPanel,  18.0);
-        AnchorPane.setRightAnchor(resultsPopupPanel, 18.0);
+        AnchorPane.setTopAnchor(resultsPopupPanel,  205.5);
+        AnchorPane.setLeftAnchor(resultsPopupPanel,  30.0);
+        AnchorPane.setRightAnchor(resultsPopupPanel, 30.0);
 
         root.getChildren().addAll(mainContent, resultsPopupPanel);
 
@@ -193,7 +193,7 @@ public class Scene3View {
     private VBox buildBody(LocationWeather loc) {
         VBox body = new VBox(12);
         body.getStyleClass().add("scene3-content");
-        body.getChildren().addAll(buildPinnedCard(loc), buildSearchBar());
+        body.getChildren().addAll(buildSearchBar(), buildPinnedCard(loc));
         return body;
     }
 
