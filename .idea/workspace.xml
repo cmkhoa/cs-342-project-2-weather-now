@@ -6,17 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="Added new Icons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/HourlyCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/HourlyCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/LocationResultRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/LocationResultRow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/PeriodCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/PeriodCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/WeekdayRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/WeekdayRow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/controller/Scene1Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/controller/Scene1Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/controller/Scene2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/controller/Scene2Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/controller/Scene3Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/controller/Scene3Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene1View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene1View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene2View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene2View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene3View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene3View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/SvgIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/SvgIcon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -36,6 +25,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
@@ -65,36 +59,36 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.WeatherAPI.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Homework3 [clean,compile,exec:java].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Project2 Run.executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Project2 clean (run before submitting!).executor&quot;: &quot;Run&quot;,
-    &quot;Maven.Project2 clean .executor&quot;: &quot;Run&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.MCP Project settings loaded&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
-    &quot;com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/mkc/Documents/uic/cs/cs342/project/project2/Project2/src/main/java/model&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.WeatherAPI.executor": "Run",
+    "Maven.Homework3 [clean,compile,exec:java].executor": "Run",
+    "Maven.Project2 Run.executor": "Run",
+    "Maven.Project2 clean (run before submitting!).executor": "Run",
+    "Maven.Project2 clean .executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.MCP Project settings loaded": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "com.intellij.ml.llm.matterhorn.ej.ui.settings.DefaultModelSelectionForGA.v1": "true",
+    "git-widget-placeholder": "new-ver",
+    "junie.onboarding.icon.badge.shown": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/mkc/Documents/uic/cs/cs342/project/project2/Project2/src/main/java/model",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "to.speed.mode.migration.done": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/model" />
