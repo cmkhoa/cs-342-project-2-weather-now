@@ -4,32 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="adjusted the first page UI">
-      <change afterPath="$PROJECT_DIR$/src/main/java/models/nwsPoints/nwsPoint.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/services/AbstractForecastService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/services/ForecastService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/services/HourlyForecastService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene1Factory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene2Factory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene3Factory.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/ui/view/SceneFactory.java" afterDir="false" />
+    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="refactor">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/JavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JavaFX.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/hourlyForecast/MyWeatherAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/hourlyForecast/MyWeatherAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/models/location/LocationWeather.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/location/LocationNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/services/GeocodingService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/GeocodingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/HourlyCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/HourlyCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/LocationResultRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/LocationResultRow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/PeriodCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/PeriodCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/WeekdayRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/WeekdayRow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/controller/Scene1Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/controller/Scene1Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/controller/Scene2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/controller/Scene2Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/controller/Scene3Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/controller/Scene3Controller.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene1View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene1View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene3View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene3View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/IconRouter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/IconRouter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/SvgIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/SvgIcon.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/utils/TempConverter.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/TempConverter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -313,7 +290,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773859395859</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="refactor">
+      <option name="closed" value="true" />
+      <created>1773940747528</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1773940747528</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -326,6 +311,7 @@
     <MESSAGE value="Working scene 1 and 2 with refactoring of css properties." />
     <MESSAGE value="Scene 3 chua xong, dang refactor thanh phan scene 1 2 cho oke han" />
     <MESSAGE value="adjusted the first page UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="adjusted the first page UI" />
+    <MESSAGE value="refactor" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
   </component>
 </project>
