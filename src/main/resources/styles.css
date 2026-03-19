@@ -35,8 +35,8 @@
     -fx-background-color: linear-gradient(to bottom, #0a0e2a 0%, #14204a 50%, #0f3060 100%);
     -fx-pref-width: 405;
     -fx-pref-height: 810;
-    -fx-padding: 30;
-    -fx-spacing: 10;
+    -fx-padding: 0;
+    -fx-spacing: 0;
 }
 
 /* general menu bar */
@@ -236,7 +236,7 @@
 .scene2-scroll .scroll-bar:horizontal .increment-button,
 .scene2-scroll .scroll-bar:horizontal .decrement-button { -fx-pref-height: 0; -fx-max-height: 0; -fx-opacity: 0; -fx-padding: 0; }
 
-/* ─── PERIOD CARD (Scene 2) ───────────────────────────────── */
+/*Period card*/
 .period-card {
     -fx-background-color: rgba(255,255,255,0.1);
     -fx-background-radius: 18;
@@ -262,16 +262,16 @@
     -fx-pref-width: 70;
     -fx-alignment: center-right;
 }
-.period-icon   { -fx-pref-width: 32; -fx-pref-height: 32; -fx-min-width: 32; -fx-min-height: 32; }
-.period-sub-label        { -fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.75); -fx-alignment: center-left; }
+.period-icon        { -fx-pref-width: 25; -fx-pref-height: 25; -fx-min-width: 25; -fx-min-height: 25; }
+.period-sub-label   { -fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.7); -fx-alignment: center-left; }
 .period-sub-label.precip-label { -fx-alignment: center-right; }
 
-/* ─── SCENE 3 HEADER ──────────────────────────────────────── */
+/*Scene 3*/
 .scene3-header {
     -fx-background-color: rgba(0,0,0,0.25);
     -fx-pref-width: 405;
-    -fx-pref-height: 64;
-    -fx-padding: 14 20 14 20;
+    -fx-pref-height: 50;
+    -fx-padding: 30 30 30 30;
     -fx-alignment: center-left;
     -fx-spacing: 0;
     -fx-border-color: transparent transparent rgba(255,255,255,0.10) transparent;
@@ -292,8 +292,8 @@
 .unit-switch-label:hover { -fx-background-color: rgba(255,255,255,0.22); }
 
 .scene3-content {
-    -fx-spacing: 12;
-    -fx-padding: 16 18 16 18;
+    -fx-spacing: 10;
+    -fx-padding: 30;
     -fx-pref-width: 405;
     -fx-background-color: transparent;
 }
@@ -301,16 +301,16 @@
 /* ─── SEARCH BAR (Scene 3) ────────────────────────────────── */
 .search-bar {
     -fx-background-color: rgba(255,255,255,0.14);
-    -fx-background-radius: 16;
+    -fx-background-radius: 18;
     -fx-border-color: rgba(255,255,255,0.30);
     -fx-border-width: 1;
-    -fx-border-radius: 16;
-    -fx-pref-height: 46;
-    -fx-padding: 0 14 0 14;
-    -fx-spacing: 8;
+    -fx-border-radius: 15;
+    -fx-pref-height: 40;
+    -fx-padding: 15;
+    -fx-spacing: 10;
     -fx-alignment: center-left;
 }
-.search-icon  { -fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.60); }
+.search-icon  { -fx-font-size: 25px; -fx-text-fill: rgba(255,255,255,0.60); }
 .search-field {
     -fx-font-size: 16px;
     -fx-text-fill: white;
@@ -322,28 +322,28 @@
 
 /* ─── PINNED CARD (Scene 3) ───────────────────────────────── */
 .pinned-card {
-    -fx-background-color: rgba(255,255,255,0.18);
+    -fx-background-color: rgba(255,255,255,0.1);
     -fx-background-radius: 18;
-    -fx-border-color: rgba(255,255,255,0.35);
+    -fx-border-color: rgba(255,255,255,0.2);
     -fx-border-width: 1;
-    -fx-border-radius: 18;
+    -fx-border-radius: 15;
     -fx-cursor: hand;
-    -fx-padding: 14 16 14 16;
+    -fx-padding: 15;
 }
-.pinned-card:hover { -fx-background-color: rgba(255,255,255,0.25); }
-.pinned-card-label { -fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.55); -fx-font-weight: bold; }
-.pinned-card-city  { -fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: white; }
-.pinned-card-temp  { -fx-font-size: 25px; -fx-font-weight: bold; -fx-text-fill: white; }
-.pinned-card-desc  { -fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.70); }
-.pinned-icon       { -fx-pref-width: 48; -fx-pref-height: 48; -fx-min-width: 48; -fx-min-height: 48; }
+.pinned-card:hover { -fx-background-color: rgba(255,255,255,0.2); }
+.pinned-card-label { -fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.7); -fx-font-weight: bold; }
+.pinned-card-city  { -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; }
+.pinned-card-temp  { -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; }
+.pinned-card-desc  { -fx-font-size: 13px; -fx-text-fill: rgba(255,255,255,0.70); }
+.pinned-icon       { -fx-pref-width: 30; -fx-pref-height: 30; -fx-min-width: 30; -fx-min-height: 30; }
 
-/* ─── RESULTS POPUP (Scene 3) ─────────────────────────────── */
+/* result anchor */
 .results-popup-panel {
     -fx-background-color: rgba(8,12,36,0.92);
     -fx-background-radius: 18;
     -fx-border-color: rgba(255,255,255,0.18);
     -fx-border-width: 1;
-    -fx-border-radius: 18;
+    -fx-border-radius: 15;
 }
 .results-scroll { -fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent; }
 .results-scroll .viewport { -fx-background-color: transparent; }
@@ -354,7 +354,7 @@
 .results-scroll .scroll-bar:vertical .decrement-button { -fx-pref-width: 0; -fx-max-width: 0; -fx-opacity: 0; -fx-padding: 0; }
 .results-list { -fx-background-color: transparent; -fx-spacing: 0; -fx-padding: 6 8 6 8; }
 
-/* ─── LOCATION RESULT ROW ─────────────────────────────────── */
+/* Location result each row */
 .location-result-row {
     -fx-background-color: transparent;
     -fx-pref-height: 54;
