@@ -4,14 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="adjusted the first page UI">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ui-icons/backButton.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ui-icons/homeButton.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ui-icons/location.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ui-icons/moreButton.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ui-icons/precipitationIcon.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/ui-icons/searchIcon.svg" afterDir="false" />
+    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="Added new Icons">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/HourlyCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/HourlyCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/LocationResultRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/LocationResultRow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/PeriodCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/PeriodCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/WeekdayRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/WeekdayRow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/controller/Scene1Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/controller/Scene1Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/controller/Scene2Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/controller/Scene2Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/controller/Scene3Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/controller/Scene3Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene1View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene1View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene2View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene2View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene3View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene3View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/SvgIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/SvgIcon.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -294,7 +299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773859395859</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Added new Icons">
+      <option name="closed" value="true" />
+      <created>1773860423405</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1773860423405</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -307,6 +320,7 @@
     <MESSAGE value="Working scene 1 and 2 with refactoring of css properties." />
     <MESSAGE value="Scene 3 chua xong, dang refactor thanh phan scene 1 2 cho oke han" />
     <MESSAGE value="adjusted the first page UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="adjusted the first page UI" />
+    <MESSAGE value="Added new Icons" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added new Icons" />
   </component>
 </project>

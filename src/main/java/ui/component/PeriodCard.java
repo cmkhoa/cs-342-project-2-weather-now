@@ -1,5 +1,6 @@
 package ui.component;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -11,91 +12,89 @@ import utils.TempConverter;
 import weather.Period;
 
 /**
- * A single period card in the Scene 2 scrollable forecast list.
- * basically has 2 rows, the first with the period name, an icon, the temperature
- * the second row has the wind speed, the wind dir and the chance of precipitation
+ * A single period card in Scene 2.
+ *
+ * Row 1: [ Period name (left) ] [spacer] [ weather icon ] [spacer] [ temp (right) ]
+ * Row 2: [ wind speed + direction (left, grouped) ] [spacer] [ precip % (right) ]
+ *
+ * All content is vertically centered within each row.
+ * Text is white on the glass background.
  */
 public class PeriodCard extends VBox {
+
     public PeriodCard(Period period) {
         super();
-        // Import properties from the CSS file
         getStyleClass().add("period-card");
+        setSpacing(8);
 
-        // call builder functions for the inner 2 rows
         getChildren().addAll(
-                buildInfo1Row(period),
-                buildInfo2Row(period)
+                buildInfoRow(period),
+                buildSubRow(period)
         );
     }
 
-    private HBox buildInfo1Row(Period period) {
+    /** Row 1: name — icon — temperature */
+    private HBox buildInfoRow(Period period) {
         HBox row = new HBox();
-        // Import properties from the CSS file
         row.getStyleClass().add("period-info1-row");
+        row.setAlignment(Pos.CENTER_LEFT);
 
-        // create the label for the Period name and the temperature
         Label nameLabel = new Label(period.name != null ? period.name : "--");
         nameLabel.getStyleClass().add("period-name-label");
+
+        Region icon = buildIcon(period);
+
         Label tempLabel = new Label(TempConverter.format(period.temperature));
         tempLabel.getStyleClass().add("period-temp-label");
 
-        // build the icon
-        Region icon = buildIcon(period);
+        Region spacerL = new Region(); HBox.setHgrow(spacerL, Priority.ALWAYS);
+        Region spacerR = new Region(); HBox.setHgrow(spacerR, Priority.ALWAYS);
 
-        // generate the spacers
-        Region spacerRight = new Region();
-        HBox.setHgrow(spacerRight, Priority.ALWAYS);
-        Region spacerLeft = new Region();
-        HBox.setHgrow(spacerLeft, Priority.ALWAYS);
-
-        // return the row
-        row.getChildren().addAll(nameLabel, spacerLeft, icon, spacerRight, tempLabel);
+        row.getChildren().addAll(nameLabel, spacerL, icon, spacerR, tempLabel);
         return row;
     }
 
-    private HBox buildInfo2Row(Period period) {
+    /**
+     * Row 2: [ wind speed · wind direction ]  [spacer]  [ precip % ]
+     *
+     * Wind speed and direction are placed adjacent (no spacer between them)
+     * on the left half. Precipitation is right-aligned.
+     */
+    private HBox buildSubRow(Period period) {
         HBox row = new HBox();
-        // Import properties from the CSS file
         row.getStyleClass().add("period-info2-row");
+        row.setAlignment(Pos.CENTER_LEFT);
+        row.setSpacing(0);
 
-        // create the labels for each entry
-        Label windLabel  = makeSubLabel(formatWind(period));
-        Label windirLabel = makeSubLabel(period.windDirection != null ? period.windDirection : "--");
-        Label precipLabel = makeSubLabel(formatPrecip(period));
+        // Wind group — speed + direction side by side, left-aligned
+        String windSpeed = (period.windSpeed != null) ? period.windSpeed : "--";
+        String windDir   = (period.windDirection != null) ? period.windDirection : "--";
 
-        HBox.setHgrow(windLabel,   Priority.ALWAYS);
-        HBox.setHgrow(windirLabel, Priority.ALWAYS);
-        HBox.setHgrow(precipLabel, Priority.ALWAYS);
+        Label windLabel = new Label(windSpeed);
+        windLabel.getStyleClass().add("period-sub-label");
 
-        row.getChildren().addAll(windLabel, windirLabel, precipLabel);
+        Label windDirLabel = new Label("  " + windDir); // small gap between speed and dir
+        windDirLabel.getStyleClass().add("period-sub-label");
+
+        HBox windGroup = new HBox(0, windLabel, windDirLabel);
+        windGroup.setAlignment(Pos.CENTER_LEFT);
+        HBox.setHgrow(windGroup, Priority.ALWAYS);
+
+        // Precip — right-aligned
+        String precipStr = (period.probabilityOfPrecipitation != null)
+                ? period.probabilityOfPrecipitation.value + "% precip"
+                : "0% precip";
+        Label precipLabel = new Label(precipStr);
+        precipLabel.getStyleClass().addAll("period-sub-label", "precip-label");
+        precipLabel.setAlignment(Pos.CENTER_RIGHT);
+
+        row.getChildren().addAll(windGroup, precipLabel);
         return row;
-    }
-
-    // ---------------------------------------------------------------
-    // Helpers
-    // ---------------------------------------------------------------
-
-    private Label makeSubLabel(String text) {
-        Label l = new Label(text);
-        l.getStyleClass().add("period-sub-label");
-        return l;
-    }
-
-    private String formatWind(Period period) {
-        return period.windSpeed != null ? period.windSpeed : "-- mph";
-    }
-
-    private String formatPrecip(Period period) {
-        if (period.probabilityOfPrecipitation == null) {
-            return "0% precip";
-        }
-        return period.probabilityOfPrecipitation.value + "% precip";
     }
 
     private Region buildIcon(Period period) {
         if (period == null) return new Region();
-        String resourcePath = IconRouter.getLocalPath(period.icon, period.isDaytime);
-        Region region = SvgIcon.load(resourcePath);
+        Region region = SvgIcon.load(IconRouter.getLocalPath(period.icon, period.isDaytime));
         region.getStyleClass().add("period-icon");
         return region;
     }
