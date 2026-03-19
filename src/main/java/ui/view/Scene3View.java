@@ -3,62 +3,98 @@ package ui.view;
 import models.location.LocationWeather;
 import ui.component.LocationResultRow;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
+import utils.IconRouter;
+import utils.SvgIcon;
 import utils.TempConverter;
+import weather.Period;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 /**
- * Builds Scene 3 — City Search / Pinned List.
+ * Scene 3 — City Search / Pinned List.
  *
- * Figma: node 1:279  "Scene 3 - City search/Pinned List"
- * Canvas: 540 × 1080
+ * Layout (AnchorPane root):
+ *   ┌─── mainContent (VBox, full-width) ───────────────────┐
+ *   │  header strip (64px)                                  │
+ *   │  scene3-content VBox (16px padding each side)        │
+ *   │    pinned card  (~120px)                              │
+ *   │    search bar   ( 46px)                               │
+ *   │    [gap 12px]                                         │
+ *   └───────────────────────────────────────────────────────┘
+ *   ┌─── resultsPopupPanel (overlay, AnchorPane anchors) ──┐
+ *   │  positioned at top=280, left=18, right=18            │
+ *   │  (below: header + top-pad + pinned + spacing + bar)   │
+ *   └───────────────────────────────────────────────────────┘
  *
- * Structure:
- *   VBox (root)
- *   ├── MenuBar     HBox: [ "Weather" title ]  [ Unit Switch button ]
- *   └── content     VBox:
- *       ├── searchbar   HBox: [ 🔍 icon ]  [ TextField ]
- *       └── resultsList ScrollPane > VBox of LocationResultRows
- *
- * Callbacks wired by Scene3Controller:
- *   onSearchTextChanged  — fired (debounced) on every keystroke
- *   onUnitSwitch         — fired when the unit toggle is clicked
- *   onResultClick        — fired with the chosen LocationWeather
+ * Key fixes:
+ *  - AnchorPane root (not StackPane) prevents the popup from overflowing
+ *    or being clipped; left/right anchors of 18px match scene3-content padding.
+ *  - pinnedTempLabel held as a field; refreshPinnedTemp() re-formats in-place
+ *    when the unit switch is toggled — no scene rebuild needed.
+ *  - Pinned card fires onPinnedClick callback → controller navigates to Chicago.
+ *  - Search field clears the popup when emptied.
  */
 public class Scene3View {
 
-    // Callbacks set by Scene3Controller before build()
-    private Consumer<String>       onSearchTextChanged;
-    private Runnable               onUnitSwitch;
+    // Callbacks set by Scene3Controller
+    private Consumer<String> onSearchTextChanged;
+    private Runnable         onUnitSwitch;
+    private Runnable         onPinnedClick;
 
-    // Live reference to the results VBox so Scene3Controller can update it
-    private VBox resultsBox;
+    // Live UI references for dynamic updates
+    private VBox  resultsBox;
+    private VBox  resultsPopupPanel;
+    private Label pinnedTempLabel;
+    private LocationWeather pinnedLocation;
 
     // ---------------------------------------------------------------
     // Public builder
     // ---------------------------------------------------------------
 
-    /**
-     * Builds and returns a fully wired Scene 3.
-     * Pass the initial "Current Location" entry so it shows before any search.
-     *
-     * @param currentLocation  The device/default location — shown as the first row.
-     *                         May be null if location is unavailable.
-     */
     public Scene build(LocationWeather currentLocation) {
-        VBox root = new VBox();
-        root.getStyleClass().add("scene3-root");
+        this.pinnedLocation = currentLocation;
 
-        root.getChildren().addAll(
-                buildMenuBar(),
-                buildContent(currentLocation)
-        );
+        AnchorPane root = new AnchorPane();
+        root.getStyleClass().add("scene3-root");
+        root.setPrefSize(405, 810);
+
+        // ── Static content ──────────────────────────────────────
+        VBox mainContent = new VBox(0);
+        mainContent.setStyle("-fx-background-color: transparent;");
+        mainContent.setPrefWidth(405);
+        mainContent.getChildren().addAll(buildHeader(), buildBody(currentLocation));
+
+        AnchorPane.setTopAnchor(mainContent,    0.0);
+        AnchorPane.setLeftAnchor(mainContent,   0.0);
+        AnchorPane.setRightAnchor(mainContent,  0.0);
+
+        // ── Results popup overlay ────────────────────────────────
+        // Offset breakdown (px):
+        //   header:       64
+        //   content-top:  16  (scene3-content padding)
+        //   pinned card: ~120 (badge row + city+temp row + desc + spacing)
+        //   gap:          12
+        //   search bar:   46
+        //   gap:          12
+        //   ──────────────
+        //   total:       270  (+10 breathing room = 280)
+        resultsPopupPanel = buildResultsPopup();
+        resultsPopupPanel.setVisible(false);
+        resultsPopupPanel.setManaged(false);
+        resultsPopupPanel.setMaxHeight(380);
+
+        AnchorPane.setTopAnchor(resultsPopupPanel,  280.0);
+        AnchorPane.setLeftAnchor(resultsPopupPanel,  18.0);
+        AnchorPane.setRightAnchor(resultsPopupPanel, 18.0);
+
+        root.getChildren().addAll(mainContent, resultsPopupPanel);
 
         Scene scene = new Scene(root);
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
@@ -71,165 +107,212 @@ public class Scene3View {
 
     public void setOnSearchTextChanged(Consumer<String> c) { this.onSearchTextChanged = c; }
     public void setOnUnitSwitch(Runnable r)                { this.onUnitSwitch = r; }
+    public void setOnPinnedClick(Runnable r)               { this.onPinnedClick = r; }
 
     // ---------------------------------------------------------------
-    // Called by Scene3Controller to refresh the results list
+    // Public update methods (called by Scene3Controller)
     // ---------------------------------------------------------------
 
-    /**
-     * Replaces the results list content with the provided rows.
-     * Always called on the FX thread (via Platform.runLater in the controller).
-     *
-     * @param locations  Search results — each paired with a click handler
-     * @param onRowClick Consumer that receives the chosen LocationWeather
-     */
+    /** Replaces result rows with the given list. Shows the popup. */
     public void setResults(List<LocationWeather> locations,
                            Consumer<LocationWeather> onRowClick) {
         if (resultsBox == null) return;
         resultsBox.getChildren().clear();
 
         if (locations == null || locations.isEmpty()) {
-            Label noResults = new Label("No results found.");
-            noResults.getStyleClass().add("no-results-label");
-            resultsBox.getChildren().add(noResults);
-            return;
+            Label lbl = new Label("No results found.");
+            lbl.getStyleClass().add("no-results-label");
+            resultsBox.getChildren().add(lbl);
+        } else {
+            for (LocationWeather lw : locations) {
+                LocationResultRow row = new LocationResultRow(lw, () -> {
+                    if (onRowClick != null) onRowClick.accept(lw);
+                });
+                resultsBox.getChildren().add(row);
+            }
         }
+        showResultsPanel(true);
+    }
 
-        for (models.location.LocationWeather lw : locations) {
-            LocationResultRow row = new LocationResultRow(lw, () -> {
-                if (onRowClick != null) onRowClick.accept(lw);
-            });
-            resultsBox.getChildren().add(row);
-        }
+    /** Shows a "Searching…" placeholder while the network call is in-flight. */
+    public void setLoading(boolean loading) {
+        if (resultsBox == null || !loading) return;
+        resultsBox.getChildren().clear();
+        Label lbl = new Label("Searching\u2026");
+        lbl.getStyleClass().add("no-results-label");
+        resultsBox.getChildren().add(lbl);
+        showResultsPanel(true);
     }
 
     /**
-     * Shows a loading indicator while the search is running.
+     * Re-formats the pinned card's temperature label in the current unit.
+     * Called by Scene3Controller when the unit switch is toggled — no rebuild needed.
      */
-    public void setLoading(boolean loading) {
-        if (resultsBox == null) return;
-        if (loading) {
-            resultsBox.getChildren().clear();
-            Label lbl = new Label("Searching…");
-            lbl.getStyleClass().add("no-results-label");
-            resultsBox.getChildren().add(lbl);
-        }
+    public void refreshPinnedTemp() {
+        if (pinnedTempLabel == null || pinnedLocation == null) return;
+        if (pinnedLocation.periods12hr == null || pinnedLocation.periods12hr.isEmpty()) return;
+        pinnedTempLabel.setText(TempConverter.format(pinnedLocation.currentTemp));
+    }
+
+    private void showResultsPanel(boolean visible) {
+        if (resultsPopupPanel == null) return;
+        resultsPopupPanel.setVisible(visible);
+        resultsPopupPanel.setManaged(visible);
     }
 
     // ---------------------------------------------------------------
     // Section builders
     // ---------------------------------------------------------------
 
-    /**
-     * Menu bar — Figma node 62:150
-     * [ "Weather" title (left) ]  [ Unit switch (right) ]
-     */
-    private HBox buildMenuBar() {
+    /** Header strip — "Weather" title (left) + unit switch pill (right) */
+    private HBox buildHeader() {
         HBox bar = new HBox();
-        bar.getStyleClass().add("menu-bar");
+        bar.getStyleClass().addAll("menu-bar", "scene3-header");
+        bar.setAlignment(Pos.CENTER_LEFT);
 
-        Label titleLabel = new Label("Weather");
-        titleLabel.getStyleClass().add("scene3-title");
+        Label title = new Label("Weather");
+        title.getStyleClass().add("scene3-title");
 
         Region spacer = new Region();
         HBox.setHgrow(spacer, Priority.ALWAYS);
 
-        // Unit switch — shows current unit, toggles on click
         Label unitSwitch = new Label(unitSwitchText());
         unitSwitch.getStyleClass().add("unit-switch-label");
         unitSwitch.setOnMouseClicked(e -> {
             TempConverter.toggle();
             unitSwitch.setText(unitSwitchText());
+            refreshPinnedTemp();
             if (onUnitSwitch != null) onUnitSwitch.run();
         });
 
-        bar.getChildren().addAll(titleLabel, spacer, unitSwitch);
+        bar.getChildren().addAll(title, spacer, unitSwitch);
         return bar;
     }
 
-    /**
-     * Content area — Figma node 62:154
-     * Search bar + scrollable results list
-     */
-    private VBox buildContent(LocationWeather currentLocation) {
-        VBox content = new VBox();
-        content.getStyleClass().add("scene3-content");
-
-        content.getChildren().addAll(
-                buildSearchBar(),
-                buildResultsList(currentLocation)
-        );
-
-        return content;
+    /** Body — pinned card + search bar */
+    private VBox buildBody(LocationWeather loc) {
+        VBox body = new VBox(12);
+        body.getStyleClass().add("scene3-content");
+        body.getChildren().addAll(buildPinnedCard(loc), buildSearchBar());
+        return body;
     }
 
     /**
-     * Search bar — Figma node 68:92
-     * Bordered HBox: [ 🔍 placeholder icon ]  [ TextField ]
+     * Pinned Chicago card — always visible.
+     *
+     * Clicking anywhere on the card fires onPinnedClick → Scene3Controller
+     * navigates back to the Chicago home Scene 1.
      */
-    private HBox buildSearchBar() {
-        HBox bar = new HBox();
-        bar.getStyleClass().add("search-bar");
+    private VBox buildPinnedCard(LocationWeather loc) {
+        VBox card = new VBox(4);
+        card.getStyleClass().add("pinned-card");
+        card.setCursor(javafx.scene.Cursor.HAND);
 
-        // Search icon placeholder (matches the 30×29 rounded-rect in Figma)
-        Label searchIcon = new Label("🔍");
-        searchIcon.getStyleClass().add("search-icon");
+        // Row 1: "📍 CURRENT LOCATION" badge + weather icon
+        HBox topRow = new HBox();
+        topRow.setAlignment(Pos.CENTER_LEFT);
 
-        TextField searchField = new TextField();
-        searchField.setPromptText("Search city…");
-        searchField.getStyleClass().add("search-field");
-        HBox.setHgrow(searchField, Priority.ALWAYS);
+        Label badge = new Label("\uD83D\uDCCD CURRENT LOCATION");
+        badge.getStyleClass().add("pinned-card-label");
 
-        // Forward text changes to the controller's debounce handler
-        searchField.textProperty().addListener((obs, oldVal, newVal) -> {
-            if (onSearchTextChanged != null) onSearchTextChanged.accept(newVal.trim());
+        Region sp1 = new Region();
+        HBox.setHgrow(sp1, Priority.ALWAYS);
+
+        Region iconRegion = new Region();
+        if (loc != null && loc.periods12hr != null && !loc.periods12hr.isEmpty()) {
+            Period p = loc.periods12hr.get(0);
+            iconRegion = SvgIcon.load(IconRouter.getLocalPath(p.icon, p.isDaytime));
+        }
+        iconRegion.getStyleClass().add("pinned-icon");
+        topRow.getChildren().addAll(badge, sp1, iconRegion);
+
+        // Row 2: city name + temperature
+        HBox cityRow = new HBox();
+        cityRow.setAlignment(Pos.CENTER_LEFT);
+
+        Label cityLabel = new Label(loc != null && loc.displayName != null
+                ? loc.displayName : "Chicago, IL");
+        cityLabel.getStyleClass().add("pinned-card-city");
+
+        Region sp2 = new Region();
+        HBox.setHgrow(sp2, Priority.ALWAYS);
+
+        String tempStr = (loc != null && loc.periods12hr != null && !loc.periods12hr.isEmpty())
+                ? TempConverter.format(loc.currentTemp) : "--";
+        pinnedTempLabel = new Label(tempStr);
+        pinnedTempLabel.getStyleClass().add("pinned-card-temp");
+        cityRow.getChildren().addAll(cityLabel, sp2, pinnedTempLabel);
+
+        // Row 3: short description
+        String desc = "--";
+        if (loc != null && loc.periods12hr != null && !loc.periods12hr.isEmpty()) {
+            Period p = loc.periods12hr.get(0);
+            desc = p.shortForecast != null ? p.shortForecast : "--";
+        }
+        Label descLabel = new Label(desc);
+        descLabel.getStyleClass().add("pinned-card-desc");
+
+        card.getChildren().addAll(topRow, cityRow, descLabel);
+
+        // Click → home navigation
+        card.setOnMouseClicked(e -> {
+            if (onPinnedClick != null) onPinnedClick.run();
         });
 
-        bar.getChildren().addAll(searchIcon, searchField);
+        return card;
+    }
+
+    /** Search bar — magnifier icon + text field */
+    private HBox buildSearchBar() {
+        HBox bar = new HBox(8);
+        bar.getStyleClass().add("search-bar");
+        bar.setAlignment(Pos.CENTER_LEFT);
+
+        Label icon = new Label("\uD83D\uDD0D");
+        icon.getStyleClass().add("search-icon");
+
+        TextField field = new TextField();
+        field.setPromptText("Search city\u2026");
+        field.getStyleClass().add("search-field");
+        HBox.setHgrow(field, Priority.ALWAYS);
+
+        field.textProperty().addListener((obs, oldVal, newVal) -> {
+            String trimmed = newVal.trim();
+            if (trimmed.isEmpty()) showResultsPanel(false);
+            if (onSearchTextChanged != null) onSearchTextChanged.accept(trimmed);
+        });
+
+        bar.getChildren().addAll(icon, field);
         return bar;
     }
 
     /**
-     * Results list — Figma node 68:99 "Display Results"
-     * ScrollPane wrapping a VBox of LocationResultRows.
-     * The first row is always "Current Location" when no search is active.
+     * Results popup — dark glass container, hidden scrollbar.
+     * Width is controlled by AnchorPane left/right anchors set in build().
      */
-    private ScrollPane buildResultsList(LocationWeather currentLocation) {
-        resultsBox = new VBox();
+    private VBox buildResultsPopup() {
+        VBox panel = new VBox(0);
+        panel.getStyleClass().add("results-popup-panel");
+
+        resultsBox = new VBox(0);
         resultsBox.getStyleClass().add("results-list");
-
-        // Pre-populate with the current/default location row
-        if (currentLocation != null) {
-            LocationWeather displayLoc = new LocationWeather();
-            displayLoc.displayName  = "Current Location";
-            displayLoc.periods12hr  = currentLocation.periods12hr;
-            displayLoc.currentTemp  = currentLocation.currentTemp;
-            displayLoc.hourlyPeriods = currentLocation.hourlyPeriods;
-            displayLoc.nwsOffice    = currentLocation.nwsOffice;
-            displayLoc.gridX        = currentLocation.gridX;
-            displayLoc.gridY        = currentLocation.gridY;
-
-            // Click on "Current Location" row uses the real LocationWeather
-            LocationResultRow currentRow = new LocationResultRow(displayLoc, null);
-            resultsBox.getChildren().add(currentRow);
-        }
 
         ScrollPane scroll = new ScrollPane(resultsBox);
         scroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scroll.setFitToWidth(true);
+        scroll.setMaxHeight(378);
         scroll.getStyleClass().add("results-scroll");
 
-        return scroll;
+        panel.getChildren().add(scroll);
+        return panel;
     }
 
     // ---------------------------------------------------------------
-    // Helpers
+    // Helper
     // ---------------------------------------------------------------
 
     private String unitSwitchText() {
-        return TempConverter.getUnit() == utils.TempConverter.Unit.FAHRENHEIT
-                ? "Switch to °C"
-                : "Switch to °F";
+        return TempConverter.getUnit() == utils.TempConverter.Unit.FAHRENHEIT ? "\u00B0C" : "\u00B0F";
     }
 }

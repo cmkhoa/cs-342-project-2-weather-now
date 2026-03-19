@@ -7,23 +7,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
+import utils.SvgIcon;
 import weather.Period;
 
 import java.util.ArrayList;
 
 /**
- * Builds the full Scene 2 layout from 12-hour period data.
- * Figma: node 1:277  "Scene 2 - Three Day Forecast"
- * Canvas size: 540 × 1080
- * Structure:
- *   VBox (root)
- *   ├── MenuBar    HBox: [ Back button ]  [ "Forecast" title ]
- *   └── content    ScrollPane > VBox of PeriodCards (all 14 periods)
- * Navigation: "Back" button callback wired by Scene2Controller.
+ * Scene 2 — Detailed Forecast.
+ *
+ * Fixes:
+ *  - Background gradient matches Scene 1's current weather theme.
+ *    The Scene2Controller passes the detected weather class string via build(periods, weatherClass).
+ *  - Scrollbar completely hidden (same CSS override technique as the hourly strip).
+ *  - Period sub-row: wind+dir grouped left, precip right, evenly distributed.
  */
 public class Scene2View {
 
-    // Callback wired by Scene2Controller
     private Runnable onBackClick;
 
     // ---------------------------------------------------------------
@@ -31,13 +30,18 @@ public class Scene2View {
     // ---------------------------------------------------------------
 
     /**
-     * Constructs and returns a fully populated Scene 2.
+     * Builds Scene 2.
      *
-     * @param periods12hr All 14 12-hour periods from WeatherAPI (must not be null)
+     * @param periods12hr   The 12-hr period list.
+     * @param weatherClass  The CSS class string detected by Scene1View (e.g. "weather-sunny").
+     *                      Pass empty string for the default gradient.
      */
-    public Scene build(ArrayList<Period> periods12hr) {
+    public Scene build(ArrayList<Period> periods12hr, String weatherClass) {
         VBox root = new VBox();
         root.getStyleClass().add("scene2-root");
+        if (weatherClass != null && !weatherClass.isEmpty()) {
+            root.getStyleClass().add(weatherClass);
+        }
 
         root.getChildren().addAll(
                 buildMenuBar(),
@@ -49,9 +53,10 @@ public class Scene2View {
         return scene;
     }
 
-    // ---------------------------------------------------------------
-    // Callback setter
-    // ---------------------------------------------------------------
+    /** Backwards-compatible overload — no theme. */
+    public Scene build(ArrayList<Period> periods12hr) {
+        return build(periods12hr, "");
+    }
 
     public void setOnBackClick(Runnable r) { this.onBackClick = r; }
 
@@ -59,16 +64,13 @@ public class Scene2View {
     // Section builders
     // ---------------------------------------------------------------
 
-    /**
-     * Menu bar — Figma node 62:84
-     * [ Back button ]  [ "Forecast" label ]
-     */
     private HBox buildMenuBar() {
         HBox bar = new HBox();
+        bar.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
+        bar.setSpacing(12);
         bar.getStyleClass().add("menu-bar");
 
-        Button backBtn = new Button("← Back");
-        backBtn.getStyleClass().add("back-btn");
+        Button backBtn = buildBackButton();
         backBtn.setOnAction(e -> { if (onBackClick != null) onBackClick.run(); });
 
         Label titleLabel = new Label("Forecast");
@@ -78,25 +80,34 @@ public class Scene2View {
         return bar;
     }
 
+    private Button buildBackButton() {
+        Region backIcon = SvgIcon.loadTinted("/ui-icons/backButton.svg", 20);
+        backIcon.getStyleClass().add("back-icon");
+        Button btn = new Button();
+        btn.setGraphic(backIcon);
+        btn.getStyleClass().add("back-btn");
+        return btn;
+    }
+
     /**
-     * Scrollable period list — Figma node 62:90 / 62:149
-     * VBox of PeriodCard components, one per period.
+     * Scrollable list of period cards.
+     * Scrollbar is hidden via CSS — user scrolls with mouse wheel / trackpad.
      */
     private ScrollPane buildContent(ArrayList<Period> periods12hr) {
         VBox periodsBox = new VBox();
         periodsBox.getStyleClass().add("periods-list");
-        int startIdx = 2;
-        if (!periods12hr.get(0).isDaytime){
-            startIdx -= 1;
-        }
-        for (int i = startIdx; i < startIdx + 6; i++) {
-            PeriodCard card = new PeriodCard(periods12hr.get(i));
-            periodsBox.getChildren().add(card);
+
+        if (periods12hr != null) {
+            // Show up to 8 periods starting from the current one
+            int end = Math.min(8, periods12hr.size());
+            for (int i = 0; i < end; i++) {
+                periodsBox.getChildren().add(new PeriodCard(periods12hr.get(i)));
+            }
         }
 
         ScrollPane scrollPane = new ScrollPane(periodsBox);
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER); // hidden by CSS too
         scrollPane.setFitToWidth(true);
         scrollPane.getStyleClass().add("scene2-scroll");
 

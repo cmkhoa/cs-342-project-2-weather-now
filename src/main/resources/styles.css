@@ -1,459 +1,399 @@
-/* =============================================================
-   styles.css  —  342 Weather App
-   Loaded by Scene1View and Scene2View via scene.getStylesheets()
-   Figma design: Inter font family, 1px solid black borders,
-   white backgrounds, rounded icon containers.
-   ============================================================= */
-
-/* ----- Root containers ---------------------------------------- */
-
-.scene1-root, .scene2-root {
-    -fx-background-color: white;
-    -fx-font-family: 'Inter', 'Segoe UI', sans-serif;
+/* scene 1 general properties */
+.scene1-root {
+    -fx-background-color: linear-gradient(to bottom, #1a6baa 0%, #4ab3f4 50%, #87ceeb 100%);
     -fx-pref-width: 405;
     -fx-pref-height: 810;
-    -fx-padding: 30 30 30 30;
-    -fx-spacing: 15;
+    -fx-padding: 30;
+    -fx-spacing: 10;
+}
+.scene1-root.weather-sunny          { -fx-background-color: linear-gradient(to bottom, #1565c0 0%, #1e88e5 35%, #ffd54f 100%); }
+.scene1-root.weather-cloudy         { -fx-background-color: linear-gradient(to bottom, #455a64 0%, #607d8b 50%, #90a4ae 100%); }
+.scene1-root.weather-rain           { -fx-background-color: linear-gradient(to bottom, #0d1b4b 0%, #1a237e 45%, #283593 100%); }
+.scene1-root.weather-storm          { -fx-background-color: linear-gradient(to bottom, #0d0d1a 0%, #1a1a2e 55%, #263238 100%); }
+.scene1-root.weather-snow           { -fx-background-color: linear-gradient(to bottom, #607d8b 0%, #90a4ae 55%, #cfd8dc 100%); }
+.scene1-root.weather-fog            { -fx-background-color: linear-gradient(to bottom, #546e7a 0%, #78909c 55%, #b0bec5 100%); }
+.scene1-root.weather-clear-night    { -fx-background-color: linear-gradient(to bottom, #050518 0%, #0d0d2b 50%, #1a1a4a 100%); }
+
+/* scene 2 general properties */
+.scene2-root {
+    -fx-background-color: linear-gradient(to bottom, #1a6baa 0%, #4ab3f4 50%, #87ceeb 100%);
+    -fx-pref-width: 405;
+    -fx-pref-height: 810;
+    -fx-padding: 30;
+    -fx-spacing: 10;
+}
+.scene2-root.weather-sunny          { -fx-background-color: linear-gradient(to bottom, #1565c0 0%, #1e88e5 35%, #ffd54f 100%); }
+.scene2-root.weather-cloudy         { -fx-background-color: linear-gradient(to bottom, #455a64 0%, #607d8b 50%, #90a4ae 100%); }
+.scene2-root.weather-rain           { -fx-background-color: linear-gradient(to bottom, #0d1b4b 0%, #1a237e 45%, #283593 100%); }
+.scene2-root.weather-storm          { -fx-background-color: linear-gradient(to bottom, #0d0d1a 0%, #1a1a2e 55%, #263238 100%); }
+.scene2-root.weather-snow           { -fx-background-color: linear-gradient(to bottom, #607d8b 0%, #90a4ae 55%, #cfd8dc 100%); }
+.scene2-root.weather-fog            { -fx-background-color: linear-gradient(to bottom, #546e7a 0%, #78909c 55%, #b0bec5 100%); }
+.scene2-root.weather-clear-night    { -fx-background-color: linear-gradient(to bottom, #050518 0%, #0d0d2b 50%, #1a1a4a 100%); }
+
+/* scene 3 general properties─ */
+.scene3-root {
+    -fx-background-color: linear-gradient(to bottom, #0a0e2a 0%, #14204a 50%, #0f3060 100%);
+    -fx-pref-width: 405;
+    -fx-pref-height: 810;
+    -fx-padding: 30;
+    -fx-spacing: 10;
 }
 
-/* ----- Menu bar ----------------------------------------------- */
-
+/* general menu bar */
 .menu-bar {
     -fx-background-color: transparent;
-    -fx-pref-width: 330;
-    -fx-pref-height: 40;
+    -fx-pref-height: 50;
     -fx-alignment: center-left;
-    -fx-padding: 15;
-    -fx-spacing: 0;
-}
-
-.scene2-root .menu-bar {
-    -fx-spacing: 45;
-}
-
-.location-btn {
-    -fx-font-size: 15px;
-    -fx-font-family: 'Inter', sans-serif;
-    -fx-background-color: transparent;
-    -fx-border-color: black;
-    -fx-border-width: 1px;
-    -fx-cursor: hand;
-    -fx-underline: true;
-}
-
-.home-btn {
-    -fx-font-size: 15px;
-    -fx-font-family: 'Inter', sans-serif;
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-cursor: hand;
-    -fx-underline: true;
-}
-
-.back-btn {
-    -fx-font-size: 15px;
-    -fx-font-family: 'Inter', sans-serif;
-    -fx-background-color: transparent;
-    -fx-border-color: black;
-    -fx-border-width: 1px;
-    -fx-cursor: hand;
-    -fx-underline: true;
-}
-
-.scene2-title {
-    -fx-font-size: 18px;
-    -fx-font-family: 'Inter', sans-serif;
-}
-
-/* ----- Quick info hero ---------------------------------------- */
-
-.quick-info {
-    -fx-background-color: transparent;
-    -fx-spacing: 9;
-    -fx-pref-width: 330;
-    -fx-pref-height: 310;
-    -fx-alignment: center;
-    -fx-padding: 8 19 0 19;
-}
-
-.hero-icon {
-    /*-fx-background-radius: 23px;*/
-    /*-fx-border-radius: 23px;*/
-    /*-fx-border-color: #747474;*/
-    /*-fx-border-width: 1px;*/
-    -fx-pref-width: 135;
-    -fx-pref-height: 135;
-    -fx-min-width: 135;
-    -fx-min-height: 135;
-}
-
-.hourly-icon, .period-icon, .weekday-icon {
-    -fx-pref-width: 23;
-    -fx-pref-height: 23;
-    -fx-min-width: 23;
-    -fx-min-height: 23;
-}
-
-.hero-temp {
-    -fx-font-size: 30px;
-    -fx-font-family: 'Inter', sans-serif;
-    -fx-text-fill: black;
-}
-
-.hero-desc {
-    -fx-font-size: 15px;
-    -fx-font-family: 'Inter', sans-serif;
-    -fx-text-fill: black;
-}
-
-/* ----- Current conditions bar (precip / wind / humidity) ------ */
-
-.current-info-bar {
-    -fx-border-color: black;
-    -fx-border-width: 1px;
-    -fx-border-radius: 9;
-    -fx-background-radius: 9;
-    -fx-background-color: white;
-    -fx-pref-width: 330;
-    -fx-alignment: center;
-    -fx-padding: 8 20 8 20;
+    -fx-padding: 0;
     -fx-spacing: 30;
 }
 
-.stat-slot {
-    -fx-background-color: transparent;
-    -fx-spacing: 10;
-    -fx-alignment: center-left;
+/* Location button */
+.location-btn {
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+    -fx-background-color: rgba(255,255,255,0.1);
+    -fx-background-radius: 15;
+    /*-fx-border-color: rgba(255,255,255,0.40);*/
+    /*-fx-border-width: 1;*/
+    /*-fx-border-radius: 20;*/
+    -fx-cursor: hand;
+    -fx-padding: 10;
 }
+.location-btn:hover { -fx-background-color: rgba(255,255,255,0.2); }
 
-/* ----- Hourly forecast panel ---------------------------------- */
+/* SVG icon sizes */
+.location-icon { -fx-pref-width: 20; -fx-pref-height: 20; -fx-min-width: 20; -fx-min-height: 20; }
+.home-icon     { -fx-pref-width: 20; -fx-pref-height: 20; -fx-min-width: 20; -fx-min-height: 20; }
+.back-icon     { -fx-pref-width: 20; -fx-pref-height: 20; -fx-min-width: 20; -fx-min-height: 20; }
+.more-icon     { -fx-pref-width: 20; -fx-pref-height: 20; -fx-min-width: 20; -fx-min-height: 20; }
 
-.hourly-info-box {
-    -fx-border-color: black;
-    -fx-border-width: 1px;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-background-color: white;
-    -fx-spacing: 10;
-    -fx-pref-width: 330;
-    -fx-pref-height: 210;
-    -fx-padding: 20;
-}
-
-.hourly-header {
-    -fx-alignment: center-left;
-    -fx-max-width: 5000;
-}
-
-.hourly-strip {
-    -fx-spacing: 10;
-    -fx-alignment: center-left;
+/* Home / Back icon-only buttons */
+.home-btn, .back-btn {
+    -fx-background-color: rgba(255,255,255,0.05);
+    -fx-background-radius: 15;
+    -fx-border-color: rgba(255,255,255,0.2);
+    -fx-border-width: 1;
+    -fx-border-radius: 15;
+    -fx-cursor: hand;
     -fx-padding: 5 5 5 5;
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+    -fx-min-width: 30;
+    -fx-min-height: 30;
+}
+.home-btn:hover, .back-btn:hover { -fx-background-color: rgba(255,255,255,0.28); }
+
+/* More dots button */
+.more-btn {
+    -fx-background-color: rgba(255,255,255,0.1);
+    -fx-background-radius: 15;
+    -fx-border-color: rgba(255,255,255,0.2);
+    -fx-border-width: 1;
+    -fx-border-radius: 15;
+    -fx-cursor: hand;
+    -fx-padding: 5 5 5 5;
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+    -fx-min-width: 30;
+    -fx-min-height: 30;
+}
+.more-btn:hover { -fx-background-color: rgba(255,255,255,0.28); }
+
+/* Scene 2 title */
+.scene2-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
 }
 
-.hourly-scroll {
+/* ─── HERO SECTION ────────────────────────────────────────── */
+.quick-info {
     -fx-background-color: transparent;
-    -fx-background: transparent;
-    -fx-border-color: transparent;
+    -fx-spacing: 5;
+    -fx-pref-width: 330;
+    -fx-pref-height: 260;
+    -fx-alignment: center;
+    -fx-padding: 5;
+}
+.hero-icon { -fx-pref-width: 130; -fx-pref-height: 130; -fx-min-width: 130; -fx-min-height: 130; }
+.hero-temp {
+    -fx-font-size: 54px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+.hero-desc {
+    -fx-font-size: 16px;
+    -fx-text-fill: rgba(255,255,255,0.7);
+}
+
+/* Current conditions bar */
+.current-info-bar {
+    -fx-background-color: rgba(255,255,255,0.1);
+    -fx-background-radius: 15;
+    /*-fx-border-color: rgba(255,255,255,0.32);*/
+    /*-fx-border-width: 1;*/
+    /*-fx-border-radius: 16;*/
+    -fx-pref-height: 25;
+    -fx-alignment: center;
+    -fx-spacing: 0;
     -fx-padding: 0;
 }
-
-/* Remove default ScrollPane viewport background */
-.hourly-scroll .viewport {
-    -fx-background-color: transparent;
+/* Each stat slot: equal flex width, centered */
+.stat-slot {
+    -fx-alignment: center;
+    -fx-spacing: 0;
 }
-
-/* Hide the horizontal scrollbar track and thumb entirely */
-.hourly-scroll .scroll-bar:horizontal {
-    -fx-pref-height: 0;
-    -fx-max-height: 0;
-    -fx-opacity: 0;
+/* Thin vertical divider */
+.stat-separator {
+    -fx-background-color: rgba(255,255,255,0.28);
+    -fx-pref-width: 1;
+    -fx-pref-height: 10;
+    -fx-min-width: 1;
 }
+.stat-icon-label  { -fx-font-size: 18px; -fx-alignment: center; }
+.stat-value-label { -fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white; -fx-alignment: center; }
+.stat-key-label   { -fx-font-size: 11px; -fx-text-fill: rgba(255,255,255,0.65); -fx-alignment: center; }
 
+/* ─── HOURLY PANEL ────────────────────────────────────────── */
+.hourly-info-box {
+    -fx-background-color: rgba(255,255,255,0.16);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(255,255,255,0.28);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+    -fx-spacing: 8;
+    -fx-padding: 14 12 10 12;
+}
+.hourly-header { -fx-alignment: center-left; }
+.today-label   { -fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white; }
+.date-label    { -fx-font-size: 14px; -fx-text-fill: rgba(255,255,255,0.70); }
+.hourly-strip  { -fx-spacing: 7; -fx-alignment: center-left; -fx-padding: 0 2 0 0; }
+
+/* Invisible scroll pane */
+.hourly-scroll { -fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent; -fx-padding: 0; }
+.hourly-scroll .viewport { -fx-background-color: transparent; }
+.hourly-scroll .scroll-bar:horizontal { -fx-pref-height: 0; -fx-max-height: 0; -fx-opacity: 0; }
 .hourly-scroll .scroll-bar:horizontal .track,
 .hourly-scroll .scroll-bar:horizontal .thumb,
 .hourly-scroll .scroll-bar:horizontal .increment-button,
 .hourly-scroll .scroll-bar:horizontal .decrement-button {
-    -fx-pref-height: 0;
-    -fx-max-height: 0;
-    -fx-opacity: 0;
-    -fx-padding: 0;
+    -fx-pref-height: 0; -fx-max-height: 0; -fx-opacity: 0; -fx-padding: 0;
 }
 
-/* ----- Hourly card (HourlyCard component) --------------------- */
-
+/* ─── HOURLY CARD ─────────────────────────────────────────── */
 .hourly-card {
-    -fx-border-color: black;
-    -fx-border-width: 1px;
-    -fx-background-color: white;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-spacing: 5;
-    -fx-pref-width: 55;
-    -fx-pref-height: 80;
-    -fx-min-width: 55;
-    -fx-max-width: 55;
-    -fx-alignment: center;
-    -fx-padding: 6;
-}
-
-.hourly-hour-label, .hourly-temp-label {
-    -fx-alignment: center;
-}
-
-/* ----- 3-day info panel --------------------------------------- */
-
-.three-day-box {
-    -fx-border-color: black;
-    -fx-border-width: 1px;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-background-color: white;
-    -fx-spacing: 10;
-    -fx-pref-width: 330;
-    -fx-padding: 20;
-}
-
-.three-day-header {
-    -fx-alignment: center-left;
-    -fx-max-width: 5000;
-}
-
-.three-day-rows {
-    -fx-spacing: 10;
-    -fx-padding: 0;
-}
-
-.more-btn {
-    -fx-font-size: 15px;
-    -fx-font-family: 'Inter', sans-serif;
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-    -fx-cursor: hand;
-    -fx-underline: true;
-}
-
-/* ----- Weekday row (WeekdayRow component) ---------------------- */
-
-.weekday-row {
-    -fx-background-color: transparent;
-    -fx-pref-height: 20;
-    -fx-alignment: center-left;
-    -fx-padding: 0;
-    -fx-spacing: 0;
-}
-
-.weekday-label-left {
-    -fx-pref-width: 80;
-}
-
-.weekday-label-right {
-    -fx-pref-width: 80;
-    -fx-alignment: center-right;
-}
-
-/* ----- Scene 2 period list ------------------------------------ */
-
-.periods-list {
-    -fx-background-color: white;
-    -fx-spacing: 15;
-    -fx-padding: 0;
-    -fx-max-width: 5000;
-}
-
-.scene2-scroll {
-    -fx-background-color: white;
-    -fx-background: white;
-    -fx-border-color: transparent;
-}
-
-.scene2-scroll .viewport {
-    -fx-background-color: white;
-}
-
-/* ----- Period card (PeriodCard component) ---------------------- */
-
-.period-card {
-    -fx-border-color: black;
-    -fx-border-width: 1px;
-    -fx-background-color: white;
-    -fx-border-radius: 10;
-    -fx-background-radius: 10;
-    -fx-spacing: 10;
+    -fx-background-color: rgba(255,255,255,0.14);
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(255,255,255,0.26);
+    -fx-border-width: 1;
+    -fx-border-radius: 14;
+    -fx-spacing: 4;
+    -fx-pref-width: 58;
+    -fx-min-width: 58;
+    -fx-max-width: 58;
     -fx-pref-height: 90;
-    -fx-max-width: 5000;
-    -fx-padding: 20;
-}
-
-.period-info1-row, .period-info2-row {
+    -fx-min-height: 90;
     -fx-alignment: center;
-    -fx-max-width: 5000;
+    -fx-padding: 8 4 8 4;
 }
-
-.period-info2-row {
-    -fx-spacing: 40;
+.hourly-card.current-hour {
+    -fx-background-color: rgba(255,255,255,0.28);
+    -fx-border-color: rgba(255,255,255,0.55);
 }
+.hourly-hour-label  { -fx-font-size: 11px; -fx-text-fill: rgba(255,255,255,0.78); -fx-alignment: center; }
+.hourly-temp-label  { -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white; -fx-alignment: center; }
+.hourly-icon        { -fx-pref-width: 28; -fx-pref-height: 28; -fx-min-width: 28; -fx-min-height: 28; }
 
-/* ----- Labels (extracted from code) --------------------------- */
-
-.hourly-text {
-    -fx-font-size: 11px;
-    -fx-font-family: 'Inter', sans-serif;
-    -fx-text-fill: black;
+/* ─── 3-DAY PANEL ─────────────────────────────────────────── */
+.three-day-box {
+    -fx-background-color: rgba(255,255,255,0.16);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(255,255,255,0.28);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+    -fx-spacing: 6;
+    -fx-padding: 14 16 14 16;
 }
+.three-day-header { -fx-alignment: center-left; }
+.next-label       { -fx-font-size: 15px; -fx-font-weight: bold; -fx-text-fill: white; }
+.three-day-rows   { -fx-spacing: 0; }
 
-.period-name-label, .period-temp-label {
-    -fx-font-size: 15px;
-    -fx-font-family: 'Inter', sans-serif;
+/* ─── WEEKDAY ROW ─────────────────────────────────────────── */
+.weekday-row {
+    -fx-pref-height: 46;
+    -fx-min-height: 46;
+    -fx-alignment: center-left;
+    -fx-padding: 0;
+    -fx-spacing: 0;
+    -fx-border-color: transparent transparent rgba(255,255,255,0.14) transparent;
+    -fx-border-width: 0 0 1 0;
 }
+.weekday-row.last-row { -fx-border-color: transparent; }
+.weekday-label        { -fx-font-size: 14px; -fx-text-fill: white; }
+.weekday-label-left   { -fx-pref-width: 95; }
+.weekday-label-right  { -fx-pref-width: 95; -fx-alignment: center-right; -fx-font-weight: bold; }
+.weekday-icon         { -fx-pref-width: 28; -fx-pref-height: 28; -fx-min-width: 28; -fx-min-height: 28; }
 
+/* ─── SCENE 2: PERIOD LIST ────────────────────────────────── */
+.periods-list { -fx-background-color: transparent; -fx-spacing: 10; -fx-padding: 4 0 20 0; }
+
+/* Scene 2 scroll — no scrollbar at all */
+.scene2-scroll { -fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent; }
+.scene2-scroll .viewport { -fx-background-color: transparent; }
+.scene2-scroll .scroll-bar:vertical { -fx-pref-width: 0; -fx-max-width: 0; -fx-opacity: 0; }
+.scene2-scroll .scroll-bar:vertical .track,
+.scene2-scroll .scroll-bar:vertical .thumb,
+.scene2-scroll .scroll-bar:vertical .increment-button,
+.scene2-scroll .scroll-bar:vertical .decrement-button { -fx-pref-width: 0; -fx-max-width: 0; -fx-opacity: 0; -fx-padding: 0; }
+.scene2-scroll .scroll-bar:horizontal { -fx-pref-height: 0; -fx-max-height: 0; -fx-opacity: 0; }
+.scene2-scroll .scroll-bar:horizontal .track,
+.scene2-scroll .scroll-bar:horizontal .thumb,
+.scene2-scroll .scroll-bar:horizontal .increment-button,
+.scene2-scroll .scroll-bar:horizontal .decrement-button { -fx-pref-height: 0; -fx-max-height: 0; -fx-opacity: 0; -fx-padding: 0; }
+
+/* ─── PERIOD CARD (Scene 2) ───────────────────────────────── */
+.period-card {
+    -fx-background-color: rgba(255,255,255,0.16);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(255,255,255,0.28);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+    -fx-spacing: 8;
+    -fx-padding: 14 16 14 16;
+}
+.period-info1-row { -fx-alignment: center; -fx-pref-height: 38; }
+.period-info2-row { -fx-alignment: center; -fx-pref-height: 28; }
 .period-name-label {
-    -fx-pref-width: 250;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-pref-width: 170;
+    -fx-alignment: center-left;
 }
-
 .period-temp-label {
-    -fx-pref-width: 80;
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-pref-width: 70;
     -fx-alignment: center-right;
 }
+.period-icon   { -fx-pref-width: 32; -fx-pref-height: 32; -fx-min-width: 32; -fx-min-height: 32; }
+.period-sub-label        { -fx-font-size: 14px; -fx-text-fill: rgba(255,255,255,0.75); -fx-alignment: center-left; }
+.period-sub-label.precip-label { -fx-alignment: center-right; }
 
-.period-sub-label {
-    -fx-font-size: 13px;
-    -fx-font-family: 'Inter', sans-serif;
-}
-
-.weekday-label {
-    -fx-font-size: 13px;
-    -fx-font-family: 'Inter', sans-serif;
-}
-
-.today-label, .next-label {
-    -fx-font-size: 15px;
-    -fx-font-family: 'Inter', sans-serif;
-}
-
-.date-label, .stat-value-label {
-    -fx-font-size: 15px;
-    -fx-font-family: 'Inter', sans-serif;
-}
-
-.stat-icon-label {
-    -fx-font-size: 14px;
-}
-
-.scene3-root {
-    -fx-background-color: white;
-    -fx-font-family: 'Inter', 'Segoe UI', sans-serif;
+/* ─── SCENE 3 HEADER ──────────────────────────────────────── */
+.scene3-header {
+    -fx-background-color: rgba(0,0,0,0.25);
     -fx-pref-width: 405;
-    -fx-pref-height: 810;
-    -fx-padding: 38;
+    -fx-pref-height: 64;
+    -fx-padding: 14 20 14 20;
+    -fx-alignment: center-left;
     -fx-spacing: 0;
+    -fx-border-color: transparent transparent rgba(255,255,255,0.10) transparent;
+    -fx-border-width: 0 0 1 0;
 }
-
-/* "Weather" title in Scene 3 menu bar */
-.scene3-title {
-    -fx-font-size: 15px;
-    -fx-font-family: 'Inter', sans-serif;
-}
-
-/* Unit switch label — clickable, right-aligned */
+.scene3-title { -fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white; }
 .unit-switch-label {
-    -fx-font-size: 12px;
-    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: rgba(255,255,255,0.85);
     -fx-cursor: hand;
-    -fx-underline: true;
+    -fx-background-color: rgba(255,255,255,0.14);
+    -fx-background-radius: 14;
+    -fx-border-color: rgba(255,255,255,0.28);
+    -fx-border-radius: 14;
+    -fx-border-width: 1;
+    -fx-padding: 5 12 5 12;
 }
+.unit-switch-label:hover { -fx-background-color: rgba(255,255,255,0.22); }
 
-/* Content VBox inside Scene 3 */
 .scene3-content {
-    -fx-spacing: 8;
-    -fx-padding: 0 15 0 15;
-    -fx-pref-width: 330;
+    -fx-spacing: 12;
+    -fx-padding: 16 18 16 18;
+    -fx-pref-width: 405;
+    -fx-background-color: transparent;
 }
 
-/* ----- Search bar (Figma node 68:92) -------------------------- */
-
+/* ─── SEARCH BAR (Scene 3) ────────────────────────────────── */
 .search-bar {
-    -fx-border-color: black;
-    -fx-border-width: 1px;
-    -fx-background-color: white;
-    -fx-pref-height: 37;
-    -fx-pref-width: 300;
-    -fx-padding: 8 19 8 19;
+    -fx-background-color: rgba(255,255,255,0.14);
+    -fx-background-radius: 16;
+    -fx-border-color: rgba(255,255,255,0.30);
+    -fx-border-width: 1;
+    -fx-border-radius: 16;
+    -fx-pref-height: 46;
+    -fx-padding: 0 14 0 14;
     -fx-spacing: 8;
     -fx-alignment: center-left;
 }
-
-.search-icon {
-    -fx-font-size: 14px;
-    -fx-pref-width: 23;
-    -fx-pref-height: 22;
-}
-
+.search-icon  { -fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.60); }
 .search-field {
-    -fx-font-size: 12px;
-    -fx-font-family: 'Inter', sans-serif;
+    -fx-font-size: 14px;
+    -fx-text-fill: white;
+    -fx-prompt-text-fill: rgba(255,255,255,0.45);
     -fx-background-color: transparent;
     -fx-border-color: transparent;
-    -fx-pref-height: 22;
 }
+.search-field:focused { -fx-background-color: transparent; -fx-border-color: transparent; }
 
-/* ----- Results list (Figma node 68:99) ------------------------ */
-
-.results-scroll {
-    -fx-background-color: white;
-    -fx-background: white;
-    -fx-border-color: transparent;
-    -fx-pref-height: 638;
-    -fx-pref-width: 300;
+/* ─── PINNED CARD (Scene 3) ───────────────────────────────── */
+.pinned-card {
+    -fx-background-color: rgba(255,255,255,0.18);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(255,255,255,0.35);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
+    -fx-cursor: hand;
+    -fx-padding: 14 16 14 16;
 }
+.pinned-card:hover { -fx-background-color: rgba(255,255,255,0.25); }
+.pinned-card-label { -fx-font-size: 11px; -fx-text-fill: rgba(255,255,255,0.55); -fx-font-weight: bold; }
+.pinned-card-city  { -fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: white; }
+.pinned-card-temp  { -fx-font-size: 30px; -fx-font-weight: bold; -fx-text-fill: white; }
+.pinned-card-desc  { -fx-font-size: 14px; -fx-text-fill: rgba(255,255,255,0.70); }
+.pinned-icon       { -fx-pref-width: 48; -fx-pref-height: 48; -fx-min-width: 48; -fx-min-height: 48; }
 
-.results-scroll .viewport {
-    -fx-background-color: white;
+/* ─── RESULTS POPUP (Scene 3) ─────────────────────────────── */
+.results-popup-panel {
+    -fx-background-color: rgba(8,12,36,0.92);
+    -fx-background-radius: 18;
+    -fx-border-color: rgba(255,255,255,0.18);
+    -fx-border-width: 1;
+    -fx-border-radius: 18;
 }
+.results-scroll { -fx-background-color: transparent; -fx-background: transparent; -fx-border-color: transparent; }
+.results-scroll .viewport { -fx-background-color: transparent; }
+.results-scroll .scroll-bar:vertical { -fx-pref-width: 0; -fx-max-width: 0; -fx-opacity: 0; }
+.results-scroll .scroll-bar:vertical .track,
+.results-scroll .scroll-bar:vertical .thumb,
+.results-scroll .scroll-bar:vertical .increment-button,
+.results-scroll .scroll-bar:vertical .decrement-button { -fx-pref-width: 0; -fx-max-width: 0; -fx-opacity: 0; -fx-padding: 0; }
+.results-list { -fx-background-color: transparent; -fx-spacing: 0; -fx-padding: 6 8 6 8; }
 
-.results-list {
-    -fx-background-color: white;
-    -fx-spacing: 14;
-    -fx-padding: 15 8 15 8;
-}
-
-/* ----- Location result row (Figma node 68:100 / 62:329) ------- */
-
+/* ─── LOCATION RESULT ROW ─────────────────────────────────── */
 .location-result-row {
-    -fx-border-color: black;
-    -fx-border-width: 1px;
-    -fx-background-color: white;
-    -fx-pref-height: 43;
-    -fx-pref-width: 285;
+    -fx-background-color: transparent;
+    -fx-pref-height: 54;
+    -fx-min-height: 54;
     -fx-padding: 0 8 0 8;
     -fx-alignment: center-left;
     -fx-spacing: 0;
+    -fx-border-color: transparent transparent rgba(255,255,255,0.10) transparent;
+    -fx-border-width: 0 0 1 0;
 }
-
-.result-row-clickable {
+.result-row-clickable { -fx-cursor: hand; }
+.result-row-clickable:hover { -fx-background-color: rgba(255,255,255,0.08); -fx-background-radius: 10; }
+.result-location-label { -fx-font-size: 14px; -fx-text-fill: white; }
+.result-temp-label     { -fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: white; -fx-pref-width: 52; -fx-alignment: center-right; }
+.result-icon           { -fx-pref-width: 26; -fx-pref-height: 26; -fx-min-width: 26; -fx-min-height: 26; }
+.pin-btn {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
     -fx-cursor: hand;
+    -fx-padding: 2 4 2 4;
+    -fx-text-fill: rgba(255,255,255,0.45);
+    -fx-font-size: 14px;
+    -fx-background-radius: 8;
 }
-
-.result-row-clickable:hover {
-    -fx-background-color: #f5f5f5;
-}
-
-.result-location-label {
-    -fx-font-size: 15px;
-    -fx-font-family: 'Inter', sans-serif;
-}
-
-.result-temp-label {
-    -fx-font-size: 15px;
-    -fx-font-family: 'Inter', sans-serif;
-    -fx-pref-width: 56;
-    -fx-alignment: center-right;
-}
-
-/* No-results / loading label */
-.no-results-label {
-    -fx-font-size: 12px;
-    -fx-font-family: 'Inter', sans-serif;
-    -fx-text-fill: #888888;
-    -fx-padding: 15;
-}
+.pin-btn:hover { -fx-background-color: rgba(255,255,255,0.10); -fx-text-fill: white; }
+.no-results-label { -fx-font-size: 14px; -fx-text-fill: rgba(255,255,255,0.50); -fx-padding: 16; -fx-alignment: center; }
