@@ -21,33 +21,18 @@ import java.util.Date;
 import javafx.scene.input.ScrollEvent;
 
 /**
- * Scene 1 view — Figma-aligned glassmorphism over a weather-reactive background.
- *
- * Fixes applied:
- *  - Stat slots use equal Priority.ALWAYS HGrow so each takes 1/3 width, centered
- *  - Home button hidden when on Chicago, visible otherwise
- *  - Weather theme class drives both Scene1 and (via controller) Scene2 backgrounds
- *  - All font sizes ≥ 14px (hero desc = 16, stat value = 15, weekday = 14, etc.)
- *  - Text in stat slots is centered using VBox alignment + HBox.setHgrow equal thirds
+ * Scene 1 view
  */
 public class Scene1View {
-
     private Runnable onMoreForecastClick;
     private Runnable onLocationClick;
     private Runnable onHomeClick;
-
     // Expose the detected weather theme so Scene2Controller can reuse it
     private String detectedWeatherClass = "";
-
     public String getDetectedWeatherClass() { return detectedWeatherClass; }
 
-    // ---------------------------------------------------------------
     // Public builder
-    // ---------------------------------------------------------------
-
-    public Scene build(ArrayList<Period> periods12hr,
-                       ArrayList<HourlyPeriod> hourlyPeriods,
-                       String locationName) {
+    public Scene build(ArrayList<Period> periods12hr, ArrayList<HourlyPeriod> hourlyPeriods, String locationName) {
         VBox root = new VBox();
         root.getStyleClass().add("scene1-root");
 
@@ -74,7 +59,7 @@ public class Scene1View {
         scene.getStylesheets().add(getClass().getResource("/styles.css").toExternalForm());
         return scene;
     }
-
+    // Default build for chicago
     public Scene build(ArrayList<Period> periods12hr, ArrayList<HourlyPeriod> hourlyPeriods) {
         return build(periods12hr, hourlyPeriods, "Chicago, IL");
     }
@@ -83,11 +68,7 @@ public class Scene1View {
     public void setOnLocationClick(Runnable r)     { this.onLocationClick = r; }
     public void setOnHomeClick(Runnable r)          { this.onHomeClick = r; }
 
-    // ---------------------------------------------------------------
-    // Weather theme detection
-    // ---------------------------------------------------------------
-
-    /** Returns the CSS class to add to root for weather-reactive background. */
+    //add weather dependent theme to background
     private String detectWeatherClass(Period period) {
         if (period == null) return "";
         String icon = period.icon != null ? period.icon.toLowerCase() : "";
@@ -106,11 +87,8 @@ public class Scene1View {
         return locationName == null || locationName.toLowerCase().contains("chicago");
     }
 
-    // ---------------------------------------------------------------
     // Section builders
-    // ---------------------------------------------------------------
-
-    /** Menu bar: [ 📍 City ]  [spacer]  [ 🏠 (only when not home) ] */
+    // Menu bar: City + spacer + home button (only when not home)
     private HBox buildMenuBar(String locationName, boolean isHome) {
         HBox bar = new HBox();
         bar.getStyleClass().add("menu-bar");
@@ -135,11 +113,11 @@ public class Scene1View {
     }
 
     private Button buildLocationButton(String locationName) {
-        Region pinIcon = SvgIcon.loadTinted("/ui-icons/location.svg", 20);
+        Region pinIcon = SvgIcon.loadTinted("/ui-icons/location.svg", 16);
         pinIcon.getStyleClass().add("location-icon");
 
         Label nameLabel = new Label(locationName != null ? locationName : "—");
-        nameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 14px;");
+        nameLabel.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
 
         HBox content = new HBox(6, pinIcon, nameLabel);
         content.setAlignment(Pos.CENTER_LEFT);
@@ -160,9 +138,8 @@ public class Scene1View {
         return btn;
     }
 
-    /** Hero: centered icon → big temperature → short description */
-    private VBox buildQuickInfo(ArrayList<Period> periods12hr,
-                                ArrayList<HourlyPeriod> hourlyPeriods) {
+    // Hero: centered icon + big temperature + short description
+    private VBox buildQuickInfo(ArrayList<Period> periods12hr, ArrayList<HourlyPeriod> hourlyPeriods) {
         VBox box = new VBox();
         box.getStyleClass().add("quick-info");
 
@@ -173,42 +150,32 @@ public class Scene1View {
         if (current != null) {
             Region icon = SvgIcon.load(IconRouter.getLocalPath(current.icon, current.isDaytime));
             icon.getStyleClass().add("hero-icon");
-
             Label tempLabel = new Label(TempConverter.format(current.temperature));
             tempLabel.getStyleClass().add("hero-temp");
-
             Label descLabel = new Label(current.shortForecast != null ? current.shortForecast : "");
             descLabel.getStyleClass().add("hero-desc");
-
             box.getChildren().addAll(icon, tempLabel, descLabel);
         }
         return box;
     }
 
     /**
-     * Current conditions bar — 3 equal columns, each centered.
-     *
-     * Layout:  [ slot1 (grow) ] [ divider ] [ slot2 (grow) ] [ divider ] [ slot3 (grow) ]
-     *
-     * Each slot is a VBox(icon, value, key) with Priority.ALWAYS HGrow so all three
+     * Current conditions bar: 3 equal columns, each centered VBox(icon, value, key) with  all three
      * columns are exactly equal width and their content is centered within the bar.
      */
     private HBox buildCurrentInfo(ArrayList<HourlyPeriod> hourlyPeriods) {
         HBox bar = new HBox();
         bar.getStyleClass().add("current-info-bar");
 
-        HourlyPeriod h = (hourlyPeriods != null && !hourlyPeriods.isEmpty())
-                ? hourlyPeriods.get(0) : null;
+        HourlyPeriod h = (hourlyPeriods != null && !hourlyPeriods.isEmpty()) ? hourlyPeriods.get(0) : null;
 
-        String precip   = (h != null && h.probabilityOfPrecipitation != null)
-                ? h.probabilityOfPrecipitation.value + "%" : "0%";
-        String wind     = (h != null && h.windSpeed != null) ? h.windSpeed : "--";
-        String humidity = (h != null && h.relativeHumidity != null)
-                ? h.relativeHumidity.value + "%" : "--%";
+        String precip = (h != null && h.probabilityOfPrecipitation != null) ? h.probabilityOfPrecipitation.value + "%" : "0%";
+        String wind = (h != null && h.windSpeed != null) ? h.windSpeed : "--";
+        String humidity = (h != null && h.relativeHumidity != null) ? h.relativeHumidity.value + "%" : "--%";
 
-        VBox slot1 = buildStatColumn("💧", precip,   "Precip");
-        VBox slot2 = buildStatColumn("💨", wind,     "Wind");
-        VBox slot3 = buildStatColumn("💦", humidity, "Humidity");
+        VBox slot1 = buildStatColumn(precip, "Precipitation");
+        VBox slot2 = buildStatColumn(wind, "Wind");
+        VBox slot3 = buildStatColumn(humidity, "Humidity");
 
         // Give each slot equal width
         HBox.setHgrow(slot1, Priority.ALWAYS);
@@ -228,12 +195,7 @@ public class Scene1View {
     /**
      * A single stat column: icon / value / key, all centered.
      */
-    private VBox buildStatColumn(String iconText, String valueText, String keyText) {
-        Label iconLabel  = new Label(iconText);
-        iconLabel.getStyleClass().add("stat-icon-label");
-        iconLabel.setMaxWidth(Double.MAX_VALUE);
-        iconLabel.setAlignment(Pos.CENTER);
-
+    private VBox buildStatColumn(String valueText, String keyText) {
         Label valueLabel = new Label(valueText);
         valueLabel.getStyleClass().add("stat-value-label");
         valueLabel.setMaxWidth(Double.MAX_VALUE);
@@ -244,13 +206,13 @@ public class Scene1View {
         keyLabel.setMaxWidth(Double.MAX_VALUE);
         keyLabel.setAlignment(Pos.CENTER);
 
-        VBox col = new VBox(2, iconLabel, valueLabel, keyLabel);
+        VBox col = new VBox(2, valueLabel, keyLabel);
         col.setAlignment(Pos.CENTER);
         col.setMaxWidth(Double.MAX_VALUE);
         return col;
     }
 
-    /** Hourly strip with invisible horizontal scroll. */
+    //Hourly strip with invisible horizontal scroll.
     private VBox buildHourlyInfo(ArrayList<HourlyPeriod> hourlyPeriods) {
         VBox box = new VBox();
         box.getStyleClass().add("hourly-info-box");
@@ -299,7 +261,7 @@ public class Scene1View {
         return box;
     }
 
-    /** 3-day forecast panel with more-icon button. */
+    // 3-day forecast panel with more button.
     private VBox buildThreeDayInfo(ArrayList<Period> periods12hr) {
         VBox box = new VBox();
         box.getStyleClass().add("three-day-box");

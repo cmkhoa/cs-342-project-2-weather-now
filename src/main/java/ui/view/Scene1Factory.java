@@ -12,6 +12,7 @@ public class Scene1Factory implements SceneFactory {
     private final Scene1View view;
     public Scene1Factory(Scene1View view) {this.view = view;}
 
+    // scene 1 only uses the 12 hour periods, the hourly periods, and the name of the location, the rest are ignored
     @Override
     public Scene create(ArrayList<Period> periods12hr, ArrayList<HourlyPeriod> hourlyPeriods,
                         String locationName, String weatherClass, LocationNode pinnedLocation) {

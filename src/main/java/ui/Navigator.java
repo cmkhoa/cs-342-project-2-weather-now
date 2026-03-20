@@ -16,40 +16,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Single navigator — replaces Scene1Controller / Scene2Controller / Scene3Controller.
- *
- * Flow:
- *   Scene 1  ──[More]──────►  Scene 2  (same location)
- *   Scene 2  ──[Back]──────►  Scene 1  (same location)
- *   Scene 1  ──[Location]──►  Scene 3
- *   Scene 3  ──[Chicago card]► Chicago Scene 1
- *   Scene 3  ──[Search row]──► that location's Scene 1
- *   Scene 1  ──[Home btn]───►  Chicago Scene 1  (only visible for non-Chicago)
- *
- * Design patterns preserved (required by hw4):
- *   Template Method — ForecastService / HourlyForecastService extend AbstractForecastService
- *   Abstract Factory — each scene is built via a SceneFactory (Scene1/2/3Factory)
+ * A controller for the entire app
+ * Design patterns for hw4:
+ *   Template Method: ForecastService / HourlyForecastService extend AbstractForecastService
+ *   Abstract Factory: each scene is built via a SceneFactory (Scene1/2/3Factory)
  */
 public class Navigator {
-
+    // debounce for the search function
     private static final int DEBOUNCE_MS = 400;
-
+    // instantiate main stage
     private final Stage stage;
+    // instantiate services (to be called with template method)
     private final ForecastService       forecastService = new ForecastService();
     private final HourlyForecastService hourlyService   = new HourlyForecastService();
-
+    // instantiate default scenes
     private LocationNode chicago;
-    /** Cached so Home / pinned-card navigation is instant. Rebuilt after unit toggle. */
     private Scene chicagoScene1;
-
     private Timeline debounce;
 
-    public Navigator(Stage stage) {
-        this.stage = stage;
-    }
+    public Navigator(Stage stage) { this.stage = stage; }
 
-    // ------------------------------------------------------------------ startup
-
+    // on init, set the default scene fetch starter data for chicago, set the values for the current card and build the scene
     public void init() {
         chicago = LocationNode.chicagoDefault();
         chicago.periods12hr   = forecastService.fetch(chicago.nwsOffice, chicago.gridX, chicago.gridY);
@@ -61,46 +48,40 @@ public class Navigator {
         stage.show();
     }
 
-    // ------------------------------------------------------------------ navigation
 
-    /** Return to the always-cached Chicago Scene 1. */
-    private void goHome() {
-        stage.setScene(chicagoScene1);
-    }
+    // Return to the always-cached Chicago Scene 1.
+    private void goHome() { stage.setScene(chicagoScene1); }
 
-    private void goToScene1(LocationNode location) {
-        stage.setScene(buildScene1(location));
-    }
+    // action to go to scene 1 with the location as a parameter for the corresponding location
+    private void goToScene1(LocationNode location) { stage.setScene(buildScene1(location)); }
 
+    // action to go to scene 2 with the location, the scene to return to, and the weather class as parameters
     private void goToScene2(LocationNode location, Scene returnScene, String weatherClass) {
         Scene2View view = new Scene2View();
         view.setOnBackClick(() -> stage.setScene(returnScene));
-        // Abstract Factory
+        // Abstract Factory called, so the navigator function never actually have to adjust to what needs to build
         Scene scene = new Scene2Factory(view).create(location.periods12hr, null, null, weatherClass, null);
         stage.setScene(scene);
     }
 
-    private void goToScene3() {
-        stage.setScene(buildScene3());
-    }
+    // action to go to scene 3
+    private void goToScene3() { stage.setScene(buildScene3()); }
 
-    // ------------------------------------------------------------------ builders
 
+    // BUILDER FUNCTIONS
+
+    // function that actually constructs scene 1
     private Scene buildScene1(LocationNode location) {
         Scene1View view = new Scene1View();
-
-        // Array wrapper so the More-lambda can reference the scene after it's built
+        // reset the scene stack
         Scene[] holder = {null};
 
-        view.setOnMoreForecastClick(() ->
-                goToScene2(location, holder[0], view.getDetectedWeatherClass()));
-
+        // set action controllers
+        view.setOnMoreForecastClick(() -> goToScene2(location, holder[0], view.getDetectedWeatherClass()));
         view.setOnLocationClick(this::goToScene3);
+        view.setOnHomeClick(() -> { if (!isChicago(location)) goHome(); }); // home button only when not in chicago
 
-        // Home button only does something when we're not already on Chicago
-        view.setOnHomeClick(() -> { if (!isChicago(location)) goHome(); });
-
-        // Abstract Factory
+        // Abstract Factory called, so the navigator function never actually have to adjust to what needs to build
         Scene scene = new Scene1Factory(view).create(
                 location.periods12hr,
                 location.hourlyPeriods != null ? location.hourlyPeriods : new ArrayList<>(),
@@ -108,28 +89,26 @@ public class Navigator {
                 null,   // weatherClass is detected internally by Scene1View.build()
                 null
         );
+        // add the current scene to the top of the stack
         holder[0] = scene;
         return scene;
     }
 
     private Scene buildScene3() {
         Scene3View view = new Scene3View();
-
-        // Kept so the unit-switch can refresh temp labels in the visible result list
         @SuppressWarnings("unchecked")
+        // set an empty list of results
         List<LocationNode>[] lastResults = new List[]{null};
-
+        //wire go home button
         view.setOnPinnedClick(this::goHome);
-
+        // wire the unit switch
         view.setOnUnitSwitch(() -> {
-            // TempConverter.toggle() + refreshPinnedTemp() are already called inside
-            // Scene3View before this callback fires — just update the result rows and
-            // rebuild the cached Chicago Scene 1 so Home reflects the new unit.
+            //rebuild the scenes when the unit switch is clicked
             if (lastResults[0] != null)
                 view.setResults(lastResults[0], this::loadHourlyAndNavigate);
             chicagoScene1 = buildScene1(chicago);
         });
-
+        // wire the search action when the user input changes (checked every debounce interval)
         view.setOnSearchTextChanged(query -> {
             if (debounce != null) debounce.stop();
             if (query == null || query.isEmpty()) return;
@@ -152,9 +131,7 @@ public class Navigator {
         return new Scene3Factory(view).create(null, null, null, null, chicago);
     }
 
-    // ------------------------------------------------------------------ async fetch + navigate
-
-    /** Fetches hourly data for a search result on a background thread, then navigates. */
+    // use multiple threads to fetch data and then go to a new scene 1 reflecting that when clicked
     private void loadHourlyAndNavigate(LocationNode loc) {
         if (loc.isFullyLoaded()) { goToScene1(loc); return; }
         Thread t = new Thread(() -> {
@@ -165,8 +142,7 @@ public class Navigator {
         t.start();
     }
 
-    // ------------------------------------------------------------------ helper
-
+    // Helper function that tells if a location node is reflecting chicago
     private boolean isChicago(LocationNode loc) {
         return loc != null && "LOT".equals(loc.nwsOffice)
                 && loc.gridX == 77 && loc.gridY == 70;

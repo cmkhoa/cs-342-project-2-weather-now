@@ -41,14 +41,6 @@ public class LocationResultRow extends HBox {
         tempLabel.getStyleClass().add("result-temp-label");
         tempLabel.setAlignment(Pos.CENTER_RIGHT);
 
-//        // Pin button (placeholder for future persistence)
-//        Button pinBtn = new Button("📌");
-//        pinBtn.getStyleClass().add("pin-btn");
-//        pinBtn.setOnAction(e -> {
-//            e.consume();
-//            System.out.println("[Pin] " + location.displayName);
-//        });
-
         getChildren().addAll(nameLabel, iconRegion, tempLabel); // , pinBtn
 
         // Row click triggers navigation

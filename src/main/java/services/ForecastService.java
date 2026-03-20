@@ -11,18 +11,20 @@ import java.util.ArrayList;
  */
 public class ForecastService extends AbstractForecastService<Period> {
     private static final ObjectMapper OM = new ObjectMapper();
+
+    // actually define the function buildURL for the 12hr periods
     @Override
     protected String buildUrl(String office, int gridX, int gridY) {
         return "https://api.weather.gov/gridpoints/" + office + "/" + gridX + "," + gridY + "/forecast";
     }
 
+    // actually define the function to parse the json into an array of 12hr periods
     @Override
     protected ArrayList<Period> parseResponse(String json) {
         try {
             Root root = OM.readValue(json, Root.class);
             return root.properties.periods;
         } catch (Exception e) {
-            System.err.println("[ForecastService] Parse error: " + e.getMessage());
             return null;
         }
     }

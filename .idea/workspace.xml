@@ -4,9 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="refactor">
+    <list default="true" id="16d11f11-37ee-4564-b5ad-a664fd95dea8" name="Changes" comment="rebuilt navigation system">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/JavaFX.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/JavaFX.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/models/nwsPoints/nwsPoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/models/nwsPoints/nwsPoint.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/AbstractForecastService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/AbstractForecastService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/ForecastService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/ForecastService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/services/HourlyForecastService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/services/HourlyForecastService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/Navigator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/Navigator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/component/LocationResultRow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/component/LocationResultRow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene1Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene1Factory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene1View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene1View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene2Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene2Factory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene2View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene2View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene3Factory.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene3Factory.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/ui/view/Scene3View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ui/view/Scene3View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/utils/SvgIcon.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/utils/SvgIcon.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/styles.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,7 +27,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="EmbeddingIndexingInfo">
-    <option name="cachedIndexableFilesCount" value="309" />
+    <option name="cachedIndexableFilesCount" value="121" />
     <option name="fileBasedEmbeddingIndicesEnabled" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -298,7 +311,15 @@
       <option name="project" value="LOCAL" />
       <updated>1773940747528</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="rebuilt navigation system">
+      <option name="closed" value="true" />
+      <created>1773941651766</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1773941651766</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -312,6 +333,7 @@
     <MESSAGE value="Scene 3 chua xong, dang refactor thanh phan scene 1 2 cho oke han" />
     <MESSAGE value="adjusted the first page UI" />
     <MESSAGE value="refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
+    <MESSAGE value="rebuilt navigation system" />
+    <option name="LAST_COMMIT_MESSAGE" value="rebuilt navigation system" />
   </component>
 </project>

@@ -19,27 +19,6 @@ import java.util.function.Consumer;
 
 /**
  * Scene 3 — City Search / Pinned List.
- *
- * Layout (AnchorPane root):
- *   ┌─── mainContent (VBox, full-width) ───────────────────┐
- *   │  header strip (64px)                                 │
- *   │  scene3-content VBox (16px padding each side)        │
- *   │    pinned card  (~120px)                             │
- *   │    search bar   ( 46px)                              │
- *   │    [gap 12px]                                        │
- *   └──────────────────────────────────────────────────────┘
- *   ┌─── resultsPopupPanel (overlay, AnchorPane anchors) ──┐
- *   │  positioned at top=280, left=18, right=18            │
- *   │  (below: header + top-pad + pinned + spacing + bar)  │
- *   └──────────────────────────────────────────────────────┘
- *
- * Key fixes:
- *  - AnchorPane root (not StackPane) prevents the popup from overflowing
- *    or being clipped; left/right anchors of 18px match scene3-content padding.
- *  - pinnedTempLabel held as a field; refreshPinnedTemp() re-formats in-place
- *    when the unit switch is toggled — no scene rebuild needed.
- *  - Pinned card fires onPinnedClick callback → controller navigates to Chicago.
- *  - Search field clears the popup when emptied.
  */
 public class Scene3View {
 
@@ -54,10 +33,7 @@ public class Scene3View {
     private Label pinnedTempLabel;
     private LocationNode pinnedLocation;
 
-    // ---------------------------------------------------------------
-    // Public builder
-    // ---------------------------------------------------------------
-
+    // Scene 3 buildder
     public Scene build(LocationNode currentLocation) {
         this.pinnedLocation = currentLocation;
 
@@ -75,16 +51,7 @@ public class Scene3View {
         AnchorPane.setLeftAnchor(mainContent,   0.0);
         AnchorPane.setRightAnchor(mainContent,  0.0);
 
-        // ── Results popup overlay ────────────────────────────────
-        // Offset breakdown (px):
-        //   header:       64
-        //   content-top:  16  (scene3-content padding)
-        //   pinned card: ~120 (badge row + city+temp row + desc + spacing)
-        //   gap:          12
-        //   search bar:   46
-        //   gap:          12
-        //   ──────────────
-        //   total:       270  (+10 breathing room = 280)
+        // setup popup pane for search results
         resultsPopupPanel = buildResultsPopup();
         resultsPopupPanel.setVisible(false);
         resultsPopupPanel.setManaged(false);
@@ -101,19 +68,13 @@ public class Scene3View {
         return scene;
     }
 
-    // ---------------------------------------------------------------
-    // Callback setters
-    // ---------------------------------------------------------------
-
+    // Quick set functions
     public void setOnSearchTextChanged(Consumer<String> c) { this.onSearchTextChanged = c; }
     public void setOnUnitSwitch(Runnable r)                { this.onUnitSwitch = r; }
     public void setOnPinnedClick(Runnable r)               { this.onPinnedClick = r; }
 
-    // ---------------------------------------------------------------
-    // Public update methods (called by Scene3Controller)
-    // ---------------------------------------------------------------
-
-    /** Replaces result rows with the given list. Shows the popup. */
+    //update functions
+    //update results
     public void setResults(List<LocationNode> locations,
                            Consumer<LocationNode> onRowClick) {
         if (resultsBox == null) return;
@@ -134,7 +95,7 @@ public class Scene3View {
         showResultsPanel(true);
     }
 
-    /** Shows a "Searching…" placeholder while the network call is in-flight. */
+    // loading spiral
     public void setLoading(boolean loading) {
         if (resultsBox == null || !loading) return;
         resultsBox.getChildren().clear();
@@ -144,10 +105,7 @@ public class Scene3View {
         showResultsPanel(true);
     }
 
-    /**
-     * Re-formats the pinned card's temperature label in the current unit.
-     * Called by Scene3Controller when the unit switch is toggled — no rebuild needed.
-     */
+    //quickly reformat scene 3 to reflect unit change
     public void refreshPinnedTemp() {
         if (pinnedTempLabel == null || pinnedLocation == null) return;
         if (pinnedLocation.periods12hr == null || pinnedLocation.periods12hr.isEmpty()) return;
@@ -160,11 +118,7 @@ public class Scene3View {
         resultsPopupPanel.setManaged(visible);
     }
 
-    // ---------------------------------------------------------------
-    // Section builders
-    // ---------------------------------------------------------------
-
-    /** Header strip — "Weather" title (left) + unit switch pill (right) */
+    //build each section
     private HBox buildHeader() {
         HBox bar = new HBox();
         bar.getStyleClass().addAll("menu-bar", "scene3-header");
@@ -189,7 +143,6 @@ public class Scene3View {
         return bar;
     }
 
-    /** Body — pinned card + search bar */
     private VBox buildBody(LocationNode loc) {
         VBox body = new VBox(12);
         body.getStyleClass().add("scene3-content");
@@ -197,22 +150,16 @@ public class Scene3View {
         return body;
     }
 
-    /**
-     * Pinned Chicago card — always visible.
-     *
-     * Clicking anywhere on the card fires onPinnedClick → Scene3Controller
-     * navigates back to the Chicago home Scene 1.
-     */
     private VBox buildPinnedCard(LocationNode loc) {
         VBox card = new VBox(4);
         card.getStyleClass().add("pinned-card");
         card.setCursor(javafx.scene.Cursor.HAND);
 
-        // Row 1: "📍 CURRENT LOCATION" badge + weather icon
+        // Row 1: CURRENT LOCATION badge + weather icon
         HBox topRow = new HBox();
         topRow.setAlignment(Pos.CENTER_LEFT);
 
-        Label badge = new Label("\uD83D\uDCCD CURRENT LOCATION");
+        Label badge = new Label("CURRENT LOCATION");
         badge.getStyleClass().add("pinned-card-label");
 
         Region sp1 = new Region();
@@ -262,7 +209,7 @@ public class Scene3View {
         return card;
     }
 
-    /** Search bar — magnifier icon + text field */
+    // Search bar: magnifier icon + text field
     private HBox buildSearchBar() {
         HBox bar = new HBox(8);
         bar.getStyleClass().add("search-bar");
@@ -286,10 +233,7 @@ public class Scene3View {
         return bar;
     }
 
-    /**
-     * Results popup — dark glass container, hidden scrollbar.
-     * Width is controlled by AnchorPane left/right anchors set in build().
-     */
+    // results popup
     private VBox buildResultsPopup() {
         VBox panel = new VBox(0);
         panel.getStyleClass().add("results-popup-panel");
@@ -308,10 +252,7 @@ public class Scene3View {
         return panel;
     }
 
-    // ---------------------------------------------------------------
-    // Helper
-    // ---------------------------------------------------------------
-
+    // Helper to get the unit
     private String unitSwitchText() {
         return TempConverter.getUnit() == utils.TempConverter.Unit.FAHRENHEIT ? "\u00B0C" : "\u00B0F";
     }
