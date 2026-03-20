@@ -10,7 +10,7 @@ import java.util.ArrayList;
  * Template Method pattern for homework 4.
  *  Defines the skeleton algorithm for fetching a weather forecast:
  *  fetch calls buildUrl, httpGet and parseResponse(), with subclasses changing buildurl and parseresponse
- * @param <T>  The period type produced: {@code Period} or {@code HourlyPeriod}.
+ * @param <T>  The period type produced: Period or HourlyPeriod.
  */
 public abstract class AbstractForecastService<T> {
 
@@ -37,7 +37,6 @@ public abstract class AbstractForecastService<T> {
             HttpResponse<String> response = CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
             return response.body();
         } catch (Exception e) {
-            System.err.println("[AbstractForecastService] HTTP error for " + url + ": " + e.getMessage());
             return null;
         }
     }

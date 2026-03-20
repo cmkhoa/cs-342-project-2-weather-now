@@ -1,5 +1,6 @@
 /* scene 1 general properties */
 .scene1-root {
+    -fx-font-family: "San Francisco", "Helvetica Neue", "Lucida Grande", sans-serif;
     -fx-background-color: linear-gradient(to bottom, #1a6baa 0%, #4ab3f4 50%, #87ceeb 100%);
     -fx-pref-width: 405;
     -fx-pref-height: 810;
@@ -16,6 +17,7 @@
 
 /* scene 2 general properties */
 .scene2-root {
+    -fx-font-family: "San Francisco", "Helvetica Neue", "Lucida Grande", sans-serif;
     -fx-background-color: linear-gradient(to bottom, #1a6baa 0%, #4ab3f4 50%, #87ceeb 100%);
     -fx-pref-width: 405;
     -fx-pref-height: 810;
@@ -32,7 +34,8 @@
 
 /* scene 3 general properties─ */
 .scene3-root {
-    -fx-background-color: linear-gradient(to bottom, #0a0e2a 0%, #14204a 50%, #0f3060 100%);
+    -fx-font-family: "San Francisco", "Helvetica Neue", "Lucida Grande", sans-serif;
+    -fx-background-color: linear-gradient(to bottom, #323131 0%, #282f43 50%, #203453 100%);
     -fx-pref-width: 405;
     -fx-pref-height: 810;
     -fx-padding: 0;
@@ -50,13 +53,10 @@
 
 /* Location button */
 .location-btn {
-    -fx-font-size: 16px;
+    -fx-font-size: 18px;
     -fx-text-fill: white;
-    -fx-background-color: rgba(255,255,255,0.1);
+    -fx-background-color: rgba(255,255,255,0.05);
     -fx-background-radius: 18;
-    /*-fx-border-color: rgba(255,255,255,0.2);*/
-    /*-fx-border-width: 1;*/
-    /*-fx-border-radius: ;*/
     -fx-cursor: hand;
     -fx-padding: 10;
 }
@@ -71,16 +71,16 @@
 /* Home / Back icon-only buttons */
 .home-btn, .back-btn, .more-btn{
     -fx-background-color: rgba(255,255,255,0.1);
-    -fx-background-radius: 15;
+    -fx-background-radius: 18;
     /*-fx-border-color: rgba(255,255,255,0.2);*/
     /*-fx-border-width: 1;*/
     /*-fx-border-radius: 15;*/
     -fx-cursor: hand;
-    -fx-padding: 5 5 5 5;
-    -fx-pref-width: 25;
-    -fx-pref-height: 25;
-    -fx-min-width: 25;
-    -fx-min-height: 25;
+    -fx-padding: 10;
+    -fx-pref-width: 30;
+    -fx-pref-height: 30;
+    -fx-min-width: 30;
+    -fx-min-height: 30;
 }
 .home-btn:hover, .back-btn:hover , .more-btn:hover{ -fx-background-color: rgba(255,255,255,0.3); }
 
@@ -115,10 +115,10 @@
 .current-info-bar {
     -fx-background-color: rgba(255,255,255,0.1);
     -fx-background-radius: 18;
-    -fx-border-color: rgba(255,255,255,0.2);
+    -fx-border-color: rgba(255,255,255,0.3);
     -fx-border-width: 1;
     -fx-border-radius: 15;
-    -fx-pref-height: 25;
+    -fx-pref-height: 60;
     -fx-alignment: center;
     -fx-spacing: 0;
     -fx-padding: 0;
@@ -133,26 +133,27 @@
     -fx-background-color: rgba(255,255,255,0.28);
     -fx-pref-width: 1;
     -fx-pref-height: 10;
+    -fx-max-height: 20;
     -fx-min-width: 1;
 }
 .stat-icon-label  { -fx-font-size: 16px; -fx-alignment: center; }
 .stat-value-label { -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; -fx-alignment: center; }
 .stat-key-label   { -fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.65); -fx-alignment: center; }
 
-/* ─── HOURLY PANEL ────────────────────────────────────────── */
+/* HOURLY PANEL */
 .hourly-info-box {
     -fx-background-color: rgba(255,255,255,0.1);
     -fx-background-radius: 18;
-    -fx-border-color: rgba(255,255,255,0.2);
+    -fx-border-color: rgba(255,255,255,0.3);
     -fx-border-width: 1;
     -fx-border-radius: 15;
-    -fx-min-height: 150;
+    -fx-pref-height: 155;
     -fx-spacing: 10;
     -fx-padding: 15;
 }
 .hourly-header { -fx-alignment: center-left; }
-.today-label   { -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white; }
-.date-label    { -fx-font-size: 18px; -fx-text-fill: rgba(255,255,255,0.70); }
+.today-label   { -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; }
+.date-label    { -fx-font-size: 16px; -fx-text-fill: rgba(255,255,255,0.70); }
 .hourly-strip  { -fx-spacing: 10; -fx-alignment: center-left; -fx-padding: 0; }
 
 /* Invisible scroll pane */
@@ -166,7 +167,7 @@
     -fx-pref-height: 0; -fx-max-height: 0; -fx-opacity: 0; -fx-padding: 0;
 }
 
-/* ─── HOURLY CARD ─────────────────────────────────────────── */
+/* HOURLY CARD */
 .hourly-card {
     -fx-background-color: rgba(255,255,255,0.14);
     -fx-background-radius: 18;
@@ -189,18 +190,18 @@
 .hourly-temp-label  { -fx-font-size: 12px; -fx-font-weight: bold; -fx-text-fill: white; -fx-alignment: center; }
 .hourly-icon        { -fx-pref-width: 25; -fx-pref-height: 25; -fx-min-width: 25; -fx-min-height: 25; }
 
-/* ─── 3-DAY PANEL ─────────────────────────────────────────── */
+/* 3-DAY PANEL */
 .three-day-box {
     -fx-background-color: rgba(255,255,255,0.1);
     -fx-background-radius: 18;
-    -fx-border-color: rgba(255,255,255,0.2);
+    -fx-border-color: rgba(255,255,255,0.3);
     -fx-border-width: 1;
     -fx-border-radius: 15;
     -fx-spacing: 10;
     -fx-padding: 15;
 }
 .three-day-header { -fx-alignment: center-left; }
-.next-label       { -fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: white; }
+.next-label       { -fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white; }
 .three-day-rows   { -fx-spacing: 0; }
 
 /* ─── WEEKDAY ROW ─────────────────────────────────────────── */
@@ -210,7 +211,7 @@
     -fx-alignment: center-left;
     -fx-padding: 0 15 0 15;
     -fx-spacing: 0;
-    -fx-border-color: transparent transparent rgba(255,255,255,0.1) transparent;
+    -fx-border-color: transparent transparent rgba(255,255,255,0.2) transparent;
     -fx-border-width: 0 0 1 0;
 }
 .weekday-row.last-row { -fx-border-color: transparent; }
@@ -240,7 +241,7 @@
 .period-card {
     -fx-background-color: rgba(255,255,255,0.1);
     -fx-background-radius: 18;
-    -fx-border-color: rgba(255,255,255,0.2);
+    -fx-border-color: rgba(255,255,255,0.3);
     -fx-border-width: 1;
     -fx-border-radius: 15;
     -fx-spacing: 10;
@@ -282,14 +283,14 @@
     -fx-font-size: 16px;
     -fx-text-fill: rgba(255,255,255,0.85);
     -fx-cursor: hand;
-    -fx-background-color: rgba(255,255,255,0.14);
+    -fx-background-color: rgba(255,255,255,0.1);
     -fx-background-radius: 14;
     -fx-border-color: rgba(255,255,255,0.28);
     -fx-border-radius: 14;
     -fx-border-width: 1;
     -fx-padding: 5 12 5 12;
 }
-.unit-switch-label:hover { -fx-background-color: rgba(255,255,255,0.22); }
+.unit-switch-label:hover { -fx-background-color: rgba(255,255,255,0.3); }
 
 .scene3-content {
     -fx-spacing: 10;
@@ -298,9 +299,9 @@
     -fx-background-color: transparent;
 }
 
-/* ─── SEARCH BAR (Scene 3) ────────────────────────────────── */
+/* SEARCH BAR */
 .search-bar {
-    -fx-background-color: rgba(255,255,255,0.14);
+    -fx-background-color: rgba(255,255,255,0.1);
     -fx-background-radius: 18;
     -fx-border-color: rgba(255,255,255,0.30);
     -fx-border-width: 1;
