@@ -148,6 +148,7 @@
     -fx-border-width: 1;
     -fx-border-radius: 15;
     -fx-pref-height: 155;
+    -fx-min-height: 155;
     -fx-spacing: 10;
     -fx-padding: 15;
 }
